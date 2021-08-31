@@ -1,9 +1,23 @@
-header.header
-	.header__wrap
-		button.header__burger.btn.js-burger.hide(type="button")
-			span
-			span
+header.header(data-aos="fade-in" data-aos-anchor-placement="top-center")
+	.header__wrap 
+		a.header__burger(href="#mmenu")
+			button.hamburger.hamburger--spin.btn.hide.show-flex-s(type="button")
+				span.hamburger-box
+					span.hamburger-inner
+		nav#mmenu  
+			.mmenu-close.js-mmenu-close
+				svg(version='1.1' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 10 11' width="10" height="11" fill="none") 
+					path(d="M1 1.42847L9 9.42847"  stroke-width="2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round")
+					path(d="M9 1.42847L1 9.42847"  stroke-width="2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round") 
 
+			ul.header__list
+				each object, key in data.header.mmenu
+					li
+						a.header__mmlink.js-mmenu-close(
+							href=object.url
+							data-link=key
+						)
+							!= object.name
 		a.header__logo(href=data.header.links.logo)
 			svg(version='1.1' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 120.213 30.84' enable-background='new 0 0 120.213 30.84')
 				g
@@ -23,7 +37,7 @@ header.header
 					c-0.501-0.028-0.901-0.016-1.092-0.018h-11.96v29.126h8.041l0.015-9.535h0.008l2.863,4.563l3.254,4.972h9.738L63.461,19.641z\
 					M58.432,13.917c-0.182,0.061-0.353,0.081-0.541,0.096l-0.83,0.002l-2.304,0.002l0.004-6.704l2.29-0.001\
 					c0.306-0.002,0.68,0.018,0.89,0.041c2.726,0.226,3.037,2.054,3.032,3.333C60.973,11.417,60.909,13.365,58.432,13.917')
-		nav.header__nav-container 
+		nav.header__nav-container.hide-s
 			ul.nav-container
 				each object, key in data.header.menu
 					li.nav-container__item
@@ -60,13 +74,4 @@ header.header
 		//- a.header__pen.header__pen-ver(href="#products-versions") 
 		//- 	.header__pen.header__pen-ver-trigger
 		//- 		#ver1.btn-change.active Версия 1
-		//- 		#ver2.btn-change Версия 2
-
-		//- nav.header__menu
-		//- 	.header__list
-		//- 		each object, key in data.header.menu
-		//- 			a.header__link.js-to-anchor(
-		//- 				href=object.url
-		//- 				data-link=key
-		//- 			)
-		//- 				!= object.name
+		//- 		#ver2.btn-change Версия 2 

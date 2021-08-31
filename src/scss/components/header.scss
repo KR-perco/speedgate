@@ -139,7 +139,7 @@
                 &:after {
                     content: "";
                     position: absolute;
-                    right: -30px;
+                    right: -35px;
                     top: 0;
                     width: 30px;
                     height: 1em;
@@ -173,22 +173,15 @@
         position: relative;
         &-img {
             position: absolute;
-            top: -3px;
-            right: 26px;
+            top: 3px;
+            right: 41.5px;
             width: 81px;
-            height: 90px;
-            background: url(../images/menu_pen.svg) no-repeat center 23px/35px transparent;
+            height: 81px;
+            background: url(../images/menu_pen.png) no-repeat center center/75px #003067;
             border-radius: 50%;
+            border: 1px solid #002957;
             &:hover {
-                background: url(../images/menu_pen.svg) no-repeat center 21px/39px transparent;
-            }
-            &:after {
-                content: "";
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                background: url(../images/header-krug.svg) no-repeat center center / cover transparent;
-                z-index: -1;
+                background-size: 88px;
             }
         }
         &-ver {
@@ -285,37 +278,20 @@
     }
     &__burger {
         z-index: 100;
-        flex-direction: column;
-        margin: (-6.5px / 2) 0;
-        width: 39px;
-        color: $color-black;
-        span {
-            display: block;
-            margin: 6.5px 0;
-            width: 39px;
-            height: 2px;
-            background-color: currentColor;
-            transition: $duration-normal;
-        }
-        @include active {
-            span {
-                &:first-child {
-                    transform: translate(0, 8px) rotate(-45deg);
-                }
-                &:last-child {
-                    transform: translate(0, -6px) rotate(45deg);
-                }
-            }
-        }
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 50px;
     }
     &:before {
         content: "";
         position: absolute;
-        top: 0px;
-        right: -14px;
-        height: calc(100% + 8px);
-        width: 130%;
-        background: url(../images/header-plawka.svg) bottom right no-repeat;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background: url("../images/header-plawka4.svg") bottom right no-repeat;
     }
     &:after {
         content: "";
@@ -325,5 +301,80 @@
         height: 100%;
         width: 100%;
         background-color: #003067;
+        border-bottom: 1px solid #002a5b;
     }
+}
+
+.mm-spn.mm-spn--navbar::after {
+    content: none;
+}
+
+.mm-spn li::after {
+    display: none;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    width: 25px;
+    height: 2px;
+    background-color: white;
+}
+
+.hamburger-inner::before {
+    top: -7px;
+}
+
+.hamburger-inner::after {
+    bottom: -7px;
+}
+
+.mm-spn {
+    position: relative;
+}
+
+.header__link:first-child,
+.mm-spn.mm-spn--navbar ul::before {
+    border-top: 0px solid;
+}
+
+.mm-spn.mm-spn--light {
+    background: #F0F0F0;
+}
+
+.mm-spn .mmenu-close {
+    top: 43px;
+    border: 2.35862px solid #B3B3B3;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    position: absolute;
+    left: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg {
+        stroke: #B3B3B3;
+        width: 47%;
+        height: 47%;
+    }
+}
+
+.mm-spn.mm-spn--navbar ul {
+    top: 115px;
+}
+
+.mm-spn a.header__mmlink {
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.1em;
+    color: #003067;
+    &.active {
+        background-color: #E5E5E5;
+    }
+}
+
+.hamburger {
+    width: 25px;
 }

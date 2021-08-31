@@ -26,13 +26,13 @@ Fancybox.bind("[data-fancybox-plyr]", {
     on: {
         done: (fancybox, slide) => {
 
-            var sliderVideos = $(".slider-demonstration .swiper-slide video");
+            var sliderVideos = $(".js-sliderdemo-2 .swiper-slide video");
             sliderVideos.each(function(index) {
                 this.pause();
             });
         },
         closing: (fancybox, slide) => {
-            let currentVideo = swiper3.slides[swiper3.activeIndex].children[0];
+            let currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
             currentVideo.play();
         }
     }
@@ -79,14 +79,14 @@ var swiper2 = new Swiper(".slider-prod", {
 });
 
 var names = [];
-$(".slider-demonstration .swiper-slide").each(function(i) {
+$(".js-sliderdemo-2 .swiper-slide").each(function(i) {
     names.push($(this).data("name"));
 });
-var swiper3 = new Swiper('.slider-demonstration', {
+var swiper3prod2 = new Swiper('.js-sliderdemo-2', {
     effect: "fade",
     loop: false,
     pagination: {
-        el: '.slider-demonstration + .swiper-pagination',
+        el: '.js-sliderdemo-2 + .swiper-pagination',
         type: 'custom',
         clickable: true,
         renderCustom: function(swiper, current, total) {
@@ -110,20 +110,20 @@ var swiper3 = new Swiper('.slider-demonstration', {
     },
 });
 
-var sliderVideos = $(".slider-demonstration .swiper-slide video");
+var sliderVideos = $(".js-sliderdemo-2 .swiper-slide video");
 sliderVideos.each(function(index) {
     this.addEventListener('ended', () => {
-        if (swiper3.activeIndex == 5) {
-            swiper3.slideTo(0)
+        if (swiper3prod2.activeIndex == 5) {
+            swiper3prod2.slideTo(0)
         } else {
-            swiper3.slideNext();
+            swiper3prod2.slideNext();
         }
     });
 });
 
-swiper3.on('slideChange', function() {
-    let currentVideo = swiper3.slides[swiper3.activeIndex].children[0];
-    let prevVideo = swiper3.slides[swiper3.previousIndex].children[0];
+swiper3prod2.on('slideChange', function() {
+    let currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
+    let prevVideo = swiper3prod2.slides[swiper3prod2.previousIndex].children[0];
     sliderVideos.each(function(index) {
         this.pause();
         this.currentTime = 0;
@@ -162,27 +162,4 @@ window.onload = function() {
 $(".btn-change").on("click", function(e) {
     $(".btn-change").toggleClass("active");
     $("#main").toggleClass("ver2");
-});
-
-var figure = $(".chess__row");
-var vid = figure.find("video");
-
-[].forEach.call(figure, function(item, index) {
-    item.addEventListener('mouseover', hoverVideo.bind(item, index), false);
-    item.addEventListener('mouseout', hideVideo.bind(item, index), false);
-});
-
-function hoverVideo(index, e) {
-    vid[index].play();
-}
-
-function hideVideo(index, e) {
-    vid[index].pause();
-}
-
-$("#adapt-vid").on("click", function(e) {
-    e.preventDefault;
-    $(".js-video-side-gap").toggleClass("cell-2").toggleClass("cell-1");
-    $(".js-video-main-wrap").toggleClass("cell-8").toggleClass("cell-10");
-    swiper3.update();
 });

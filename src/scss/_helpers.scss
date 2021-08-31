@@ -745,6 +745,24 @@ fieldset[disabled] .textarea-field {
     }
 }
 
+@media screen and (max-width: 640px) {
+    .hide-s {
+        display: none !important;
+    }
+    .show-s {
+        display: block !important;
+    }
+    .show-flex-s {
+        display: flex !important;
+    }
+    .show-inline-s {
+        display: inline !important;
+    }
+    .show-inline-block-s {
+        display: inline-block !important;
+    }
+}
+
 @media screen and (max-width: 480px) {
     .hide-xs {
         display: none !important;

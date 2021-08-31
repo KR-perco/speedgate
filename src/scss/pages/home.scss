@@ -2,7 +2,7 @@
     --bullets-color: white;
     --color-active: #003067;
     --swiper-navigation-size: 30px;
-    --swiper-nav-color: #999999;
+    --swiper-nav-color: #999;
     // --fancybox-opacity: .7;
     --fancybox-bg: rgba(43, 41, 41, 0.7);
 }
@@ -41,6 +41,44 @@
             display: flex;
             flex-direction: column;
         }
+        &.dop-prod {
+            .header__text {
+                margin-bottom: 70px;
+                padding: 0 20%;
+            }
+            .dop-prod {
+                &__img {
+                    // &.img-dop-1 {
+                    //     background: url("../images/dop-prods/dop-prod-1.jpg") no-repeat center center/cover transparent;
+                    // }
+                    // &.img-dop-2 {
+                    //     background: url("../images/dop-prods/dop-prod-2.jpg") no-repeat center center/cover transparent;
+                    // }
+                    // &.img-dop-3 {
+                    //     background: url("../images/dop-prods/dop-prod-3.jpg") no-repeat center center/cover transparent;
+                    // }
+                    // &.img-dop-4 {
+                    //     background: url("../images/dop-prods/dop-prod-4.jpg") no-repeat center center/cover transparent;
+                    // }
+                    // &.img-dop-5 {
+                    //     background: url("../images/dop-prods/dop-prod-5.jpg") no-repeat center center/cover transparent;
+                    // }
+                    // &.img-dop-6 {
+                    //     background: url("../images/dop-prods/dop-prod-6.jpg") no-repeat center center/cover transparent;
+                    // }
+                }
+                &__descr {
+                    color: $light-gray-color;
+                    font-size: 20px;
+                    line-height: 1.3em;
+                    text-align: center;
+                    margin: 20px 0;
+                    width: 100%;
+                    box-sizing: border-box;
+                    padding: 0 20px;
+                }
+            }
+        }
         &.three {
             height: auto;
             display: flex;
@@ -72,9 +110,9 @@
                 font-style: normal;
                 font-weight: 300;
                 font-size: 80px;
-                line-height: 94px;
                 color: #003067;
                 margin: 0 0 30px;
+                line-height: 1.1em;
                 &_subtext {
                     font-size: 40px;
                     line-height: 47px;
@@ -233,7 +271,7 @@
             .swiper-pagination-bullet {
                 color: var(--bullets-color);
                 font-size: 20px;
-                line-height: 43px;
+                line-height: 1.3em;
                 text-align: center;
                 &-active {
                     color: var(--color-active);
@@ -299,7 +337,7 @@
                 width: 115px;
                 height: 115px;
                 &__signature {
-                    max-width: 155px;
+                    max-width: 160px;
                 }
             }
         }
@@ -359,19 +397,19 @@
             background: url("../images/icon-char-1.svg") no-repeat center center transparent;
         }
         .icon-char-2 {
-            background: url("../images/icon-char-2.svg") no-repeat center center transparent;
+            background: url("../images/icon-char-2.v2.svg") no-repeat center center transparent;
         }
         .icon-char-3 {
-            background: url("../images/icon-char-3.svg") no-repeat center center transparent;
+            background: url("../images/icon-char-3.v2.svg") no-repeat center center transparent;
         }
         .icon-char-4 {
-            background: url("../images/icon-char-4.svg") no-repeat center center transparent;
+            background: url("../images/icon-char-4.v3.svg") no-repeat center center transparent;
         }
         .icon-char-5 {
-            background: url("../images/icon-char-5.svg") no-repeat center center transparent;
+            background: url("../images/icon-char-5.v3.svg") no-repeat center center transparent;
         }
         .icon-char-6 {
-            background: url("../images/icon-char-6.svg") no-repeat center center transparent;
+            background: url("../images/icon-char-6.v3.svg") no-repeat center center transparent;
         }
     }
     .three {
@@ -532,6 +570,9 @@
         .icon__item {
             display: flex;
             padding: 0;
+            flex: 1 1 20%;
+            justify-content: center;
+            align-items: center;
             .icon {
                 height: 90px;
                 width: 90px;
@@ -582,8 +623,12 @@
     }
 }
 
-.image-container.is-square {
+.image-container.is-wide {
     padding-top: 26%;
+}
+
+.image-container.is-square {
+    padding-top: 100%;
 }
 
 .image-container {
