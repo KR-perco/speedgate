@@ -5,6 +5,15 @@ import $ from 'jquery';
 import objectFitImages from 'object-fit-images';
 import MmenuLight from 'mmenu-light';
 import AOS from 'aos';
+import Typed from 'typed.js';
+
+var options = {
+    strings: ['Скоростные проходы'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var typed = new Typed('#js-dynamic-text-1', options);
 
 // import objectFitVideos from 'object-fit-videos';
 

@@ -1,10 +1,11 @@
 main.home#main
 	section.hero
-		.header__container.text-center(data-aos="fade-right" data-aos-anchor-placement="center-center")
-			h1.header__text#js-dynamic-text-1 Скоростные проходы
-			span.header__text.header__text_subtext#js-dynamic-subtext-1 Решение для бизнес-центров 
-		.slider-hero.swiper-container(data-aos="fade-in" data-aos-anchor-placement="top-center")
-			.swiper-wrapper  
+		.header__container.text-center
+			.reserve-height Скоростные проходы
+				h1.header__text#js-dynamic-text-1
+			span.header__text.header__text_subtext#js-dynamic-subtext-1(data-aos="fade-in" data-aos-delay="2100" data-aos-anchor-placement="top-center") Решение для бизнес-центров 
+		.slider-hero.swiper-container(data-aos="fade-in" data-aos-delay="500" data-aos-anchor-placement="top-center")
+			.swiper-wrapper
 				.swiper-slide(data-subtext="Решение для бизнес-центров")
 					img(src="images/Slide1.jpg", alt="")
 				.swiper-slide(data-subtext="Решение для офисов")
@@ -21,12 +22,12 @@ main.home#main
 
 	section.advantages#advantages
 		.container.text-center
-			h2.advantages__header(data-aos="fade-left" data-aos-anchor-placement="center-center") Преимущества
+			h2.advantages__header(data-aos="fade-in" data-aos-anchor-placement="center-center") Преимущества
 			.advantages__icons.container(data-aos="fade-in" data-aos-anchor-placement="top-center")
 				.icons_wrap
 					.icons_list.row
 						each object, key in data.home.advanages.icons
-							.icon__item.cell-2.cell-3-xs
+							.icon__item.cell-2.cell-3-xs( class='advantages__icon-' + key data-aos-delay=object.delay data-aos="fade-in" data-aos-anchor-placement="top-center")
 								figure.icon(
 									class=object.svg 
 								)
@@ -35,7 +36,7 @@ main.home#main
 								//- +svg("icon-adv-1") https://github.com/ninelines-team/ninelines-docs/blob/master/07_images.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-svg-%D1%81%D0%BF%D1%80%D0%B0%D0%B9%D1%82%D0%B0%D0%BC%D0%B8 
 
 	section.two.white-bg#products
-		.header__container.text-center(data-aos="fade-right" data-aos-anchor-placement="center-center")
+		.header__container.text-center
 			h2.header__text#js-dynamic-text Скоростной проход ST-01
 			span.header__text.header__text_subtext#js-dynamic-subtext Универсальный скоростной проход с распашными створками
 
@@ -54,490 +55,49 @@ main.home#main
 								img(src="images/ST-01__slide3.jpg", alt="")
 							a.swiper-slide(href="#prod-4" data-text="Калитка WMD-06" data-subtext="Автоматическая калитка со створкой из закаленного стекла")
 								img(src="images/ST-01__slide4.jpg", alt="")
-							a.swiper-slide(href="#prod-5" data-text="Ограждение ВН06" data-subtext="Ограждение из закаленного стекла")
+							a.swiper-slide(href="#prod-4" data-text="Ограждение ВН06" data-subtext="Ограждение из закаленного стекла")
 								img(src="images/ST-01__slide5.jpg", alt="") 
 						.swiper-button-prev
 						.swiper-button-next
 						.swiper-pagination
-				.cell-2.cell-1-md
-
-	section.ver2#products-versions 
-		.container
-			.row
-				.cell-4.show-flex.flex-middle.flex-start
-					.header__container
-						h2.header__text.header__text_ver2 Скоростной проход ST-01
-						span.header__text.header__text_subtext.header__text_subtext-v2 Универсальный скоростной проход с распашными створками
-						a.header-demo__video-btn(data-fancybox-plyr data-src="https://www.youtube.com/watch?v=1Ap-dv-lEQY" mainClass="full-vid") 
-				.cell-8(data-aos="fade-in" data-aos-anchor-placement="top-center")
-					img(src="images/ST-01__main-image.jpg", alt="")
-					
-	section.ver2.white-bg 
-		.container.chess
-			.row.chess__row
-				.cell-6.chess__video
-					+lazyVideo({
-						poster: 'images/video-posters/poster1.jpg',
-						source: [
-							{
-								srcset: `video/1.mp4`,
-								type: 'video/mp4',
-							}
-						]
-					}).lozad(loop, muted)
-				.cell-1
-				.cell-5.chess__video-info
-					| Скоростной проход ST-01 обеспечивает комфортный бесконтактный доступ. Увеличенная ширина прохода 1200 мм позволяет организовать проезд маломобильных групп населения. На объектах массового пребывания людей можно организовать свободный выход.
-			.row.chess__row
-				.cell-5.chess__video-info
-					| Скоростной проход ST-01 обеспечивает комфортный бесконтактный доступ. Увеличенная ширина прохода 1200 мм позволяет организовать проезд маломобильных групп населения. На объектах массового пребывания людей можно организовать свободный выход.
-				.cell-1
-				.cell-6.chess__video
-					+lazyVideo({
-						poster: 'images/video-posters/poster2.jpg',
-						source: [
-							{
-								srcset: `video/2.mp4`,
-								type: 'video/mp4',
-							}
-						]
-					}).lozad(loop, muted)
-			.row.chess__row
-				.cell-6.chess__video
-					+lazyVideo({
-						poster: 'images/video-posters/poster3.jpg',
-						source: [
-							{
-								srcset: `video/3.mp4`,
-								type: 'video/mp4',
-							}
-						]
-					}).lozad(loop, muted)
-				.cell-1
-				.cell-5.chess__video-info 
-					| Скоростной проход ST-01 обеспечивает комфортный бесконтактный доступ. Увеличенная ширина прохода 1200 мм позволяет организовать проезд маломобильных групп населения. На объектах массового пребывания людей можно организовать свободный выход.
-			.row.chess__row
-				.cell-5.chess__video-info
-					| Скоростной проход ST-01 обеспечивает комфортный бесконтактный доступ. Увеличенная ширина прохода 1200 мм позволяет организовать проезд маломобильных групп населения. На объектах массового пребывания людей можно организовать свободный выход.
-				.cell-1
-				.cell-6.chess__video
-					+lazyVideo({
-						poster: 'images/video-posters/poster4.jpg',
-						source: [
-							{
-								srcset: `video/4.mp4`,
-								type: 'video/mp4',
-							}
-						]
-					}).lozad(loop, muted)
-			.row.chess__row
-				.cell-6.chess__video
-					+lazyVideo({
-						poster: 'images/video-posters/poster5.jpg',
-						source: [
-							{
-								srcset: `video/5.mp4`,
-								type: 'video/mp4',
-							}
-						]
-					}).lozad(loop, muted)
-				.cell-1
-				.cell-5.chess__video-info
-					| Скоростной проход ST-01 обеспечивает комфортный бесконтактный доступ. Увеличенная ширина прохода 1200 мм позволяет организовать проезд маломобильных групп населения. На объектах массового пребывания людей можно организовать свободный выход.
-			.row.flex-center 
-				a.btn.btn-gray(href="#") Купить 
-	
-	//- Скоростной проход ST-01
-	section.ver1.video0#prod-1 
-		.container
-			.row 
-				.js-video-main-wrap.push-2.cell-8.post-2.cell-12-md
-					.header-demo.flex-between.flex-middle
-						h2.header-demo__text Скоростной проход ST-01
-						a.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") 
-					.swiper-container.slider-demonstration.js-sliderdemo-1
-						.swiper-wrapper
-							.swiper-slide(data-name="Ракурсы")
-								//- poster: 'images/video-posters/poster1.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st01/1.mp4`, 
-											type: 'video/mp4', 
-										},
-										{ 
-											srcset: `video/1245x701/1.mp4`,
-											type: 'video/mp4', 
-										}
-									]
-								}).lozad#index-1(autoplay, muted)
-							.swiper-slide(data-name="Проход")
-								//- poster: 'images/video-posters/poster2.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st01/2.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/2.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-2(test-attrs)
-							.swiper-slide(data-name="Проход2")
-								//- poster: 'images/video-posters/poster2.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st01/2.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/2.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-2(test-attrs)
-							.swiper-slide(data-name="Исполнение") 
-								//- poster: 'images/video-posters/poster3.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st01/3.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/3.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-3(test-attrs)
-							.swiper-slide(data-name="Безопасность")
-								//- poster: 'images/video-posters/poster4.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st01/4.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/4.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-4(test-attrs)
-							.swiper-slide(data-name="Размеры")
-								//- poster: 'images/video-posters/poster5.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st01/5.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/5.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-5(test-attrs)
-							.swiper-slide(data-name="Интеграция")
-								//- poster: 'images/video-posters/poster6.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st01/6.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/6.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-6(test-attrs)
-					.swiper-pagination 
-				
-		.container
-			.row
-				.cell-3.cell-0-md
-				.cell-6.cell-12-md
-					.icons_list.characteristics.row
-						//- each object, key in data.home.characteristics.icons
-						//- 	.icon__item.cell-2
-						//- 		figure.icon(
-						//- 			class=object.svg 
-						//- 		)
-						//- 		span.icon__signature 
-						//- 			!= object.text 		
-				.cell-3.cell-0-md
-
-	//- скоростной проход st-11
-	section.ver1.video1#prod-2 
-		.container
-			.row 
-				.js-video-main-wrap.push-2.cell-8.post-2.cell-12-md
-					.header-demo.flex-between.flex-middle
-						h2.header-demo__text Скоростной проход ST-11
-						a.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st11 mainClass="full-vid") 
-					.swiper-container.slider-demonstration.js-sliderdemo-2
-						.swiper-wrapper
-							.swiper-slide(data-name="Ракурсы")
-								+lazyVideo({
-									poster: 'images/video-posters/poster1.jpg',
-									source: [
-										{
-											srcset: `video/st11/990x560/1.mp4`,
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/1.mp4`,
-											type: 'video/mp4', 
-										}
-									]
-								}).lozad#index-1(autoplay, muted)
-							.swiper-slide(data-name="Проход")
-								+lazyVideo({
-									poster: 'images/video-posters/poster2.jpg',
-									source: [
-										{
-											srcset: `video/st11/990x560/2.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/2.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-2(test-attrs)
-							.swiper-slide(data-name="Габариты") 
-								+lazyVideo({
-									poster: 'images/video-posters/poster3.jpg',
-									source: [
-										{
-											srcset: `video/st11/990x560/3.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/3.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-3(test-attrs)
-							.swiper-slide(data-name="Безопасность")
-								+lazyVideo({
-									poster: 'images/video-posters/poster4.jpg',
-									source: [
-										{
-											srcset: `video/st11/990x560/4.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/4.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-4(test-attrs)
-							.swiper-slide(data-name="Исполнение")
-								+lazyVideo({
-									poster: 'images/video-posters/poster5.jpg',
-									source: [
-										{
-											srcset: `video/st11/990x560/5.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/5.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-5(test-attrs)
-							.swiper-slide(data-name="Интеграция")
-								+lazyVideo({
-									poster: 'images/video-posters/poster6.jpg',
-									source: [
-										{
-											srcset: `video/st11/990x560/6.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/6.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-6(test-attrs)
-					.swiper-pagination  
-				
-		.container
-			.row
-				.cell-3.cell-0-md
-				.cell-6.cell-12-md
-					.icons_list.characteristics.row
-						each object, key in data.home.characteristics.icons
-							.icon__item.cell-2
-								figure.icon(
-									class=object.svg 
-								)
-								span.icon__signature 
-									!= object.text 		
-				.cell-3.cell-0-md
+				.cell-2.cell-1-md 
  
-	//- скоростной проход st-02
-	section.ver1.video2#prod-3 
-		.container
-			.row 
-				.js-video-main-wrap.push-2.cell-8.post-2.cell-12-md
-					.header-demo.flex-between.flex-middle
-						h2.header-demo__text Скоростной проход ST-02
-						a.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st02 mainClass="full-vid") 
-					.swiper-container.slider-demonstration.js-sliderdemo-3
-						.swiper-wrapper
-							.swiper-slide(data-name="Ракурсы")
-								//- poster: 'images/video-posters/poster1.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st02/1.mp4`, 
-											type: 'video/mp4', 
-										},
-										{ 
-											srcset: `video/1245x701/1.mp4`,
-											type: 'video/mp4', 
-										}
-									]
-								}).lozad#index-1(autoplay, muted)
-							.swiper-slide(data-name="Проход")
-								//- poster: 'images/video-posters/poster2.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st02/2.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/2.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-2(test-attrs)
-							.swiper-slide(data-name="Проход2")
-								//- poster: 'images/video-posters/poster2.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st02/2.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/2.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-2(test-attrs)
-							.swiper-slide(data-name="Исполнение") 
-								//- poster: 'images/video-posters/poster3.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st02/3.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/3.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-3(test-attrs)
-							.swiper-slide(data-name="Безопасность")
-								//- poster: 'images/video-posters/poster4.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st02/4_990_560_60fps.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/4.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-4(test-attrs)
-							.swiper-slide(data-name="Размеры")
-								//- poster: 'images/video-posters/poster5.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st02/5.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/5.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-5(test-attrs)
-							.swiper-slide(data-name="Интеграция")
-								//- poster: 'images/video-posters/poster6.jpg',
-								+lazyVideo({
-									source: [
-										{
-											srcset: `video/st02/6.mp4`, 
-											type: 'video/mp4',
-										},
-										{ 
-											srcset: `video/1245x701/6.mp4`,
-											type: 'video/mp4',
-										}
-									]
-								}).lozad#index-6(test-attrs)
-					.swiper-pagination 
-				
-		.container
-			.row
-				.cell-3.cell-0-md
-				.cell-6.cell-12-md
-					.icons_list.characteristics.row
-						//- each object, key in data.home.characteristics.icons
-						//- 	.icon__item.cell-2
-						//- 		figure.icon(
-						//- 			class=object.svg 
-						//- 		)
-						//- 		span.icon__signature 
-						//- 			!= object.text 		
-				.cell-3.cell-0-md
-
+	include products/st01
+	include products/st11
+	include products/st02  
 
 	section.dop-prod.white-bg
 		.header__container.text-center
 			h2.header__text Установка дополнительного оборудования  
 		.container
 			.row 
-				.cell-2.push-2
+				.cell-2.push-2.other-1(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center")
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-1.jpg", alt="")
 					//- .dop-prod__img.img-dop-1  
 					.dop-prod__descr Кронштейн для биометрических считывателей 
-				.cell-2.push-1
+				.cell-2.push-1.other-2(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-1")
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-2.jpg", alt="")
 					.dop-prod__descr Стойка с картоприемником 
-				.cell-2.push-1.post-2
+				.cell-2.push-1.post-2.other-3(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-2")
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-3.jpg", alt="")
 					.dop-prod__descr Стойка для сканера штрихкода 
-				.cell-2.push-2
+				.cell-2.push-2.other-4(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-3")
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-4.jpg", alt="")
 					.dop-prod__descr Кронштейны для терминалов распознавания лиц Suprema  
-				.cell-2.push-1
+				.cell-2.push-1.other-5(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-4")
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-5.jpg", alt="")
 					.dop-prod__descr Кронштейны для терминалов распознавания лиц ZKTeco 
-				.cell-2.push-1.post-2
+				.cell-2.push-1.post-2(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-1")
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-6.jpg", alt="")
@@ -546,7 +106,7 @@ main.home#main
 	section.three
 		.header__container.text-center
 			h2.header__text Фотогалерея  
-		.swiper-container.slider-gallery#gallery
+		.swiper-container.slider-gallery#gallery(data-aos="fade-in" data-aos-anchor-placement="top-center")
 			.swiper-wrapper
 				.swiper-slide
 					img(src="images/gallery/gallery-slide1.jpg", alt="")
@@ -599,11 +159,11 @@ main.home#main
 			.swiper-button-prev
 			.swiper-button-next
 
-	section.four#about
+	section.four#about(data-aos="fade-in" data-aos-anchor-placement="top-center")
 		.container 
 			.row 
 				.cell-6.cell-12-elg
-					.about
+					.about(data-aos="fade-right" data-aos-anchor-placement="center-center")
 						h2.header__text.header__text_white.text-center Почему PERCo 
 						.about__joint-photos.hide.show-elg.image-container.is-wide
 							.image-flex-center
@@ -622,12 +182,11 @@ main.home#main
 									span.icon__signature
 										!= object.text
 				.cell-6.cell-0-elg
-
-							
+ 
 	section.five.white-bg#write-us 
-		.header__container.text-center 
+		.header__container.text-center
 			h1.header__text Напишите нам
-		.container 
+		.container(data-aos="fade-up" data-aos-anchor-placement="center-bottom")
 			.row 
 				.cell-3
 				.cell-6

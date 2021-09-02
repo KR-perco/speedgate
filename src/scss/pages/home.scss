@@ -24,6 +24,28 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            .header__container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .reserve-height {
+            display: block;
+            line-height: 1.1em;
+            font-size: 80px;
+            font-weight: 300;
+            min-height: 117px;
+            position: relative;
+            color: transparent;
+            .header__text {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                text-align: left;
+            }
         }
         // цетрированная версия
         .slider-hero.centered-version {
@@ -159,11 +181,28 @@
                 color: #003067;
             }
             &__video-btn {
-                display: block;
+                display: flex;
                 width: 167px;
-                height: 115px;
-                background: url("../images/video-btn.svg") no-repeat center center transparent;
-                &:hover {}
+                max-width: 167px;
+                height: 60px;
+                background-repeat: no-repeat;
+                background-position: 18px center;
+                background-image: url("../images/icons/play-gray.svg");
+                padding: 5px;
+                padding-left: 55px;
+                margin: 0;
+                text-align: left;
+                line-height: 1.3em;
+                justify-content: center;
+                align-items: center;
+                background-color: #003067;
+                border: 3px solid #003067;
+                color: white;
+                transition: none;
+                &:hover {
+                    background-size: 30px;
+                    background-position: 16px center;
+                }
             }
             &+.slider-demonstration {
                 padding-bottom: 140px;
@@ -190,11 +229,29 @@
         }
     }
     .btn {
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        background: none;
+        cursor: pointer;
+        padding: 25px 80px;
+        display: inline-block;
+        margin: 15px 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        outline: none;
+        position: relative;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        // мои стили
+        background-color: transparent;
         text-decoration: none;
-        border: 0px solid;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 3px;
         &-gray {
             width: 228px;
             height: 50.65px;
@@ -205,6 +262,22 @@
             line-height: 26px;
             font-weight: 300;
             text-transform: uppercase;
+        }
+        &.js-startstop {
+            display: none;
+            cursor: pointer;
+            text-align: right;
+            position: absolute;
+            width: 176px;
+            height: 42px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url(" ") no-repeat 20px center #003067;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
         }
     }
     @include desktop {
@@ -278,7 +351,7 @@
                 }
                 .centered-bullet {
                     position: absolute;
-                    top: 0;
+                    top: 10px;
                     left: 50%;
                     transform: translateX(-50%);
                 }
@@ -456,18 +529,21 @@
                     }
                     .icon-about-2 {
                         background-image: url("../images/icons/icon-about-2.svg");
+                        flex: 1 0 110px;
                     }
                     .icon-about-3 {
                         background-image: url("../images/icons/icon-about-3.svg");
                     }
                     .icon-about-4 {
                         background-image: url("../images/icons/icon-about-4.svg");
+                        flex: 1 0 110px;
                     }
                     .icon-about-5 {
                         background-image: url("../images/icons/icon-about-5.svg");
                     }
                     .icon-about-6 {
                         background-image: url("../images/icons/icon-about-6.svg");
+                        flex: 1 0 110px;
                     }
                 }
             }
@@ -505,6 +581,11 @@
             width: 100%;
             flex-direction: column-reverse;
             margin-bottom: 27px;
+            border: 2px solid transparent;
+            transition: 500ms all;
+            &:hover {
+                border-color: #999;
+            }
             &__input {
                 width: 100%;
                 height: 46px;
@@ -789,10 +870,16 @@
 
 .js-video-main-wrap {
     position: relative;
+    padding-bottom: 130px;
     .btn-gray {
         position: absolute;
         top: calc(50% - 25px);
         left: -275px;
         cursor: pointer;
+    }
+    &:hover {
+        .js-startstop {
+            display: flex;
+        }
     }
 }

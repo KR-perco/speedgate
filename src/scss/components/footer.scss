@@ -5,6 +5,9 @@
     width: 100%;
     background: #F0F0F0;
     color: $light-gray-color;
+    a:hover {
+        color: #003067;
+    }
     &__header {
         margin-bottom: 75px;
     }
