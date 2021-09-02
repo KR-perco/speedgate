@@ -125,7 +125,8 @@
             align-items: center;
             &:hover {
                 .select-lang__list {
-                    display: block;
+                    top: 100%;
+                    opacity: 1;
                 }
                 .select-lang__name {
                     font-weight: 500;
@@ -146,15 +147,17 @@
                     width: 30px;
                     height: 1em;
                     background: url(../images/lang-arrow.svg) no-repeat center center transparent;
+                    transition: 300ms all;
                 }
             }
             &__list {
                 position: absolute;
-                top: 100%;
+                top: -99999px;
+                opacity: 0;
                 color: #003067;
                 background-color: #E5E5E5;
                 padding: 10px;
-                display: none;
+                transition: 300ms opacity;
             }
             &__item {
                 font-style: normal;

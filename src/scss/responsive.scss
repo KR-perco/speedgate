@@ -103,11 +103,16 @@
     .home h2,
     .home h2.header__text {
         font-size: 48px;
-        margin: 0 0 5px;
+        // margin: 0 0 5px;
     }
+    .four .header__text {
+        margin-bottom: 35px;
+    }
+    .home section .reserve-height,
     .home .hero .header__text {
         font-size: 57px;
         margin: 0 0 12px;
+        min-height: 69px;
     }
     .home .hero .header__text_subtext {
         font-size: 36px;
@@ -121,6 +126,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    .two .swiper-button-prev,
+    .two .swiper-button-next {
+        display: none;
+    }
     .header__nav-container .nav-container__link {
         padding: 0 5px;
         font-size: 15px;
@@ -219,11 +228,88 @@
 }
 
 @media screen and (max-width: 640px) {
+    .home section .header__text_subtext {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .home section .header__container {
+        padding: 0 30px;
+    }
+    .home .swiper-container-horizontal>.swiper-pagination .swiper-pagination-bullet,
+    .home .swiper-container-horizontal+.swiper-pagination .swiper-pagination-bullet {
+        width: 35px;
+        margin: 0 9px;
+        border-width: 1px;
+    }
+    .header__pen-img:hover {
+        background-size: 31px;
+    }
+    .header__pen-img {
+        background-size: 28px;
+    }
+    .home .hero .header__text {
+        min-height: auto;
+    }
+    .home section .reserve-height .header__text {
+        text-align: center;
+    }
+    .home section .reserve-height {
+        font-size: 48px;
+    }
+    .home .hero .header__text {
+        font-size: 48px;
+    }
+    .home .hero .header__text_subtext {
+        font-size: 21px;
+    }
     .header__logo {
-        flex: 1 1 100%;
+        flex: 1 1 41%;
+    }
+    .header__language {
+        order: 0;
+        flex: 1 0 25%;
+    }
+    .header__language .select-lang {
+        right: auto;
+        left: 0;
+        width: 71px;
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+    .header__language .select-lang__name::after {
+        content: "";
+    }
+    .header__language .select-lang__list {
+        right: auto;
+        left: 0;
     }
 }
 
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+    .home .icons_list .icon__item .icon__signature {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .home section .header__container {
+        margin-bottom: 0;
+    }
+    .home section.hero .header__container {
+        margin-bottom: 20px;
+    }
+    .home h2,
+    .home h2.header__text {
+        font-size: 36px;
+    }
+    .header__pen-img {
+        top: 21px;
+        right: 21.1px;
+        width: 54px;
+        height: 54px;
+    }
+    .header__wrap {
+        height: 46px;
+        background: url("../images/header-plawka-xs.svg") no-repeat right bottom transparent;
+    }
+}
 
 @media screen and (max-width: 380px) {}

@@ -27,7 +27,7 @@ main.home#main
 				.icons_wrap
 					.icons_list.row
 						each object, key in data.home.advanages.icons
-							.icon__item.cell-2.cell-3-xs( class='advantages__icon-' + key data-aos-delay=object.delay data-aos="fade-in" data-aos-anchor-placement="top-center")
+							.icon__item.cell-2.cell-4-xs( class='advantages__icon-' + key data-aos-delay=object.delay data-aos="fade-in" data-aos-anchor-placement="top-center")
 								figure.icon(
 									class=object.svg 
 								)
@@ -36,15 +36,15 @@ main.home#main
 								//- +svg("icon-adv-1") https://github.com/ninelines-team/ninelines-docs/blob/master/07_images.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-svg-%D1%81%D0%BF%D1%80%D0%B0%D0%B9%D1%82%D0%B0%D0%BC%D0%B8 
 
 	section.two.white-bg#products
-		.header__container.text-center
+		.header__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
 			h2.header__text#js-dynamic-text Скоростной проход ST-01
 			span.header__text.header__text_subtext#js-dynamic-subtext Универсальный скоростной проход с распашными створками
 
 			.advantages__icons.container
 		.container(data-aos="fade-in" data-aos-anchor-placement="top-center")
 			.row
-				.cell-2.cell-1-md
-				.cell-8.cell-10-md
+				.cell-2.cell-1-md.cell-0-xs
+				.cell-8.cell-10-md.cell-12-xs
 					.swiper-container.slider-prod
 						.swiper-wrapper
 							a.swiper-slide(href="#prod-1" data-text="Скоростной проход ST-01" data-subtext="Универсальный скоростной проход с распашными створками")
@@ -60,44 +60,52 @@ main.home#main
 						.swiper-button-prev
 						.swiper-button-next
 						.swiper-pagination
-				.cell-2.cell-1-md 
- 
-	include products/st01
-	include products/st11
-	include products/st02  
+				.cell-2.cell-1-md.cell-0-xs
+
+	section.two.white-bg#products-cube
+		.container(data-aos="fade-in" data-aos-anchor-placement="top-center")
+			.row
+				.swiper-container.slider-cube
+					.swiper-wrapper 
+						a.swiper-slide
+							include products/st01
+						a.swiper-slide
+							include products/st11
+						a.swiper-slide
+							include products/st02  
 
 	section.dop-prod.white-bg
-		.header__container.text-center
+		.header__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
 			h2.header__text Установка дополнительного оборудования  
-		.container
+		.container(data-aos="fade-in" data-aos-anchor-placement="center-center")
 			.row 
-				.cell-2.push-2.other-1(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center")
+				.cell-2.push-2
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-1.jpg", alt="")
 					//- .dop-prod__img.img-dop-1  
 					.dop-prod__descr Кронштейн для биометрических считывателей 
-				.cell-2.push-1.other-2(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-1")
+				.cell-2.push-1
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-2.jpg", alt="")
 					.dop-prod__descr Стойка с картоприемником 
-				.cell-2.push-1.post-2.other-3(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-2")
+				.cell-2.push-1.post-2
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-3.jpg", alt="")
 					.dop-prod__descr Стойка для сканера штрихкода 
-				.cell-2.push-2.other-4(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-3")
+				.cell-2.push-2
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-4.jpg", alt="")
 					.dop-prod__descr Кронштейны для терминалов распознавания лиц Suprema  
-				.cell-2.push-1.other-5(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-4")
+				.cell-2.push-1
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-5.jpg", alt="")
 					.dop-prod__descr Кронштейны для терминалов распознавания лиц ZKTeco 
-				.cell-2.push-1.post-2(data-aos="fade-down" data-aos-easing="linear" data-aos-anchor-placement="center-center" data-aos-anchor=".other-1")
+				.cell-2.push-1.post-2
 					.dop-prod__img.image-container.is-square
 							.image-flex-center 
 								img(src="images/dop-prods/dop-prod-6.jpg", alt="")
@@ -157,13 +165,13 @@ main.home#main
 				//- 	img(src="images/gallery/gallery-slide16.jpg", alt="") 
 				//- 	span.slide-signature Скоростные проходы ST11, ЛУКОЙЛ, Москва
 			.swiper-button-prev
-			.swiper-button-next
+			.swiper-button-next 
 
 	section.four#about(data-aos="fade-in" data-aos-anchor-placement="top-center")
 		.container 
 			.row 
 				.cell-6.cell-12-elg
-					.about(data-aos="fade-right" data-aos-anchor-placement="center-center")
+					.about(data-aos="fade-in" data-aos-anchor-placement="center-center")
 						h2.header__text.header__text_white.text-center Почему PERCo 
 						.about__joint-photos.hide.show-elg.image-container.is-wide
 							.image-flex-center
@@ -182,9 +190,9 @@ main.home#main
 									span.icon__signature
 										!= object.text
 				.cell-6.cell-0-elg
- 
+
 	section.five.white-bg#write-us 
-		.header__container.text-center
+		.header__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
 			h1.header__text Напишите нам
 		.container(data-aos="fade-up" data-aos-anchor-placement="center-bottom")
 			.row 

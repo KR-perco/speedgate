@@ -139,6 +139,7 @@
                     font-size: 40px;
                     line-height: 47px;
                     position: relative;
+                    display: inline-block;
                     &:after {
                         content: "";
                         position: absolute;
@@ -492,7 +493,6 @@
         color: white;
         height: 840px;
         background: url("../images/about1.jpg") right top no-repeat, url("../images/about2.jpg") right bottom no-repeat, #003067;
-        // background: #003067;
     }
     .about {
         font-style: normal;
@@ -581,9 +581,10 @@
             width: 100%;
             flex-direction: column-reverse;
             margin-bottom: 27px;
-            border: 2px solid transparent;
             transition: 500ms all;
-            &:hover {
+            box-sizing: border-box;
+            position: relative;
+            &:hover:after {
                 border-color: #999;
             }
             &__input {
@@ -592,8 +593,14 @@
                 border: 1px solid #E5E5E5;
                 box-sizing: border-box;
                 padding: 12px 19px;
+                position: relative;
+                z-index: 1;
+                background: transparent;
                 &_textarea {
                     height: 150px;
+                }
+                &:hover {
+                    border-color: transparent;
                 }
             }
             &__placeholder {
@@ -625,6 +632,14 @@
                     block-size: 18px;
                     inline-size: 18px;
                 }
+            }
+            &:after {
+                content: "";
+                border: 2px solid transparent;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                cursor: text;
             }
         }
         &-btn {
