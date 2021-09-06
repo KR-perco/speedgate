@@ -1,13 +1,15 @@
 //- скоростной проход st-11
-section.ver1.video1#prod-2 
+.ver1.video1#prod-section-1
     .container
         .row 
             .js-video-main-wrap.push-2.cell-8.post-2.push-0-md.cell-12-md.post-0-md
                 .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")
                     h2.header-demo__text Скоростной проход ST-11
                     a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st11 mainClass="full-vid") смотреть видео
-                .btn.js-startstop Stop
-                .swiper-container.slider-demonstration.js-sliderdemo-2(data-aos="fade-in" data-aos-anchor-placement="top-center")
+                
+                //-  Далее: Скоростной проход ST-02
+                //- include svg_next_btn
+                .swiper-container.slider-demonstration.js-sliderdemo-1(data-aos="fade-in" data-aos-anchor-placement="top-center")
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы")
                             +lazyVideo({
@@ -24,7 +26,7 @@ section.ver1.video1#prod-2
                                         dataMw: "740"
                                     }
                                 ]
-                            }).lozad#index-1(autoplay, muted)
+                            }).lozad#index-1(muted)
                         .swiper-slide(data-name="Проход")
                             +lazyVideo({
                                 poster: 'images/video-posters/poster2.jpg',
@@ -105,18 +107,4 @@ section.ver1.video1#prod-2
                                     }
                                 ]
                             }).lozad#index-6(muted)
-                .swiper-pagination  
-            
-    .container
-        .row
-            .cell-3.cell-0-md
-            .cell-6.cell-12-md
-                .icons_list.characteristics.row
-                    each object, key in data.home.characteristics.icons
-                        .icon__item.cell-2
-                            figure.icon(
-                                class=object.svg 
-                            )
-                            span.icon__signature 
-                                != object.text 		
-            .cell-3.cell-0-md
+                .swiper-pagination

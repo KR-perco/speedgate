@@ -1,13 +1,15 @@
 //- Скоростной проход ST-01
-section.ver1.video0#prod-1 
+.ver1.video0#prod-section-0
     .container
         .row 
             .js-video-main-wrap.push-2.cell-8.post-2.push-0-md.cell-12-md.post-0-md
                 .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")
                     h2.header-demo__text Скоростной проход ST-01
                     a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") смотреть видео
-                .btn.js-startstop Stop
-                .swiper-container.slider-demonstration.js-sliderdemo-1(data-aos="fade-in" data-aos-anchor-placement="top-center")
+                    
+                //- Далее: Скоростной проход ST-11 
+                //- include svg_next_btn
+                .swiper-container.slider-demonstration.js-sliderdemo-0(data-aos="fade-in" data-aos-anchor-placement="top-center")
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы")
                             //- poster: 'images/video-posters/poster1.jpg',
@@ -36,7 +38,7 @@ section.ver1.video0#prod-1
                                         type: 'video/mp4',
                                     }
                                 ]
-                            }).lozad#index-2(test-attrs)
+                            }).lozad#index-2(muted)
                         .swiper-slide(data-name="Интеграция")
                             //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
@@ -50,7 +52,7 @@ section.ver1.video0#prod-1
                                         type: 'video/mp4',
                                     }
                                 ]
-                            }).lozad#index-2(test-attrs)
+                            }).lozad#index-2(muted)
                         .swiper-slide(data-name="Безопасность") 
                             //- poster: 'images/video-posters/poster3.jpg',
                             +lazyVideo({
@@ -64,7 +66,7 @@ section.ver1.video0#prod-1
                                         type: 'video/mp4',
                                     }
                                 ]
-                            }).lozad#index-3(test-attrs)
+                            }).lozad#index-3(muted)
                         .swiper-slide(data-name="Исполнение")
                             //- poster: 'images/video-posters/poster4.jpg',
                             +lazyVideo({
@@ -78,7 +80,7 @@ section.ver1.video0#prod-1
                                         type: 'video/mp4',
                                     }
                                 ]
-                            }).lozad#index-4(test-attrs)
+                            }).lozad#index-4(muted)
                         .swiper-slide(data-name="Габариты")
                             //- poster: 'images/video-posters/poster5.jpg',
                             +lazyVideo({
@@ -92,19 +94,5 @@ section.ver1.video0#prod-1
                                         type: 'video/mp4',
                                     }
                                 ]
-                            }).lozad#index-5(test-attrs) 
-                .swiper-pagination 
-            
-    .container
-        .row
-            .cell-3.cell-0-md
-            .cell-6.cell-12-md
-                .icons_list.characteristics.row
-                    each object, key in data.home.characteristics.icons
-                        .icon__item.cell-2
-                            figure.icon(
-                                class=object.svg 
-                            )
-                            span.icon__signature 
-                                != object.text 		
-            .cell-3.cell-0-md
+                            }).lozad#index-5(muted) 
+                .swiper-pagination

@@ -1,9 +1,11 @@
 main.home#main
 	section.hero
-		.header__container.text-center
+		.header__container.reserve-height__container.text-center
 			.reserve-height Скоростные проходы
-				h1.header__text#js-dynamic-text-1
-			span.header__text.header__text_subtext#js-dynamic-subtext-1(data-aos="fade-in" data-aos-delay="2100" data-aos-anchor-placement="top-center") Решение для бизнес-центров 
+				h1.header__text.text-pinned#js-dynamic-text-1
+			span.header__text.header__text_subtext
+				.header__text_subline(data-aos="flip-right" data-aos-delay="1700" data-aos-anchor-placement="top-center")
+				#js-dynamic-subtext-1(data-aos="flip-right" data-aos-delay="2100" data-aos-anchor-placement="top-center") Решение для бизнес-центров 
 		.slider-hero.swiper-container(data-aos="fade-in" data-aos-delay="500" data-aos-anchor-placement="top-center")
 			.swiper-wrapper
 				.swiper-slide(data-subtext="Решение для бизнес-центров")
@@ -21,8 +23,11 @@ main.home#main
 			.swiper-pagination
 
 	section.advantages#advantages
-		.container.text-center
-			h2.advantages__header(data-aos="fade-in" data-aos-anchor-placement="center-center") Преимущества
+		.container.reserve-height__container.text-center
+			//- Преимущества
+			.reserve-height Преимущества
+				h2.advantages__header.text-pinned#js-dynamic-text-2
+		.container.text-center 
 			.advantages__icons.container(data-aos="fade-in" data-aos-anchor-placement="top-center")
 				.icons_wrap
 					.icons_list.row
@@ -37,8 +42,10 @@ main.home#main
 
 	section.two.white-bg#products
 		.header__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
-			h2.header__text#js-dynamic-text Скоростной проход ST-01
-			span.header__text.header__text_subtext#js-dynamic-subtext Универсальный скоростной проход с распашными створками
+			h2.header__text#js-dynamic-text-3
+			span.header__text.header__text_subtext
+				.header__text_subline(data-aos="fade-right" data-aos-delay="1700" data-aos-anchor-placement="top-center")
+				#js-dynamic-subtext-3(data-aos="flip-right" data-aos-delay="2100" data-aos-anchor-placement="top-center") Универсальный скоростной проход с распашными створками 
 
 			.advantages__icons.container
 		.container(data-aos="fade-in" data-aos-anchor-placement="top-center")
@@ -47,36 +54,54 @@ main.home#main
 				.cell-8.cell-10-md.cell-12-xs
 					.swiper-container.slider-prod
 						.swiper-wrapper
-							a.swiper-slide(href="#prod-1" data-text="Скоростной проход ST-01" data-subtext="Универсальный скоростной проход с распашными створками")
+							a.swiper-slide.js-to-anchor(href="#prod-section-0" data-prod-section="0" data-text="Скоростной проход ST-01" data-subtext="Универсальный скоростной проход с распашными створками")
 								img(src="images/ST-01__slide1.jpg", alt="")
-							a.swiper-slide(href="#prod-2" data-text="Скоростной проход ST-11" data-subtext="Компактный скоростной проход с распашными створками")
+							a.swiper-slide.js-to-anchor(href="#prod-section-1" data-prod-section="1" data-text="Скоростной проход ST-11" data-subtext="Компактный скоростной проход с распашными створками")
 								img(src="images/ST-01__slide2.jpg", alt="")
-							a.swiper-slide(href="#prod-3" data-text="Скоростной проход ST-02" data-subtext="Скоростной проход с раздвижными створками")
+							a.swiper-slide.js-to-anchor(href="#prod-section-2" data-prod-section="2" data-text="Скоростной проход ST-02" data-subtext="Скоростной проход с раздвижными створками")
 								img(src="images/ST-01__slide3.jpg", alt="")
-							a.swiper-slide(href="#prod-4" data-text="Калитка WMD-06" data-subtext="Автоматическая калитка со створкой из закаленного стекла")
+							a.swiper-slide.js-to-anchor(href="#prod-section-3" data-prod-section="3" data-text="Калитка WMD-06" data-subtext="Автоматическая калитка со створкой из закаленного стекла")
 								img(src="images/ST-01__slide4.jpg", alt="")
-							a.swiper-slide(href="#prod-4" data-text="Ограждение ВН06" data-subtext="Ограждение из закаленного стекла")
+							a.swiper-slide.js-to-anchor(href="#prod-section-3" data-prod-section="3" data-text="Ограждение ВН06" data-subtext="Ограждение из закаленного стекла")
 								img(src="images/ST-01__slide5.jpg", alt="") 
 						.swiper-button-prev
 						.swiper-button-next
 						.swiper-pagination
 				.cell-2.cell-1-md.cell-0-xs
 
-	section.two.white-bg#products-cube
-		.container(data-aos="fade-in" data-aos-anchor-placement="top-center")
+	section.two#products-cube(data-aos="fade-in" data-aos-anchor-placement="top-center") 
+		.swiper-container.slider-cube
+			.swiper-wrapper 
+				.swiper-slide
+					include products/st01
+				.swiper-slide
+					include products/st11
+				.swiper-slide
+					include products/st02
+			.slider-cube-nav
+				.container
+					.row
+						.push-1.cell-10.post-1.slider-cube-relative
+							.swiper-button-prev
+							.swiper-button-next 
+
+		.container
 			.row
-				.swiper-container.slider-cube
-					.swiper-wrapper 
-						a.swiper-slide
-							include products/st01
-						a.swiper-slide
-							include products/st11
-						a.swiper-slide
-							include products/st02  
+				.cell-3.cell-0-md
+				.cell-6.cell-12-md
+					.icons_list.characteristics.row
+						each object, key in data.home.characteristics.icons
+							.icon__item.cell-2
+								figure.icon(
+									class=object.svg 
+								)
+								span.icon__signature 
+									!= object.text 		
+				.cell-3.cell-0-md
 
 	section.dop-prod.white-bg
 		.header__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
-			h2.header__text Установка дополнительного оборудования  
+			h2.header__text#js-dynamic-text-4
 		.container(data-aos="fade-in" data-aos-anchor-placement="center-center")
 			.row 
 				.cell-2.push-2
@@ -113,7 +138,7 @@ main.home#main
 
 	section.three
 		.header__container.text-center
-			h2.header__text Фотогалерея  
+			h2.header__text#js-dynamic-text-5
 		.swiper-container.slider-gallery#gallery(data-aos="fade-in" data-aos-anchor-placement="top-center")
 			.swiper-wrapper
 				.swiper-slide
@@ -172,7 +197,7 @@ main.home#main
 			.row 
 				.cell-6.cell-12-elg
 					.about(data-aos="fade-in" data-aos-anchor-placement="center-center")
-						h2.header__text.header__text_white.text-center Почему PERCo 
+						h2.header__text.header__text_white.text-center#js-dynamic-text-6
 						.about__joint-photos.hide.show-elg.image-container.is-wide
 							.image-flex-center
 								img(src="images/about_photos.png", alt="")
@@ -193,7 +218,7 @@ main.home#main
 
 	section.five.white-bg#write-us 
 		.header__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
-			h1.header__text Напишите нам
+			h1.header__text#js-dynamic-text-7
 		.container(data-aos="fade-up" data-aos-anchor-placement="center-bottom")
 			.row 
 				.cell-3

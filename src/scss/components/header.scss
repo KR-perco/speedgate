@@ -47,9 +47,6 @@
                 align-items: center;
                 transition: none;
                 padding: 0;
-                &:hover {
-                    font-weight: 500;
-                }
             }
             &__item {
                 flex: 0 0 auto;
@@ -62,6 +59,12 @@
                     .nav-sublist {
                         top: calc(100% + .5px);
                         opacity: 1;
+                    }
+                    .nav-container__link {
+                        font-weight: 500;
+                        &:after {
+                            transform: rotate(90deg);
+                        }
                     }
                 }
                 .nav-sublist {
@@ -106,6 +109,15 @@
                         justify-content: flex-start;
                         align-items: center;
                     }
+                }
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: -25%;
+                    width: 150%;
+                    height: 103%;
+                    cursor: pointer;
                 }
             }
         }
@@ -298,16 +310,16 @@
         width: 100%;
         background: url("../images/header-plawka5.svg") bottom right no-repeat;
     }
-    &:after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 130px;
-        height: 100%;
-        width: 100%;
-        background-color: #002754;
-        border-bottom: 1px solid #002754;
-    }
+    // &:after {
+    //     content: "";
+    //     position: absolute;
+    //     top: 0;
+    //     right: 130px;
+    //     height: 100%;
+    //     width: 100%;
+    //     background-color: #002754;
+    //     border-bottom: 1px solid #002754;
+    // }
 }
 
 .mm-spn.mm-spn--navbar::after {

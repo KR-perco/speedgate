@@ -7,14 +7,6 @@ import MmenuLight from 'mmenu-light';
 import AOS from 'aos';
 import Typed from 'typed.js';
 
-var options = {
-    strings: ['Скоростные проходы'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var typed = new Typed('#js-dynamic-text-1', options);
-
 // import objectFitVideos from 'object-fit-videos';
 
 svg4everybody();
@@ -50,3 +42,51 @@ AOS.init({
     // anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
 
 });
+
+var tOptions1 = {
+    strings: ['Скоростные проходы'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+var tOptions2 = {
+    strings: ['Преимущества'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+var tOptions3 = {
+    strings: ['Скоростной проход ST-01'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var tOptions4 = {
+    strings: ['Установка дополнительного оборудования'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var tOptions5 = {
+    strings: ['Фотогалерея'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var tOptions6 = {
+    strings: ['Почему PERCo'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var tOptions7 = {
+    strings: ['Напишите нам'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var typed1 = new Typed('#js-dynamic-text-1', tOptions1);
+var typed2 = new Typed('#js-dynamic-text-2', tOptions2);
+var typed3 = new Typed('#js-dynamic-text-3', tOptions3);
+var typed4 = new Typed('#js-dynamic-text-4', tOptions4);
+var typed5 = new Typed('#js-dynamic-text-5', tOptions5);
+var typed6 = new Typed('#js-dynamic-text-6', tOptions6);
+var typed7 = new Typed('#js-dynamic-text-7', tOptions7);
