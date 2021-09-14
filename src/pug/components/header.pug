@@ -50,7 +50,7 @@ header.header(data-aos="fade-in" data-aos-anchor-placement="top-center")
 							ul.nav-container__sublist.nav-sublist
 								each subobject, key in object.sublist
 									li
-										a.nav-sublist__link.js-to-anchor(
+										a.nav-sublist__link(
 											href=subobject.url
 											data-link=key
 											data-prod-section=subobject.slideto

@@ -1,15 +1,15 @@
-//- скоростной проход st-02
-.ver1.video2#prod-section-2 
+//- Калитка и Ограждение  wmd06 bh06
+.ver1.video2#prod-section-3 
     .container
         .row 
             .js-video-main-wrap.push-2.cell-8.post-2.push-0-md.cell-12-md.post-0-md
                 .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")
-                    h2.header-demo__text Скоростной проход ST-02
-                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st02 mainClass="full-vid") смотреть видео
+                    h2.header-demo__text Калитка и Ограждение 
+                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.wmd06 mainClass="full-vid") смотреть видео
 
                 //- Далее: Скоростной проход ST-01
                 //- include svg_next_btn
-                .swiper-container.slider-demonstration.js-sliderdemo-2.test(data-aos="fade-in" data-aos-anchor-placement="top-center")
+                .swiper-container.slider-demonstration.js-sliderdemo-3.test(data-aos="fade-in" data-aos-anchor-placement="top-center")
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы")
                             //- poster: 'images/video-posters/poster1.jpg',
@@ -25,22 +25,7 @@
                                     }
                                 ]
                             }).lozad#index-1(muted)
-                        //- .swiper-slide(data-name="Проход")
-                        //-     //- poster: 'images/video-posters/poster2.jpg',
-                        //-     +lazyVideo({
-                        //-         source: [
-                        //-             {
-                        //-                 srcset: `video/st02/586x330/2.mp4`, 
-                        //-                 type: 'video/mp4',
-                        //-             },
-                        //-             { 
-                        //-                 srcset: `video/1245x701/2.mp4`,
-                        //-                 type: 'video/mp4',
-                        //-             }
-                        //-         ]
-                        //-     }).lozad#index-2(muted)
                         .swiper-slide(data-name="Проход")
-                            //- Проход2
                             //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
                                 source: [
@@ -49,17 +34,31 @@
                                         type: 'video/mp4',
                                     }, 
                                     { 
+                                        srcset: `video/1245x701/2.mp4`,
+                                        type: 'video/mp4',
+                                    }
+                                ]
+                            }).lozad#index-2(muted)
+                        .swiper-slide(data-name="Проход2")
+                            //- poster: 'images/video-posters/poster2.jpg',
+                            +lazyVideo({
+                                source: [
+                                    {
+                                        srcset: `video/st11/990x560/3.mp4`,
+                                        type: 'video/mp4',
+                                    }, 
+                                    { 
                                         srcset: `video/1245x701/3.mp4`,
                                         type: 'video/mp4',
                                     }
                                 ]
                             }).lozad#index-2(muted)
-                        .swiper-slide(data-name="Габариты") 
+                        .swiper-slide(data-name="Исполнение") 
                             //- poster: 'images/video-posters/poster3.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/3.mp4`,
+                                        srcset: `video/st11/990x560/4.mp4`,
                                         type: 'video/mp4',
                                     }, 
                                     { 
@@ -73,7 +72,7 @@
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/4.mp4`,
+                                        srcset: `video/st11/990x560/5.mp4`,
                                         type: 'video/mp4',
                                     }, 
                                     { 
@@ -82,12 +81,12 @@
                                     }
                                 ]
                             }).lozad#index-4(muted)
-                        .swiper-slide(data-name="Исполнение")
+                        .swiper-slide(data-name="Размеры")
                             //- poster: 'images/video-posters/poster5.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/5.mp4`,
+                                        srcset: `video/st11/990x560/6.mp4`,
                                         type: 'video/mp4',
                                     }, 
                                     { 

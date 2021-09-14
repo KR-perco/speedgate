@@ -47,11 +47,14 @@
                 align-items: center;
                 transition: none;
                 padding: 0;
+                position: relative;
+                z-index: 10;
             }
             &__item {
                 flex: 0 0 auto;
                 position: relative;
                 height: 100%;
+                width: 130px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
