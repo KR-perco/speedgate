@@ -66,7 +66,7 @@ main.home#main
 								//- +svg("icon-adv-1") https://github.com/ninelines-team/ninelines-docs/blob/master/07_images.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-svg-%D1%81%D0%BF%D1%80%D0%B0%D0%B9%D1%82%D0%B0%D0%BC%D0%B8 
 
 	section.two.white-bg#products
-		.header__container.reserve-height__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
+		.header__container.reserve-height__container.text-center
 			.reserve-height 
 				span#js-dynamic-reserve Скоростной проход ST-01
 				h2.header__text.text-pinned#js-dynamic-text-3
@@ -75,7 +75,7 @@ main.home#main
 				#js-dynamic-subtext-3(data-aos="flip-right" data-aos-delay="2100" data-aos-anchor-placement="top-center") Универсальный скоростной проход с распашными створками 
 
 			.advantages__icons.container
-		.container(data-aos="fade-in" data-aos-anchor-placement="top-center")
+		.container(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
 			.row
 				.cell-2.cell-1-md.cell-0-xs
 				.cell-8.cell-10-md.cell-12-xs
@@ -96,7 +96,7 @@ main.home#main
 						.swiper-pagination
 				.cell-2.cell-1-md.cell-0-xs
 
-	section.two#products-cube(data-aos="fade-in" data-aos-anchor-placement="top-center") 
+	section.two#products-cube
 		.swiper-container.slider-cube
 			.swiper-wrapper 
 				.swiper-slide
@@ -194,19 +194,13 @@ main.home#main
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide4.jpg")
 						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide4-wide.jpg")
 						img(src="images/gallery/gallery-slide4.jpg", alt="Скоростные проходы ST-01, коворкинг SOK, Москва") 
-					span.slide-signature Скоростные проходы ST-01, коворкинг SOK, Москва
-				//- .swiper-slide
-				//- 	img(src="images/gallery/gallery-slide5.jpg", alt="")
-				//- 	span.slide-signature Скоростные проходы ST-01, школа перспективных исследований, Тюмень
+					span.slide-signature Скоростные проходы ST-01, коворкинг SOK, Москва 
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide6.jpg")
 						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide6-wide.jpg")
 						img(src="images/gallery/gallery-slide6.jpg", alt="Скоростные проходы ST-01 в составе системы контроля доступа PERCo, бизнес-центр West East, Одинцово, Московская область") 
-					span.slide-signature Скоростные проходы ST-01 в составе системы контроля доступа PERCo, бизнес-центр West East, Одинцово, Московская область
-				//- .swiper-slide
-				//- 	img(src="images/gallery/gallery-slide7.jpg", alt="") 
-				//- 	span.slide-signature Скоростные проходы ST-02, Аэропорт Внуково, Москва
+					span.slide-signature Скоростные проходы ST-01 в составе системы контроля доступа PERCo, бизнес-центр West East, Одинцово, Московская область 
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide8.jpg")
@@ -254,41 +248,42 @@ main.home#main
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide15.jpg")
 						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide15-wide.jpg")
 						img(src="images/gallery/gallery-slide15.jpg", alt="Автоматическая калитка WMD-06, главный офис компании JYSK,Брабранд, Дания") 
-					span.slide-signature Автоматическая калитка WMD-06, главный офис компании JYSK,Брабранд, Дания
-				//- .swiper-slide
-				//- 	img(src="images/gallery/gallery-slide16.jpg", alt="") 
-				//- 	span.slide-signature Скоростные проходы ST11, ЛУКОЙЛ, Москва
+					span.slide-signature Автоматическая калитка WMD-06, главный офис компании JYSK,Брабранд, Дания 
 			.swiper-button-prev
 			.swiper-button-next 
 
-	section.four#about(data-aos="fade-in" data-aos-anchor-placement="top-center")
+	section.four#about
 		.container 
 			.row 
 				.cell-6.cell-12-elg
-					.about(data-aos="fade-in" data-aos-anchor-placement="center-center")
+					.about
 						.reserve-height__container
 							.reserve-height Почему PERCo 
 								h2.header__text.header__text_white.text-center.text-pinned#js-dynamic-text-6
 						.about__joint-photos.hide.show-elg.image-container.is-wide
 							.image-flex-center
 								img(src="images/about_photos.png", alt="")
-						.about__text
+						.about__text(data-aos="fade-in" data-aos-anchor-placement="top-center") 
 							span
 							| PERCo - ведущий российский производитель систем и оборудования безопасности
 							br
 							| PERCo разрабатывает и выпускает: шлагбаумы, турникеты, замки, контроллеры и считыватели, системы контроля доступа.
 						.about__text_icons.row
 							each object, key in data.home.about.icons
-								.icon__item.cell-6.cell-12-xs
+								.icon__item.cell-6.cell-12-xs( 
+										data-aos="fade-in"
+										data-aos-delay=object.delay
+										data-aos-anchor-placement="top-bottom"
+									)
 									figure.icon(
-										class=object.svg
+										class=object.svg 
 									)
 									span.icon__signature
 										!= object.text
 				.cell-6.cell-0-elg
 
 	section.five.white-bg#write-us 
-		.header__container.reserve-height__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
+		.header__container.reserve-height__container.text-center
 			.reserve-height Напишите нам 
 				h2.header__text.text-pinned#js-dynamic-text-7
 		.container(data-aos="fade-up" data-aos-anchor-placement="center-bottom")

@@ -334,12 +334,16 @@ var swiperCube = new Swiper(".slider-cube", {
             });
 
             if (this.activeIndex == 0) {
+                swiper3prod0.slideTo(0);
                 var targetVid = document.getElementById("prod-section-0").getElementsByTagName("video")[swiper3prod0.activeIndex];
             } else if (this.activeIndex == 1) {
+                swiper3prod1.slideTo(0);
                 var targetVid = document.getElementById("prod-section-1").getElementsByTagName("video")[swiper3prod1.activeIndex];
             } else if (this.activeIndex == 2) {
+                swiper3prod2.slideTo(0);
                 var targetVid = document.getElementById("prod-section-2").getElementsByTagName("video")[swiper3prod2.activeIndex];
             } else if (this.activeIndex == 3) {
+                swiper3prod3.slideTo(0);
                 var targetVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
             }
 
@@ -356,10 +360,6 @@ var swiperDop = new Swiper(".slider-dop", {
     effect: "fade",
     loop: false,
     slidesPerView: 1,
-    // mousewheel: {
-    //     eventsTarget: ".dop-prod",
-    //     releaseOnEdges: false,
-    // },
     speed: 500,
     pagination: {
         el: '.slider-dop__wrap + .swiper-pagination-container .swiper-pagination',
@@ -378,21 +378,11 @@ var swiperDop = new Swiper(".slider-dop", {
             return text;
         },
     },
-    // on: {
-    //     slideChangeTransitionEnd: function() {
-    //         if (this.isBeginning || this.isEnd) {
-    //             this.params.mousewheel.releaseOnEdges = true;
-    //         } else {
-    //             this.params.mousewheel.releaseOnEdges = false;
-    //         }
-    //     }
-    // }
 });
 
 var swiper4 = new Swiper(".slider-gallery", {
     effect: "fade",
     loop: true,
-    // height: 800,
     autoplay: {
         delay: 3500,
         disableOnInteraction: false,
@@ -404,25 +394,20 @@ var swiper4 = new Swiper(".slider-gallery", {
 });
 
 
-window.onload = function() {
-    const ShowScroll = btnScrollTop => {
-        window.addEventListener('scroll', () => {
-            const shouldBeVisible = window.pageYOffset > 1700;
-            btnScrollTop.classList.toggle('visible', shouldBeVisible);
-        })
-    }
-    ShowScroll(document.getElementById('scroll-top'));
-};
+$(".btn-change").on("click", function(e) {
+    $(".btn-change").toggleClass("active");
+    $("#main").toggleClass("ver2");
+});
 
 $(".btn-change").on("click", function(e) {
     $(".btn-change").toggleClass("active");
     $("#main").toggleClass("ver2");
 });
 
-
-$(".btn-change").on("click", function(e) {
-    $(".btn-change").toggleClass("active");
-    $("#main").toggleClass("ver2");
+$("[data-prod-slide]").on("click", function(e) {
+    e.preventDefault;
+    gsap.to(window, { duration: .5, scrollTo: "#products" });
+    swiper2.slideTo($(this).data("prod-slide"));
 });
 
 $("[data-prod-section]").on("click", function(e) {
@@ -432,32 +417,29 @@ $("[data-prod-section]").on("click", function(e) {
 });
 
 
-
-// var sectionEnterFromTop = document.querySelector("#products");
 var sectionCube = document.querySelector("#products-cube");
 var sectionDopProd = document.querySelector("#dop-prod");
-// var sectionGallery = document.querySelector(".three");
+var sectionHero = document.querySelector(".slider-hero");
+var sectionGallery = document.querySelector(".three");
 var easeType = "power2";
 var easeTime = .3;
-var sliderhero = document.querySelector(".slider-hero");
+var prohodDone = false;
 
 
-
-// sectionEnterFromTop.addEventListener('wheel', function(event) {
-//     if (event.deltaY < 0) {} else if (event.deltaY > 0) {
-//         gsap.to(window, { duration: easeTime, scrollTo: "#products-cube", ease: easeType });
-//     }
-// });
 sectionCube.addEventListener('wheel', function(event) {
-    if (event.deltaY < 0 && swiperCube.activeIndex == 0 && swiperCube.params.mousewheel.releaseOnEdges) { //"up"  
-        event.preventDefault;
-        gsap.to(window, { duration: easeTime, scrollTo: "#products", ease: easeType });
-    } else if (event.deltaY > 0 && swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { //"down" 
-        event.preventDefault;
-        gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: easeType });
-    } else {
-        gsap.to(window, { duration: easeTime, scrollTo: "#products-cube", ease: easeType });
-        swiperCube.mousewheel.enable();
+    if (!prohodDone) {
+        if (event.deltaY < 0 && swiperCube.activeIndex == 0 && swiperCube.params.mousewheel.releaseOnEdges) { //"up"  
+            event.preventDefault;
+            gsap.to(window, { duration: easeTime, scrollTo: "#products", ease: 0 });
+        } else if (event.deltaY > 0 && swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { //"down" 
+            event.preventDefault;
+            gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: 0 });
+            prohodDone = true;
+            swiperCube.mousewheel.disable();
+        } else {
+            gsap.to(window, { duration: easeTime, scrollTo: "#products-cube", ease: 0 });
+            swiperCube.mousewheel.enable();
+        }
     }
 });
 
@@ -465,63 +447,48 @@ sectionDopProd.addEventListener('wheel', function(event) {
     if (event.deltaY < 0 && swiperDop.activeIndex == 0 && swiperDop.params.mousewheel.releaseOnEdges) { //"up"  
         gsap.to(window, { duration: easeTime, scrollTo: "#products-cube", ease: easeType });
     }
-    // else if (event.deltaY > 0 && swiperDop.activeIndex == 5 && swiperCube.params.mousewheel.releaseOnEdges) { //"down" 
-    //     event.preventDefault;
-    //     gsap.to(window, { duration: easeTime, scrollTo: ".three", ease: easeType });
-    // } else {
-    //     gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: easeType });
-    // }
 });
 
-
-// sectionGallery.addEventListener('wheel', function(event) {
-//     if (event.deltaY < 0) {
-//         gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: easeType });
-//     }
-// });
-
-
-sliderhero.addEventListener('click', function(event) {
+sectionHero.addEventListener('click', function(event) {
     console.log(swiper1.slideNext());
+});
+sectionGallery.addEventListener('click', function(event) {
+    console.log(swiper4.slideNext());
 });
 
 // Динамическая смена якоря
 
-// var menu_selector = ".dot-nav"; 
+// var menu_selector = ".dot-nav";
 
-// function onScroll(){
-// var scroll_top = $(document).scrollTop();
-// $(menu_selector + " a").each(function(){
-//     var hash = $(this).attr("href");
-//     var target = $(hash);
-//     if (target.position().top <= scroll_top && target.position().top + 
-//     target.outerHeight() > scroll_top) {
-//         $(menu_selector + " a.active").removeClass("active");
-//         $(this).addClass("active");
-//     } else {
-//         $(this).removeClass("active");
-//     }
-// });
+// function onScroll() {
+//     var scroll_top = $(document).scrollTop();
+//     $(menu_selector + " a").each(function() {
+//         var hash = $(this).attr("href");
+//         var target = $(hash);
+//         if (target.position().top <= scroll_top && target.position().top +
+//             target.outerHeight() > scroll_top) {
+//             $(menu_selector + " a.active").removeClass("active");
+//             $(this).addClass("active");
+//         } else {
+//             $(this).removeClass("active");
+//         }
+//     });
 // }
 
-// $(document).ready(function () {
+//             $(document).on("scroll", onScroll);
 
-// $(document).on("scroll", onScroll);
+//             $("a[href^=#]").click(function(e) {
+//                 e.preventDefault();
 
-// $("a[href^=#]").click(function(e){
-//     e.preventDefault();
+//                 $(document).off("scroll");
+//                 $(menu_selector + " a.active").removeClass("active");
+//                 $(this).addClass("active");
+//                 var hash = $(this).attr("href");
+//                 var target = $(hash);
 
-//     $(document).off("scroll");
-//     $(menu_selector + " a.active").removeClass("active");
-//     $(this).addClass("active");
-//     var hash = $(this).attr("href");
-//     var target = $(hash);
-
-//     $("html, body").animate({
-//         scrollTop: target.offset().top
-//     }, 500, function(){
-//         window.location.hash = hash;
-//         $(document).on("scroll", onScroll);
-//     });
-
-// });
+//                 $("html, body").animate({
+//                     scrollTop: target.offset().top
+//                 }, 500, function() {
+//                     window.location.hash = hash;
+//                     $(document).on("scroll", onScroll);
+//                 });

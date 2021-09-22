@@ -407,6 +407,17 @@
         &-relative {
             position: relative;
         }
+        .swiper-pagination-custom {
+            display: flex;
+            width: calc(100% - 30px);
+            justify-content: space-between;
+            background-color: #B3B3B3;
+            margin: 0 15px;
+            .swiper-pagination-bullet {
+                margin: 0;
+                border-color: transparent;
+            }
+        }
         .swiper-button-next,
         .swiper-button-prev {
             top: 50%;
