@@ -197,11 +197,21 @@
             right: 41.5px;
             width: 81px;
             height: 81px;
-            background: url(../images/menu_pen.svg) no-repeat center center/35px #002754;
             border-radius: 50%;
             border: 1px solid #002754;
-            &:hover {
-                background-size: 43px;
+            background-color: #002754;
+            &:after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url(../images/menu_pen.svg) no-repeat center center/35px transparent;
+                transition: 300ms all;
+            }
+            &:hover:after {
+                transform: scale(1.1);
             }
         }
         &-ver {

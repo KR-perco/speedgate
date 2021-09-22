@@ -7,6 +7,8 @@ import { actualYear } from './modules/actualYear';
 import header from './components/header';
 import lazyLoading from './modules/lazyLoading';
 
+import Typed from "typed.js";
+import inView from "in-view";
 import Swiper from 'swiper';
 import SwiperCore, { Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel } from 'swiper/core';
 import { Fancybox, Carousel, Panzoom } from "@fancyapps/ui";
@@ -28,19 +30,175 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 Fancybox.bind("[data-fancybox-plyr]", {
     mainClass: 'fullVid',
     on: {
-        // done: (fancybox, slide) => {
+        done: (fancybox, slide) => {
 
-        //     var sliderVideos = $(".js-sliderdemo-2 .swiper-slide video");
-        //     sliderVideos.each(function(index) {
-        //         this.pause();
-        //     });
-        // },
-        // closing: (fancybox, slide) => {
-        //     let currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
-        //     currentVideo.play();
-        // }
+            var sliderVideos = $("#prod-section-" + swiperCube.activeIndex + " video");
+            sliderVideos.each(function(index) {
+                this.pause();
+            });
+        },
+        closing: (fancybox, slide) => {
+            console.log(swiperCube.activeIndex);
+            if (swiperCube.activeIndex == 0) {
+                var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
+            } else if (swiperCube.activeIndex == 1) {
+                var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
+            } else if (swiperCube.activeIndex == 2) {
+                var currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
+            } else if (swiperCube.activeIndex == 3) {
+                var currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
+            } else {
+                // var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
+            }
+            currentVideo.play();
+        }
     }
 });
+
+window.onload = function() {
+    const ShowScroll = btnScrollTop => {
+        window.addEventListener('scroll', () => {
+            const shouldBeVisible = window.pageYOffset > 900;
+            btnScrollTop.classList.toggle('visible', shouldBeVisible);
+        })
+    }
+    ShowScroll(document.getElementById('scroll-top'));
+};
+
+var tOptions1 = {
+    strings: ['Скоростные проходы'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+var tOptions2 = {
+    strings: ['Преимущества'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+// var tOptions3 = {
+//     strings: ['Скоростной проход ST-01'],
+//     typeSpeed: 40,
+//     showCursor: false,
+//     contentType: 'null',
+//     onBegin: function(self) {
+//         console.log('onBegin ' + self);
+//     },
+//     onComplete: function(self) {
+//         console.log('onComplete ' + self);
+//     },
+//     preStringTyped: function(pos, self) {
+//         console.log('preStringTyped ' + pos + ' ' + self);
+//     },
+//     onStringTyped: function(pos, self) {
+//         console.log('onStringTyped ' + pos + ' ' + self);
+//     },
+//     onLastStringBackspaced: function(self) {
+//         console.log('onLastStringBackspaced ' + self);
+//     },
+//     onTypingPaused: function(pos, self) {
+//         console.log('onTypingPaused ' + pos + ' ' + self);
+//     },
+//     onTypingResumed: function(pos, self) {
+//         console.log('onTypingResumed ' + pos + ' ' + self);
+//     },
+//     onReset: function(self) {
+//         console.log('onReset ' + self);
+//     },
+//     onStop: function(pos, self) {
+//         console.log('onStop ' + pos + ' ' + self);
+//     },
+//     onStart: function(pos, self) {
+//         console.log('onStart ' + pos + ' ' + self);
+//     },
+//     onDestroy: function(self) {
+//         console.log('onDestroy ' + self);
+//     }
+// };
+
+var tOptions4 = {
+    strings: ['Установка оборудования'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var tOptions5 = {
+    strings: ['Фотогалерея'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var tOptions6 = {
+    strings: ['Почему PERCo'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+var tOptions7 = {
+    strings: ['Напишите нам'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+
+var tOptions8 = {
+    strings: ['Скоростной проход ST-01'],
+    typeSpeed: 40,
+    showCursor: false,
+};
+
+inView('#js-dynamic-text-1')
+    .once('enter', el => {
+        var typed1 = new Typed(el, tOptions1);
+    })
+inView('#js-dynamic-text-2')
+    .once('enter', el => {
+        var typed2 = new Typed(el, tOptions2);
+    })
+
+
+var typedToTrigger = new Typed('#js-dynamic-text-3', {
+    strings: ['Скоростной проход ST-01'],
+    typeSpeed: 20,
+    backSpeed: 0,
+});
+
+typedToTrigger.stop();
+
+// вызов внутри слайдера
+inView('#js-dynamic-text-3')
+    .once('enter', el => {
+        typedToTrigger.start();
+    })
+
+
+inView('#js-dynamic-text-4')
+    .once('enter', el => {
+        var typed4 = new Typed(el, tOptions4);
+    })
+
+inView('#js-dynamic-text-5')
+    .once('enter', el => {
+        var typed5 = new Typed(el, tOptions5);
+    })
+
+inView('#js-dynamic-text-6')
+    .once('enter', el => {
+        var typed6 = new Typed(el, tOptions6);
+    })
+
+inView('#js-dynamic-text-7')
+    .once('enter', el => {
+        var typed7 = new Typed(el, tOptions7);
+    })
+
+
+// Скоростной проход ST-01
+inView('#js-dynamic-prod1')
+    .once('enter', el => {
+        var typed8 = new Typed(el, tOptions8);
+    })
+
 
 var swiper1 = new Swiper(".slider-hero", {
     effect: "fade",
@@ -77,19 +235,32 @@ var swiper2 = new Swiper(".slider-prod", {
         prevEl: '.slider-prod .swiper-button-prev',
     },
     on: {
-        init: function(swiper) { // фикс: почему-то slideChangeTransitionEnd при инициализации заполняет это поле, что глючит надпись 
-            let dynamicText = document.getElementById("js-dynamic-text-3");
-            dynamicText.innerHTML = "";
-        },
-        slideChangeTransitionEnd: function(swiper) {
-            let dynamicText = document.getElementById("js-dynamic-text-3");
-            let dynamicTextReserve = document.getElementById("js-dynamic-reserve");
-            let dynamicSubtext = document.getElementById("js-dynamic-subtext-3");
-            dynamicText.innerHTML = swiper.slides[swiper.activeIndex].dataset.text;
-            dynamicTextReserve.innerHTML = swiper.slides[swiper.activeIndex].dataset.text;
-            dynamicSubtext.innerHTML = swiper.slides[swiper.activeIndex].dataset.subtext;
-        }
+        // init: function(swiper) { // фикс: почему-то slideChangeTransitionEnd при инициализации заполняет это поле, что глючит надпись 
+        //     let dynamicText = document.getElementById("js-dynamic-text-3");
+        //     dynamicText.innerHTML = "";
+        //     inView("#js-dynamic-text-3")
+        //         .once('enter', el => {
+        //             var typed3 = new Typed(el, {
+        //                 strings: ['Скоростной проход ST-01'],
+        //                 typeSpeed: 40,
+        //                 showCursor: false,
+        //             });
+        //             console.log(typed3);
+        //         })
+        // },
     },
+});
+
+
+
+swiper2.on('slideChangeTransitionEnd', function() {
+    let dynamicText = document.getElementById("js-dynamic-text-3");
+    let dynamicTextReserve = document.getElementById("js-dynamic-reserve");
+    let dynamicSubtext = document.getElementById("js-dynamic-subtext-3");
+
+    dynamicText.innerHTML = this.slides[this.activeIndex].dataset.text;
+    dynamicSubtext.innerHTML = this.slides[this.activeIndex].dataset.subtext;
+    dynamicTextReserve.innerHTML = this.slides[this.activeIndex].dataset.text;
 });
 
 // ST-01
@@ -352,6 +523,54 @@ var swiperCube = new Swiper(".slider-cube", {
     }
 });
 swiperCube.mousewheel.disable();
+
+
+var listener = function(event) {
+    var prohodDone = false;
+    var easeTime = .3;
+
+    if (!prohodDone) {
+        if (event.deltaY < 0) { //"up"  
+            console.log("up");
+            event.preventDefault;
+            prohodDone = true;
+            // swiperCube.mousewheel.disable();
+            // swiperCube.params.mousewheel.releaseOnEdges = false;
+        } else if (event.deltaY > 0) { //"down" 
+            event.preventDefault;
+            console.log("down");
+            gsap.to(window, {
+                duration: easeTime,
+                scrollTo: "#products-cube",
+                ease: 0,
+                onComplete: function() {
+                    console.log('third tween done');
+                    setTimeout(() => swiperCube.mousewheel.enable(), 1500);
+                }
+            });
+            if (swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { // push down only on last slide
+                gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: 0 });
+                prohodDone = true;
+                swiperCube.mousewheel.disable();
+            }
+        } else {
+            console.log("sadasd");
+        }
+    } else {
+        swiperCube.mousewheel.disable();
+    }
+};
+
+inView('#products-cube')
+    .on('enter', el => {
+        document.addEventListener('wheel', listener);
+    })
+    .on('exit', el => {
+        document.removeEventListener('wheel', listener)
+    });
+
+
+
 var namesDop = [];
 $(".js-sliderdemo-dop .swiper-slide").each(function(i) {
     namesDop.push($(this).data("name"));
@@ -416,39 +635,8 @@ $("[data-prod-section]").on("click", function(e) {
     swiperCube.slideTo($(this).data("prod-section"));
 });
 
-
-var sectionCube = document.querySelector("#products-cube");
-var sectionDopProd = document.querySelector("#dop-prod");
 var sectionHero = document.querySelector(".slider-hero");
 var sectionGallery = document.querySelector(".three");
-var easeType = "power2";
-var easeTime = .3;
-var prohodDone = false;
-
-
-sectionCube.addEventListener('wheel', function(event) {
-    if (!prohodDone) {
-        if (event.deltaY < 0 && swiperCube.activeIndex == 0 && swiperCube.params.mousewheel.releaseOnEdges) { //"up"  
-            event.preventDefault;
-            gsap.to(window, { duration: easeTime, scrollTo: "#products", ease: 0 });
-        } else if (event.deltaY > 0 && swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { //"down" 
-            event.preventDefault;
-            gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: 0 });
-            prohodDone = true;
-            swiperCube.mousewheel.disable();
-        } else {
-            gsap.to(window, { duration: easeTime, scrollTo: "#products-cube", ease: 0 });
-            swiperCube.mousewheel.enable();
-        }
-    }
-});
-
-sectionDopProd.addEventListener('wheel', function(event) {
-    if (event.deltaY < 0 && swiperDop.activeIndex == 0 && swiperDop.params.mousewheel.releaseOnEdges) { //"up"  
-        gsap.to(window, { duration: easeTime, scrollTo: "#products-cube", ease: easeType });
-    }
-});
-
 sectionHero.addEventListener('click', function(event) {
     console.log(swiper1.slideNext());
 });

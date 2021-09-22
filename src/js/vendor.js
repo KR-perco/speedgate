@@ -5,8 +5,6 @@ import $ from "jquery";
 import objectFitImages from "object-fit-images";
 import MmenuLight from "mmenu-light";
 import AOS from "aos";
-import Typed from "typed.js";
-import inView from "in-view";
 
 // import objectFitVideos from 'object-fit-videos';
 
@@ -42,91 +40,3 @@ AOS.init({
     // mirror: false, // whether elements should animate out while scrolling past them
     // anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
 });
-
-var tOptions1 = {
-    strings: ['Скоростные проходы'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-var tOptions2 = {
-    strings: ['Преимущества'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-var tOptions3 = {
-    strings: ['Скоростной проход ST-01'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions4 = {
-    strings: ['Установка оборудования'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions5 = {
-    strings: ['Фотогалерея'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions6 = {
-    strings: ['Почему PERCo'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions7 = {
-    strings: ['Напишите нам'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-
-var tOptions8 = {
-    strings: ['Скоростной проход ST-01'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-inView('#js-dynamic-text-1')
-    .once('enter', el => {
-        var typed1 = new Typed(el, tOptions1);
-    })
-inView('#js-dynamic-text-2')
-    .once('enter', el => {
-        var typed2 = new Typed(el, tOptions2);
-    })
-
-inView('#js-dynamic-text-3')
-    .once('enter', el => {
-        var typed3 = new Typed(el, tOptions3);
-    })
-
-inView('#js-dynamic-text-4')
-    .once('enter', el => {
-        var typed4 = new Typed(el, tOptions4);
-    })
-
-inView('#js-dynamic-text-5')
-    .once('enter', el => {
-        var typed5 = new Typed(el, tOptions5);
-    })
-
-inView('#js-dynamic-text-6')
-    .once('enter', el => {
-        var typed6 = new Typed(el, tOptions6);
-    })
-
-inView('#js-dynamic-text-7')
-    .once('enter', el => {
-        var typed7 = new Typed(el, tOptions7);
-    })
-
-
-// Скоростной проход ST-01
-inView('#js-dynamic-prod1')
-    .once('enter', el => {
-        var typed8 = new Typed(el, tOptions8);
-    })
