@@ -8,12 +8,12 @@
                         span Скоростной проход ST-01 
                         h2.header-demo__text.header__text.text-pinned#js-dynamic-prod1
                     a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") смотреть видео
-                    
+                     
                 //- Далее: Скоростной проход ST-11 
                 //- include svg_next_btn
                 .swiper-container.slider-demonstration.js-sliderdemo-0(data-aos="fade-in" data-aos-anchor-placement="top-center")
                     .swiper-wrapper
-                        .swiper-slide(data-name="Ракурсы")
+                        .swiper-slide(data-name="Ракурсы" data-ended="0")
                             //- poster: 'images/video-posters/poster1.jpg',
                             +lazyVideo({
                                 source: [
@@ -23,7 +23,7 @@
                                     },  
                                 ]
                             }).lozad#index-1(autoplay, muted)
-                        .swiper-slide(data-name="Проход")
+                        .swiper-slide(data-name="Проход" data-ended="0")
                             //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
                                 source: [
@@ -33,7 +33,7 @@
                                     },  
                                 ]
                             }).lozad#index-2(muted)
-                        .swiper-slide(data-name="Габариты")
+                        .swiper-slide(data-name="Габариты" data-ended="0")
                             //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
                                 source: [
@@ -43,7 +43,7 @@
                                     },  
                                 ]
                             }).lozad#index-2(muted)
-                        .swiper-slide(data-name="Безопасность") 
+                        .swiper-slide(data-name="Безопасность" data-ended="0") 
                             //- poster: 'images/video-posters/poster3.jpg',
                             +lazyVideo({
                                 source: [
@@ -53,7 +53,7 @@
                                     },  
                                 ]
                             }).lozad#index-3(muted)
-                        .swiper-slide(data-name="Исполнение")
+                        .swiper-slide(data-name="Исполнение" data-ended="0")
                             //- poster: 'images/video-posters/poster4.jpg',
                             +lazyVideo({
                                 source: [
@@ -63,7 +63,7 @@
                                     },  
                                 ]
                             }).lozad#index-4(muted)
-                        .swiper-slide(data-name="Интеграция")
+                        .swiper-slide(data-name="Интеграция" data-ended="0")
                             //- poster: 'images/video-posters/poster5.jpg',
                             +lazyVideo({
                                 source: [

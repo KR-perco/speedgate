@@ -70,9 +70,10 @@ main.home#main
 			.reserve-height 
 				span#js-dynamic-reserve Скоростной проход ST-01
 				h2.header__text.text-pinned#js-dynamic-text-3
+				h2.header__text.text-pinned.hide#js-dynamic-text-3-double
 			span.header__text.header__text_subtext
-				.header__text_subline(data-aos="fade-right" data-aos-delay="1700" data-aos-anchor-placement="top-center")
-				#js-dynamic-subtext-3(data-aos="flip-right" data-aos-delay="2100" data-aos-anchor-placement="top-center") Универсальный скоростной проход с распашными створками 
+				.header__text_subline(data-aos="fade-right" data-aos-delay="1500" data-aos-anchor-placement="top-center")
+				#js-dynamic-subtext-3(data-aos="flip-right" data-aos-delay="1700" data-aos-anchor-placement="top-center") Универсальный скоростной проход с распашными створками 
 
 			.advantages__icons.container
 		.container(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
@@ -88,13 +89,26 @@ main.home#main
 							a.swiper-slide.js-to-anchor(href="#prod-section-2" data-prod-section="2" data-text="Скоростной проход ST-02" data-subtext="Скоростной проход с раздвижными створками")
 								img(src="images/ST-01__slide3.jpg", alt="")
 							a.swiper-slide.js-to-anchor(href="#prod-section-3" data-prod-section="3" data-text="Калитка WMD-06" data-subtext="Автоматическая калитка со створкой из закаленного стекла")
-								img(src="images/ST-01__slide4.jpg", alt="")
+								img(src="images/ST-01__slide4.v2.jpg", alt="")
 							a.swiper-slide.js-to-anchor(href="#prod-section-3" data-prod-section="3" data-text="Ограждение ВН06" data-subtext="Ограждение из закаленного стекла")
 								img(src="images/ST-01__slide5.jpg", alt="") 
 						.swiper-button-prev
 						.swiper-button-next
 						.swiper-pagination
 				.cell-2.cell-1-md.cell-0-xs
+		.container
+			.row
+				.cell-3.cell-0-md
+				.cell-6.cell-12-md
+					.icons_list.characteristics.row
+						each object, key in data.home.characteristics.icons
+							.icon__item.cell-2( class=object.tag data-aos-delay=object.delay data-aos="fade-in" data-aos-anchor-placement="top-bottom" )
+								figure.icon(
+									class=object.svg 
+								)
+								span.icon__signature 
+									!= object.text 		
+				.cell-3.cell-0-md
 
 	section.two#products-cube
 		.swiper-container.slider-cube
@@ -113,24 +127,11 @@ main.home#main
 						.push-1.cell-10.post-1.slider-cube-relative
 							.swiper-button-prev
 							.swiper-button-next 
-
-		.container
-			.row
-				.cell-3.cell-0-md
-				.cell-6.cell-12-md
-					.icons_list.characteristics.row
-						each object, key in data.home.characteristics.icons
-							.icon__item.cell-2
-								figure.icon(
-									class=object.svg 
-								)
-								span.icon__signature 
-									!= object.text 		
-				.cell-3.cell-0-md
+ 
 
 	section.dop-prod.white-bg#dop-prod
 		.header__container.reserve-height__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
-			.reserve-height Установка оборудования 
+			.reserve-height Установка дополнительного оборудования
 				h2.header__text.text-pinned#js-dynamic-text-4
 		.centered-v-container(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
 			.container
@@ -174,79 +175,79 @@ main.home#main
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide1.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide1-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide1-wide.jpg")
 						img(src="images/gallery/gallery-slide1.jpg", alt="Скоростные проходы ST-01, офис компании Latécoère, Франция") 
 					span.slide-signature Скоростные проходы ST-01, офис компании Latécoère, Франция
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide2.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide2-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide2-wide.jpg")
 						img(src="images/gallery/gallery-slide2.jpg", alt="Скоростные проходы ST-01, кинотеатр Cinamon Kosmos, Эстония") 
 					span.slide-signature Скоростные проходы ST-01, кинотеатр Cinamon Kosmos, Эстония
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide3.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide3-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide3-wide.jpg")
 						img(src="images/gallery/gallery-slide3.jpg", alt="Скоростные проходы ST-01, бизнес-школа Emlyon, Франция") 
 					span.slide-signature Скоростные проходы ST-01, бизнес-школа Emlyon, Франция
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide4.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide4-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide4-wide.jpg")
 						img(src="images/gallery/gallery-slide4.jpg", alt="Скоростные проходы ST-01, коворкинг SOK, Москва") 
 					span.slide-signature Скоростные проходы ST-01, коворкинг SOK, Москва 
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide6.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide6-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide6-wide.jpg")
 						img(src="images/gallery/gallery-slide6.jpg", alt="Скоростные проходы ST-01 в составе системы контроля доступа PERCo, бизнес-центр West East, Одинцово, Московская область") 
 					span.slide-signature Скоростные проходы ST-01 в составе системы контроля доступа PERCo, бизнес-центр West East, Одинцово, Московская область 
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide8.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide8-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide8-wide.jpg")
 						img(src="images/gallery/gallery-slide8.jpg", alt="Скоростные проходы ST-01, фитнес-клуб L'Appart Fitness, Франция") 
 					span.slide-signature Скоростные проходы ST-01, фитнес-клуб L'Appart Fitness, Франция
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide9.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide9-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide9-wide.jpg")
 						img(src="images/gallery/gallery-slide9.jpg", alt="Скоростные проходы ST-01, бизнес-центр «Галерея 76», Москва") 
 					span.slide-signature Скоростные проходы ST-01, бизнес-центр «Галерея 76», Москва
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide10.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide10-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide10-wide.jpg")
 						img(src="images/gallery/gallery-slide10.jpg", alt="Скоростные проходы ST-01, бизнес-центр «Фили Град», Москва") 
 					span.slide-signature Скоростные проходы ST-01, бизнес-центр «Фили Град», Москва
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide11.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide11-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide11-wide.jpg")
 						img(src="images/gallery/gallery-slide11.jpg", alt="Скоростные проходы ST-01, жилой комплекс «Мосфильмовский», Москва") 
 					span.slide-signature Скоростные проходы ST-01, жилой комплекс «Мосфильмовский», Москва
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide12.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide12-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide12-wide.jpg")
 						img(src="images/gallery/gallery-slide12.jpg", alt="Скоростные проходы ST-01 и калитки WMD-06, Назарбаев Университет, Астана") 
 					span.slide-signature Скоростные проходы ST-01 и калитки WMD-06, Назарбаев Университет, Астана
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide13.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide13-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide13-wide.jpg")
 						img(src="images/gallery/gallery-slide13.jpg", alt="Калитки WMD-06, детский игровой комплекс KABONK, Нидерланды") 
 					span.slide-signature Калитки WMD-06, детский игровой комплекс KABONK, Нидерланды
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide14.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide14-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide14-wide.jpg")
 						img(src="images/gallery/gallery-slide14.jpg", alt="Автоматическая калитка WMD-06, музей железных дорог России, Санкт-Петербург") 
 					span.slide-signature Автоматическая калитка WMD-06, музей железных дорог России, Санкт-Петербург
 				.swiper-slide
 					picture 
 						source(media="(max-width: 1024px)" 								srcset="images/gallery/gallery-slide15.jpg")
-						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/gallery-slide15-wide.jpg")
+						source(media="(max-height: 768px) and (min-width:768px)" 		srcset="images/gallery/wide/gallery-slide15-wide.jpg")
 						img(src="images/gallery/gallery-slide15.jpg", alt="Автоматическая калитка WMD-06, главный офис компании JYSK,Брабранд, Дания") 
 					span.slide-signature Автоматическая калитка WMD-06, главный офис компании JYSK,Брабранд, Дания 
 			.swiper-button-prev

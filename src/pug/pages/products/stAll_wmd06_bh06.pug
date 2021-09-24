@@ -4,14 +4,12 @@
         .row 
             .js-video-main-wrap.push-2.cell-8.post-2.push-0-md.cell-12-md.post-0-md
                 .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")
-                    h2.header-demo__text Калитка и Ограждение 
-                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.wmd06 mainClass="full-vid") смотреть видео
-
-                //- Далее: Скоростной проход ST-01
+                    h2.header-demo__text Калитка WMD-06, ограждение ВН06
+                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.wmd06 mainClass="full-vid") смотреть видео 
                 //- include svg_next_btn
                 .swiper-container.slider-demonstration.js-sliderdemo-3.test(data-aos="fade-in" data-aos-anchor-placement="top-center")
                     .swiper-wrapper
-                        .swiper-slide(data-name="Ракурсы")
+                        .swiper-slide(data-name="Ракурсы" data-ended="0")
                             //- poster: 'images/video-posters/poster1.jpg',
                             +lazyVideo({
                                 source: [
@@ -25,7 +23,7 @@
                                     }
                                 ]
                             }).lozad#index-1(muted)
-                        .swiper-slide(data-name="Проход")
+                        .swiper-slide(data-name="Проход" data-ended="0")
                             //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
                                 source: [
@@ -39,7 +37,7 @@
                                     }
                                 ]
                             }).lozad#index-2(muted) 
-                        .swiper-slide(data-name="Габариты")
+                        .swiper-slide(data-name="Габариты" data-ended="0")
                             //- poster: 'images/video-posters/poster4.jpg',
                             +lazyVideo({
                                 source: [
@@ -53,7 +51,7 @@
                                     }
                                 ]
                             }).lozad#index-4(muted)
-                        .swiper-slide(data-name="Исполнение")
+                        .swiper-slide(data-name="Исполнение" data-ended="0")
                             //- poster: 'images/video-posters/poster5.jpg',
                             +lazyVideo({
                                 source: [

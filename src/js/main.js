@@ -38,7 +38,6 @@ Fancybox.bind("[data-fancybox-plyr]", {
             });
         },
         closing: (fancybox, slide) => {
-            console.log(swiperCube.activeIndex);
             if (swiperCube.activeIndex == 0) {
                 var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
             } else if (swiperCube.activeIndex == 1) {
@@ -56,68 +55,86 @@ Fancybox.bind("[data-fancybox-plyr]", {
 });
 
 window.onload = function() {
+    var intViewportHeight = window.innerHeight;
+    var elsToResize = document.querySelectorAll(".js-video-main-wrap");
+    var sliderArrows = document.querySelector(".slider-cube-relative");
     const ShowScroll = btnScrollTop => {
+        var offsetToTrigger = document.getElementById("advantages").offsetTop + 250;
         window.addEventListener('scroll', () => {
-            const shouldBeVisible = window.pageYOffset > 900;
+            const shouldBeVisible = window.pageYOffset + intViewportHeight > offsetToTrigger;
             btnScrollTop.classList.toggle('visible', shouldBeVisible);
         })
     }
     ShowScroll(document.getElementById('scroll-top'));
+
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    if (window.pageYOffset > 0) {
+        var hash = $(this).attr("href");
+        window.scrollTo({
+            top: 0,
+        });
+
+        window.location.hash = '#'; //remove hash text
+        window.location.href.replace('#', ''); //remove hash
+
+        $("html, body").animate({
+            scrollTop: 0
+        }, 0, function() {
+            window.location.hash = "";
+        });
+    }
+    if (intViewportHeight < 714) {
+        console.log("test height < 714");
+        window.dispatchEvent(new Event('resize'));
+    } else {
+        console.log("test height > 714");
+    }
 };
+
+window.addEventListener(`resize`, event => {
+    var intViewportHeight = window.innerHeight;
+    var elsToResize = document.querySelectorAll(".js-video-main-wrap");
+    var sliderArrows = document.querySelector(".slider-cube-relative");
+
+    if (intViewportHeight < 714) {
+        elsToResize.forEach(function(node) {
+            node.classList.add('push-3', 'cell-6', 'post-3');
+            node.classList.remove('push-2', 'cell-8', 'post-2');
+        });
+        sliderArrows.classList.add('push-2', 'cell-8', 'post-2');
+        sliderArrows.classList.remove('push-1', 'cell-10', 'post-1');
+    } else {
+        elsToResize.forEach(function(node) {
+            node.classList.add('push-2', 'cell-8', 'post-2');
+            node.classList.remove('push-3', 'cell-6', 'post-3');
+        });
+        sliderArrows.classList.add('push-1', 'cell-10', 'post-1');
+        sliderArrows.classList.remove('push-2', 'cell-8', 'post-2');
+    }
+}, false);
 
 var tOptions1 = {
     strings: ['Скоростные проходы'],
     typeSpeed: 40,
     showCursor: false,
 };
+
 var tOptions2 = {
     strings: ['Преимущества'],
     typeSpeed: 40,
     showCursor: false,
 };
 
-// var tOptions3 = {
-//     strings: ['Скоростной проход ST-01'],
-//     typeSpeed: 40,
-//     showCursor: false,
-//     contentType: 'null',
-//     onBegin: function(self) {
-//         console.log('onBegin ' + self);
-//     },
-//     onComplete: function(self) {
-//         console.log('onComplete ' + self);
-//     },
-//     preStringTyped: function(pos, self) {
-//         console.log('preStringTyped ' + pos + ' ' + self);
-//     },
-//     onStringTyped: function(pos, self) {
-//         console.log('onStringTyped ' + pos + ' ' + self);
-//     },
-//     onLastStringBackspaced: function(self) {
-//         console.log('onLastStringBackspaced ' + self);
-//     },
-//     onTypingPaused: function(pos, self) {
-//         console.log('onTypingPaused ' + pos + ' ' + self);
-//     },
-//     onTypingResumed: function(pos, self) {
-//         console.log('onTypingResumed ' + pos + ' ' + self);
-//     },
-//     onReset: function(self) {
-//         console.log('onReset ' + self);
-//     },
-//     onStop: function(pos, self) {
-//         console.log('onStop ' + pos + ' ' + self);
-//     },
-//     onStart: function(pos, self) {
-//         console.log('onStart ' + pos + ' ' + self);
-//     },
-//     onDestroy: function(self) {
-//         console.log('onDestroy ' + self);
-//     }
-// };
+var tOptions3 = {
+    strings: ['Скоростной проход ST-01'],
+    typeSpeed: 40,
+    showCursor: false,
+};
 
 var tOptions4 = {
-    strings: ['Установка оборудования'],
+    strings: ['Установка дополнительного оборудования'],
     typeSpeed: 40,
     showCursor: false,
 };
@@ -140,7 +157,6 @@ var tOptions7 = {
     showCursor: false,
 };
 
-
 var tOptions8 = {
     strings: ['Скоростной проход ST-01'],
     typeSpeed: 40,
@@ -151,26 +167,16 @@ inView('#js-dynamic-text-1')
     .once('enter', el => {
         var typed1 = new Typed(el, tOptions1);
     })
+
 inView('#js-dynamic-text-2')
     .once('enter', el => {
         var typed2 = new Typed(el, tOptions2);
     })
 
-
-var typedToTrigger = new Typed('#js-dynamic-text-3', {
-    strings: ['Скоростной проход ST-01'],
-    typeSpeed: 20,
-    backSpeed: 0,
-});
-
-typedToTrigger.stop();
-
-// вызов внутри слайдера
 inView('#js-dynamic-text-3')
     .once('enter', el => {
-        typedToTrigger.start();
+        var typed3 = new Typed(el, tOptions3);
     })
-
 
 inView('#js-dynamic-text-4')
     .once('enter', el => {
@@ -192,13 +198,11 @@ inView('#js-dynamic-text-7')
         var typed7 = new Typed(el, tOptions7);
     })
 
-
 // Скоростной проход ST-01
 inView('#js-dynamic-prod1')
     .once('enter', el => {
         var typed8 = new Typed(el, tOptions8);
     })
-
 
 var swiper1 = new Swiper(".slider-hero", {
     effect: "fade",
@@ -234,39 +238,37 @@ var swiper2 = new Swiper(".slider-prod", {
         nextEl: '.slider-prod .swiper-button-next',
         prevEl: '.slider-prod .swiper-button-prev',
     },
-    on: {
-        // init: function(swiper) { // фикс: почему-то slideChangeTransitionEnd при инициализации заполняет это поле, что глючит надпись 
-        //     let dynamicText = document.getElementById("js-dynamic-text-3");
-        //     dynamicText.innerHTML = "";
-        //     inView("#js-dynamic-text-3")
-        //         .once('enter', el => {
-        //             var typed3 = new Typed(el, {
-        //                 strings: ['Скоростной проход ST-01'],
-        //                 typeSpeed: 40,
-        //                 showCursor: false,
-        //             });
-        //             console.log(typed3);
-        //         })
-        // },
-    },
+    // on: {
+    //     init: function() {
+    //         correctTyped(this.slides[this.activeIndex].dataset.text);
+    //     }
+    // }
 });
-
-
 
 swiper2.on('slideChangeTransitionEnd', function() {
     let dynamicText = document.getElementById("js-dynamic-text-3");
+    let dynamicTextDouble = document.getElementById("js-dynamic-text-3-double");
     let dynamicTextReserve = document.getElementById("js-dynamic-reserve");
     let dynamicSubtext = document.getElementById("js-dynamic-subtext-3");
+    let sliderCharsRefactor = $(".characteristics");
 
-    dynamicText.innerHTML = this.slides[this.activeIndex].dataset.text;
+    // клёвый костыль что бы не накладывался inview + typed на подставленный текст при прокрутке из подменю товаров
+    dynamicText.classList.add("hide");
+    dynamicTextDouble.classList.remove("hide");
+    dynamicTextDouble.innerHTML = this.slides[this.activeIndex].dataset.text;
     dynamicSubtext.innerHTML = this.slides[this.activeIndex].dataset.subtext;
     dynamicTextReserve.innerHTML = this.slides[this.activeIndex].dataset.text;
+
+    sliderCharsRefactor.removeClass("prodIcons-index-" + this.previousIndex);
+    sliderCharsRefactor.addClass("prodIcons-index-" + this.activeIndex);
 });
 
-// ST-01
+// ST-01 
 var names0 = [];
+var ended0 = [];
 $(".js-sliderdemo-0 .swiper-slide").each(function(i) {
     names0.push($(this).data("name"));
+    ended0.push($(this).data("ended"));
 });
 var swiper3prod0 = new Swiper('.js-sliderdemo-0', {
     effect: "fade",
@@ -280,9 +282,9 @@ var swiper3prod0 = new Swiper('.js-sliderdemo-0', {
             for (let i = 1; i <= total; i++) {
                 let j = i - 1
                 if (current == i) {
-                    text += "<span class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names0[j] + "</div></span>";
+                    text += "<span data-played='" + ended0[j] + "' class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names0[j] + "</div></span>";
                 } else {
-                    text += "<span class='swiper-pagination-bullet'><div class='centered-bullet'>" + names0[j] + "</div></span>";
+                    text += "<span data-played='" + ended0[j] + "' class='swiper-pagination-bullet'><div class='centered-bullet'>" + names0[j] + "</div></span>";
                 }
             }
             return text;
@@ -294,11 +296,15 @@ var swiper3prod0 = new Swiper('.js-sliderdemo-0', {
 var sliderVideos0 = $(".js-sliderdemo-0 .swiper-slide video");
 sliderVideos0.each(function(index) {
     this.addEventListener('ended', () => {
-        if (swiper3prod0.activeIndex == 5) {
+        if (swiper3prod0.activeIndex == swiper3prod0.slides.length - 1) {
             swiper3prod0.slideTo(0)
         } else {
             swiper3prod0.slideNext();
         }
+    });
+    this.addEventListener('playing', () => {
+        ended0[swiper3prod0.activeIndex] = 1;
+        swiper3prod0.pagination.update();
     });
 });
 
@@ -314,10 +320,12 @@ swiper3prod0.on('slideChange', function() {
     prevVideo.currentTime = 0;
 });
 
-// ST-11 
+// ST-11  
 var names1 = [];
+var ended1 = [];
 $(".js-sliderdemo-1 .swiper-slide").each(function(i) {
     names1.push($(this).data("name"));
+    ended1.push($(this).data("ended"));
 });
 var swiper3prod1 = new Swiper('.js-sliderdemo-1', {
     effect: "fade",
@@ -331,9 +339,9 @@ var swiper3prod1 = new Swiper('.js-sliderdemo-1', {
             for (let i = 1; i <= total; i++) {
                 let j = i - 1
                 if (current == i) {
-                    text += "<span class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names1[j] + "</div></span>";
+                    text += "<span data-played='" + ended1[j] + "' class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names1[j] + "</div></span>";
                 } else {
-                    text += "<span class='swiper-pagination-bullet'><div class='centered-bullet'>" + names1[j] + "</div></span>";
+                    text += "<span data-played='" + ended1[j] + "' class='swiper-pagination-bullet'><div class='centered-bullet'>" + names1[j] + "</div></span>";
                 }
             }
             return text;
@@ -344,11 +352,15 @@ var swiper3prod1 = new Swiper('.js-sliderdemo-1', {
 var sliderVideos1 = $(".js-sliderdemo-1 .swiper-slide video");
 sliderVideos1.each(function(index) {
     this.addEventListener('ended', () => {
-        if (swiper3prod1.activeIndex == 5) {
+        if (swiper3prod1.activeIndex == swiper3prod1.slides.length - 1) {
             swiper3prod1.slideTo(0)
         } else {
             swiper3prod1.slideNext();
         }
+    });
+    this.addEventListener('playing', () => {
+        ended1[swiper3prod1.activeIndex] = 1;
+        swiper3prod1.pagination.update();
     });
 });
 
@@ -366,8 +378,10 @@ swiper3prod1.on('slideChange', function() {
 
 // ST-02 
 var names2 = [];
+var ended2 = [];
 $(".js-sliderdemo-2 .swiper-slide").each(function(i) {
     names2.push($(this).data("name"));
+    ended2.push($(this).data("ended"));
 });
 var swiper3prod2 = new Swiper('.js-sliderdemo-2', {
     effect: "fade",
@@ -381,9 +395,9 @@ var swiper3prod2 = new Swiper('.js-sliderdemo-2', {
             for (let i = 1; i <= total; i++) {
                 let j = i - 1
                 if (current == i) {
-                    text += "<span class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names2[j] + "</div></span>";
+                    text += "<span data-played='" + ended2[j] + "' class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names2[j] + "</div></span>";
                 } else {
-                    text += "<span class='swiper-pagination-bullet'><div class='centered-bullet'>" + names2[j] + "</div></span>";
+                    text += "<span data-played='" + ended2[j] + "' class='swiper-pagination-bullet'><div class='centered-bullet'>" + names2[j] + "</div></span>";
                 }
             }
             return text;
@@ -395,11 +409,16 @@ var swiper3prod2 = new Swiper('.js-sliderdemo-2', {
 var sliderVideos2 = $(".js-sliderdemo-2 .swiper-slide video");
 sliderVideos2.each(function(index) {
     this.addEventListener('ended', () => {
-        if (swiper3prod2.activeIndex == 5) {
+        if (swiper3prod2.activeIndex == swiper3prod2.slides.length - 1) {
             swiper3prod2.slideTo(0)
         } else {
             swiper3prod2.slideNext();
         }
+
+    });
+    this.addEventListener('playing', () => {
+        ended2[swiper3prod2.activeIndex] = 1;
+        swiper3prod2.pagination.update();
     });
 });
 
@@ -415,10 +434,12 @@ swiper3prod2.on('slideChange', function() {
     prevVideo.currentTime = 0;
 });
 
-// ST-02 
+// Калитка
 var names3 = [];
+var ended3 = [];
 $(".js-sliderdemo-3 .swiper-slide").each(function(i) {
     names3.push($(this).data("name"));
+    ended3.push($(this).data("ended"));
 });
 var swiper3prod3 = new Swiper('.js-sliderdemo-3', {
     effect: "fade",
@@ -432,9 +453,9 @@ var swiper3prod3 = new Swiper('.js-sliderdemo-3', {
             for (let i = 1; i <= total; i++) {
                 let j = i - 1
                 if (current == i) {
-                    text += "<span class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names3[j] + "</div></span>";
+                    text += "<span data-played='" + ended3[j] + "' class='swiper-pagination-bullet swiper-pagination-bullet-active'><div class='centered-bullet'>" + names3[j] + "</div></span>";
                 } else {
-                    text += "<span class='swiper-pagination-bullet'><div class='centered-bullet'>" + names3[j] + "</div></span>";
+                    text += "<span data-played='" + ended3[j] + "' class='swiper-pagination-bullet'><div class='centered-bullet'>" + names3[j] + "</div></span>";
                 }
             }
             return text;
@@ -446,11 +467,15 @@ var swiper3prod3 = new Swiper('.js-sliderdemo-3', {
 var sliderVideos3 = $(".js-sliderdemo-3 .swiper-slide video");
 sliderVideos3.each(function(index) {
     this.addEventListener('ended', () => {
-        if (swiper3prod3.activeIndex == 5) {
+        if (swiper3prod3.activeIndex == swiper3prod3.slides.length - 1) {
             swiper3prod3.slideTo(0)
         } else {
             swiper3prod3.slideNext();
         }
+    });
+    this.addEventListener('playing', () => {
+        ended3[swiper3prod3.activeIndex] = 1;
+        swiper3prod3.pagination.update();
     });
 });
 
@@ -471,6 +496,7 @@ var swiperCube = new Swiper(".slider-cube", {
     loop: false,
     effect: "cube",
     slidesPerView: 1,
+    allowSlidePrev: false,
     speed: 900,
     cubeEffect: {
         shadow: false,
@@ -498,10 +524,12 @@ var swiperCube = new Swiper(".slider-cube", {
             sliderVideosRefactor1.each(function() {
                 this.pause();
                 this.currentTime = 0;
+                console.log("end" + sliderVideosRefactor1)
             });
             sliderVideosRefactor2.each(function() {
                 this.pause();
                 this.currentTime = 0;
+                console.log("end" + sliderVideosRefactor2)
             });
 
             if (this.activeIndex == 0) {
@@ -524,52 +552,53 @@ var swiperCube = new Swiper(".slider-cube", {
 });
 swiperCube.mousewheel.disable();
 
-
+var prohodDone = false;
 var listener = function(event) {
-    var prohodDone = false;
     var easeTime = .3;
 
     if (!prohodDone) {
-        if (event.deltaY < 0) { //"up"  
-            console.log("up");
+        setTimeout(() => swiperCube.mousewheel.enable(), 1700);
+        console.log(!prohodDone);
+        if (event.deltaY < 0) { //"up"   
             event.preventDefault;
             prohodDone = true;
-            // swiperCube.mousewheel.disable();
-            // swiperCube.params.mousewheel.releaseOnEdges = false;
+            swiperCube.mousewheel.disable();
+            swiperCube.allowSlidePrev = true;
+            // swiperCube.update();
         } else if (event.deltaY > 0) { //"down" 
             event.preventDefault;
-            console.log("down");
             gsap.to(window, {
                 duration: easeTime,
                 scrollTo: "#products-cube",
-                ease: 0,
+                ease: "sine",
                 onComplete: function() {
-                    console.log('third tween done');
-                    setTimeout(() => swiperCube.mousewheel.enable(), 1500);
+                    console.log('products-cube section done');
                 }
             });
-            if (swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { // push down only on last slide
-                gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: 0 });
+            if (swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { // push down only on last slide 
+                gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: "sine" });
                 prohodDone = true;
                 swiperCube.mousewheel.disable();
+                swiperCube.allowSlidePrev = true;
             }
         } else {
-            console.log("sadasd");
+            console.log("test1");
         }
     } else {
-        swiperCube.mousewheel.disable();
+        console.log("Секция в поле видимости");
+        if (swiperCube.mousewheel.enabled) {
+            swiperCube.mousewheel.disable();
+        }
     }
 };
 
 inView('#products-cube')
-    .on('enter', el => {
+    .once('enter', el => {
         document.addEventListener('wheel', listener);
     })
     .on('exit', el => {
         document.removeEventListener('wheel', listener)
     });
-
-
 
 var namesDop = [];
 $(".js-sliderdemo-dop .swiper-slide").each(function(i) {
@@ -610,8 +639,17 @@ var swiper4 = new Swiper(".slider-gallery", {
         nextEl: '.slider-gallery .swiper-button-next',
         prevEl: '.slider-gallery .swiper-button-prev',
     },
+    on: {
+        init: function() {
+            this.autoplay.stop();
+        }
+    }
 });
 
+inView('#gallery')
+    .once('enter', el => {
+        swiper4.autoplay.start();
+    })
 
 $(".btn-change").on("click", function(e) {
     $(".btn-change").toggleClass("active");
@@ -633,7 +671,18 @@ $("[data-prod-section]").on("click", function(e) {
     e.preventDefault;
     gsap.to(window, { duration: .5, scrollTo: "#products-cube" });
     swiperCube.slideTo($(this).data("prod-section"));
+    prohodDone = true;
+    swiperCube.mousewheel.disable();
+    swiperCube.allowSlidePrev = true;
 });
+
+$("#products-cube .swiper-button-prev").on("click", function(e) {
+    if (!swiperCube.allowSlidePrev) {
+        swiperCube.allowSlidePrev = true;
+        swiperCube.slidePrev();
+    }
+});
+
 
 var sectionHero = document.querySelector(".slider-hero");
 var sectionGallery = document.querySelector(".three");
@@ -643,40 +692,3 @@ sectionHero.addEventListener('click', function(event) {
 sectionGallery.addEventListener('click', function(event) {
     console.log(swiper4.slideNext());
 });
-
-// Динамическая смена якоря
-
-// var menu_selector = ".dot-nav";
-
-// function onScroll() {
-//     var scroll_top = $(document).scrollTop();
-//     $(menu_selector + " a").each(function() {
-//         var hash = $(this).attr("href");
-//         var target = $(hash);
-//         if (target.position().top <= scroll_top && target.position().top +
-//             target.outerHeight() > scroll_top) {
-//             $(menu_selector + " a.active").removeClass("active");
-//             $(this).addClass("active");
-//         } else {
-//             $(this).removeClass("active");
-//         }
-//     });
-// }
-
-//             $(document).on("scroll", onScroll);
-
-//             $("a[href^=#]").click(function(e) {
-//                 e.preventDefault();
-
-//                 $(document).off("scroll");
-//                 $(menu_selector + " a.active").removeClass("active");
-//                 $(this).addClass("active");
-//                 var hash = $(this).attr("href");
-//                 var target = $(hash);
-
-//                 $("html, body").animate({
-//                     scrollTop: target.offset().top
-//                 }, 500, function() {
-//                     window.location.hash = hash;
-//                     $(document).on("scroll", onScroll);
-//                 });

@@ -17,6 +17,18 @@
         width: 70%;
         margin: 50px auto;
     }
+    .home .four .about-title {
+        top: 198px;
+        right: calc(50% + 50px);
+        // font-size: 14px;
+        z-index: 5;
+        width: 116px;
+        text-align: right;
+    }
+    .home .four .about-title+.about-title {
+        top: 198px;
+        right: 39px;
+    }
 }
 
 @media screen and (max-width: 1366px) {
@@ -49,6 +61,12 @@
     .home section {
         padding-top: 40px;
         padding-bottom: 40px;
+    }
+    .home .four .about-title {
+        top: 158px;
+    }
+    .home .four .about-title+.about-title {
+        top: 158px;
     }
 }
 
@@ -157,6 +175,16 @@
     .video1>.container {
         padding-left: 0;
         padding-right: 0;
+    }
+    .home .four .about-title {
+        top: 140px;
+        right: calc(50% + 30px);
+        font-size: 14px;
+        width: 106px;
+    }
+    .home .four .about-title+.about-title {
+        top: 140px;
+        right: 16px;
     }
 }
 
@@ -317,6 +345,14 @@
     .header__language .select-lang__list {
         right: auto;
         left: 0;
+    }
+    .home .four .about-title {
+        top: 134px;
+        right: calc(50% + 13px);
+    }
+    .home .four .about-title+.about-title {
+        top: 134px;
+        right: 8px;
     }
 }
 

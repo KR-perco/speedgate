@@ -6,12 +6,11 @@
                 .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")
                     h2.header-demo__text Скоростной проход ST-11
                     a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st11 mainClass="full-vid") смотреть видео
-                
                 //-  Далее: Скоростной проход ST-02
                 //- include svg_next_btn
                 .swiper-container.slider-demonstration.js-sliderdemo-1(data-aos="fade-in" data-aos-anchor-placement="top-center")
                     .swiper-wrapper
-                        .swiper-slide(data-name="Ракурсы")
+                        .swiper-slide(data-name="Ракурсы" data-ended="0")
                             +lazyVideo({
                                 poster: 'images/video-posters/poster1.jpg',
                                 source: [
@@ -27,7 +26,7 @@
                                     }
                                 ]
                             }).lozad#index-1(muted)
-                        .swiper-slide(data-name="Проход")
+                        .swiper-slide(data-name="Проход" data-ended="0")
                             +lazyVideo({
                                 poster: 'images/video-posters/poster2.jpg',
                                 source: [
@@ -43,7 +42,7 @@
                                     }
                                 ]
                             }).lozad#index-2(muted)
-                        .swiper-slide(data-name="Габариты") 
+                        .swiper-slide(data-name="Габариты" data-ended="0") 
                             +lazyVideo({
                                 poster: 'images/video-posters/poster3.jpg',
                                 source: [
@@ -59,7 +58,7 @@
                                     }
                                 ]
                             }).lozad#index-3(muted)
-                        .swiper-slide(data-name="Безопасность")
+                        .swiper-slide(data-name="Безопасность" data-ended="0")
                             +lazyVideo({
                                 poster: 'images/video-posters/poster4.jpg',
                                 source: [
@@ -75,7 +74,7 @@
                                     }
                                 ]
                             }).lozad#index-4(muted)
-                        .swiper-slide(data-name="Исполнение")
+                        .swiper-slide(data-name="Исполнение" data-ended="0")
                             +lazyVideo({
                                 poster: 'images/video-posters/poster5.jpg',
                                 source: [
@@ -91,7 +90,7 @@
                                     }
                                 ]
                             }).lozad#index-5(muted)
-                        .swiper-slide(data-name="Интеграция")
+                        .swiper-slide(data-name="Интеграция" data-ended="0")
                             +lazyVideo({
                                 poster: 'images/video-posters/poster6.jpg',
                                 source: [
