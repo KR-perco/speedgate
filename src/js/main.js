@@ -512,11 +512,6 @@ var swiperCube = new Swiper(".slider-cube", {
     },
     on: {
         slideChangeTransitionEnd: function() {
-            if (this.isBeginning || this.isEnd) {
-                this.params.mousewheel.releaseOnEdges = true;
-            } else {
-                this.params.mousewheel.releaseOnEdges = false;
-            }
 
             let sliderVideosRefactor1 = $(".js-sliderdemo-" + this.previousIndex + " .swiper-slide video");
             let sliderVideosRefactor2 = $(".js-sliderdemo-" + this.activeIndex + " .swiper-slide video");
@@ -557,7 +552,8 @@ var listener = function(event) {
     var easeTime = .3;
 
     if (!prohodDone) {
-        setTimeout(() => swiperCube.mousewheel.enable(), 1700);
+
+        setTimeout(() => swiperCube.mousewheel.enable(), 1500);
         console.log(!prohodDone);
         if (event.deltaY < 0) { //"up"   
             event.preventDefault;
@@ -570,16 +566,17 @@ var listener = function(event) {
             gsap.to(window, {
                 duration: easeTime,
                 scrollTo: "#products-cube",
-                ease: "sine",
+                ease: "elastic",
                 onComplete: function() {
                     console.log('products-cube section done');
                 }
             });
-            if (swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { // push down only on last slide 
-                gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: "sine" });
+            if (swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { // push down only on last slide
+                console.log("test777");
+                swiperCube.allowSlidePrev = true;
+                gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: "elastic" });
                 prohodDone = true;
                 swiperCube.mousewheel.disable();
-                swiperCube.allowSlidePrev = true;
             }
         } else {
             console.log("test1");
@@ -593,7 +590,7 @@ var listener = function(event) {
 };
 
 inView('#products-cube')
-    .once('enter', el => {
+    .on('enter', el => {
         document.addEventListener('wheel', listener);
     })
     .on('exit', el => {
@@ -645,6 +642,7 @@ var swiper4 = new Swiper(".slider-gallery", {
         }
     }
 });
+swiper4.autoplay.stop();
 
 inView('#gallery')
     .once('enter', el => {
@@ -671,9 +669,6 @@ $("[data-prod-section]").on("click", function(e) {
     e.preventDefault;
     gsap.to(window, { duration: .5, scrollTo: "#products-cube" });
     swiperCube.slideTo($(this).data("prod-section"));
-    prohodDone = true;
-    swiperCube.mousewheel.disable();
-    swiperCube.allowSlidePrev = true;
 });
 
 $("#products-cube .swiper-button-prev").on("click", function(e) {

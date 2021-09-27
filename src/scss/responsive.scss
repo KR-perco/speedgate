@@ -394,3 +394,9 @@
 }
 
 @media screen and (max-width: 380px) {}
+
+@media screen and (max-height: 874px) {
+    .home section.two {
+        padding: 45px 0 0;
+    }
+}
