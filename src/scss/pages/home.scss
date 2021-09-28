@@ -62,6 +62,9 @@
                 left: 0;
                 right: 0;
                 text-align: left;
+                &#js-dynamic-text-5 {
+                    top: 21%;
+                }
             }
         }
         // центрированная версия
@@ -76,19 +79,22 @@
             }
         }
         &.two {
-            background-color: #F0F0F0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            background-color: white;
             .header__container {
                 margin-bottom: 0px;
             }
+            &#products-cube {
+                padding: 0;
+            }
         }
         &.dop-prod {
-            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding: 65px 0 119px;
             .centered-v-container {
                 display: flex;
                 justify-content: center;
@@ -213,7 +219,7 @@
                 font-style: normal;
                 font-weight: 300;
                 font-size: $h2common-size;
-                line-height: 94px;
+                line-height: 1.3em;
                 color: #003067;
                 margin: 0;
             }
@@ -424,14 +430,23 @@
         }
     }
     .slider-cube {
+        --swiper-navigation-size: 100px;
         position: relative;
         &-nav {
             position: absolute;
             width: 100%;
-            top: 50%;
+            top: 55%;
         }
         &-relative {
             position: relative;
+        }
+        &>.swiper-wrapper>.swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 0 80px;
+            height: calc(100vh - 160px);
+            background-color: #F0F0F0;
         }
         .swiper-pagination-custom {
             display: flex;
@@ -462,7 +477,7 @@
                     left: auto;
                     background: #B3B3B3;
                     z-index: 0;
-                    max-width: 336px;
+                    max-width: 295px;
                 }
                 &[data-played="0"] {
                     &+.swiper-pagination-bullet[data-played="1"] {
@@ -523,6 +538,14 @@
                 }
             }
         }
+        .js-sliderdemo-3+.swiper-pagination-custom {
+            .swiper-pagination-bullet {
+                &:after {
+                    width: 410%;
+                    max-width: 336px;
+                }
+            }
+        }
         .js-video-main-wrap.cell-6 {
             .centered-bullet {
                 font-size: 20px;
@@ -533,7 +556,9 @@
             min-height: 330px;
             width: 100px;
             padding: 100px 0;
-            top: calc( 50% - 100px);
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: 0;
             &.swiper-button-disabled {
                 opacity: 0;
             }
@@ -610,6 +635,10 @@
         &.characteristics {
             justify-content: center;
             margin: 5px 0;
+            .char-buffer {
+                width: 0;
+                overflow: hidden;
+            }
             .icon {
                 height: 95px;
                 &:hover+.icon__signature {
@@ -629,26 +658,6 @@
                 &:hover {
                     transform: scale(1.2);
                 }
-            }
-        }
-    }
-    .characteristics {
-        .char-4_1 {
-            display: none;
-        }
-        &.prodIcons-index-4 {
-            .char-2,
-            .char-3,
-            .char-4 {
-                display: none;
-            }
-            .char-4_1 {
-                display: flex;
-            }
-        }
-        &.prodIcons-index-5 {
-            .icon__item {
-                display: none;
             }
         }
     }
@@ -710,6 +719,27 @@
         }
         .icon-char-6 {
             background-image: url("../images/icon-char-6.v3.svg");
+        }
+        .char-4_1 {
+            display: none;
+        }
+        &.prodIcons-index-3 {
+            .char-2,
+            .char-3,
+            .char-4 {
+                display: none;
+            }
+            .char-4_1 {
+                display: flex;
+            }
+        }
+        &.prodIcons-index-4 {
+            .icon__item {
+                display: none;
+            }
+            .char-buffer {
+                display: flex;
+            }
         }
     }
     .three {
@@ -1202,6 +1232,7 @@
         line-height: 84px;
         display: flex;
         width: 100%;
+        justify-content: center;
         align-items: center;
         text-align: center;
         color: #666666;
@@ -1209,8 +1240,8 @@
     &__msg {
         font-style: normal;
         font-weight: 300;
-        font-size: 36px;
-        line-height: 42px;
+        font-size: 24px;
+        line-height: 1.2em;
         text-align: center;
         color: $light-gray-color;
     }

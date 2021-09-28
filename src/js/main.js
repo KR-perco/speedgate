@@ -259,8 +259,8 @@ swiper2.on('slideChangeTransitionEnd', function() {
     dynamicSubtext.innerHTML = this.slides[this.activeIndex].dataset.subtext;
     dynamicTextReserve.innerHTML = this.slides[this.activeIndex].dataset.text;
 
-    sliderCharsRefactor.removeClass("prodIcons-index-" + this.previousIndex);
-    sliderCharsRefactor.addClass("prodIcons-index-" + this.activeIndex);
+    sliderCharsRefactor.removeClass("prodIcons-index-" + this.slides[this.previousIndex].dataset.swiperSlideIndex);
+    sliderCharsRefactor.addClass("prodIcons-index-" + this.slides[this.activeIndex].dataset.swiperSlideIndex);
 });
 
 // ST-01 
@@ -495,7 +495,7 @@ swiper3prod3.on('slideChange', function() {
 var swiperCube = new Swiper(".slider-cube", {
     loop: false,
     effect: "cube",
-    slidesPerView: 1,
+    slidesPerView: 3,
     allowSlidePrev: false,
     speed: 900,
     cubeEffect: {
@@ -504,7 +504,7 @@ var swiperCube = new Swiper(".slider-cube", {
     },
     mousewheel: {
         eventsTarget: ".slider-cube",
-        releaseOnEdges: true,
+        releaseOnEdges: false,
     },
     navigation: {
         nextEl: '.slider-cube .swiper-button-next',
@@ -512,6 +512,11 @@ var swiperCube = new Swiper(".slider-cube", {
     },
     on: {
         slideChangeTransitionEnd: function() {
+            if (this.isEnd) {
+                swiperCube.params.mousewheel.releaseOnEdges = true;
+            } else {
+                swiperCube.params.mousewheel.releaseOnEdges = false;
+            }
 
             let sliderVideosRefactor1 = $(".js-sliderdemo-" + this.previousIndex + " .swiper-slide video");
             let sliderVideosRefactor2 = $(".js-sliderdemo-" + this.activeIndex + " .swiper-slide video");
@@ -519,12 +524,14 @@ var swiperCube = new Swiper(".slider-cube", {
             sliderVideosRefactor1.each(function() {
                 this.pause();
                 this.currentTime = 0;
-                console.log("end" + sliderVideosRefactor1)
+                console.log("Stop video: ");
+                console.log(this.pause());
             });
             sliderVideosRefactor2.each(function() {
                 this.pause();
                 this.currentTime = 0;
-                console.log("end" + sliderVideosRefactor2)
+                console.log("Stop video: ");
+                console.log(this.pause());
             });
 
             if (this.activeIndex == 0) {
@@ -548,54 +555,77 @@ var swiperCube = new Swiper(".slider-cube", {
 swiperCube.mousewheel.disable();
 
 var prohodDone = false;
+var firstEnterDone = false;
+var easeTime = .1;
+
 var listener = function(event) {
-    var easeTime = .3;
+
 
     if (!prohodDone) {
-
-        setTimeout(() => swiperCube.mousewheel.enable(), 1500);
-        console.log(!prohodDone);
-        if (event.deltaY < 0) { //"up"   
-            event.preventDefault;
-            prohodDone = true;
-            swiperCube.mousewheel.disable();
-            swiperCube.allowSlidePrev = true;
-            // swiperCube.update();
-        } else if (event.deltaY > 0) { //"down" 
-            event.preventDefault;
+        if (!firstEnterDone) {
+            setTimeout(() => swiperCube.mousewheel.enable(), 1500);
+            gsap.to(window, {
+                delay: 0,
+                duration: easeTime,
+                scrollTo: "#products-cube",
+                ease: "power1",
+                onComplete: function() {
+                    console.log('products-cube section done');
+                    swiperCube.mousewheel.enable();
+                    firstEnterDone = true;
+                }
+            })
+        } else if (!swiperCube.params.mousewheel.releaseOnEdges && event.deltaY > 0) {
             gsap.to(window, {
                 duration: easeTime,
                 scrollTo: "#products-cube",
-                ease: "elastic",
-                onComplete: function() {
-                    console.log('products-cube section done');
-                }
             });
-            if (swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { // push down only on last slide
-                console.log("test777");
-                swiperCube.allowSlidePrev = true;
-                gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: "elastic" });
-                prohodDone = true;
-                swiperCube.mousewheel.disable();
+        } else if ((swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) || (event.deltaY < 0)) { // push down only on last slide 
+            prohodDone = true;
+            swiperCube.mousewheel.disable();
+            //  костыльный фикс бага с появляющейся стрелкой
+            console.log(swiperCube.navigation.$nextEl[0].classList);
+            if (swiperCube.navigation.$nextEl[0].classList) {
+                console.log(swiperCube.navigation.$nextEl[0].classList.add("swiper-button-disabled"));
+                swiperCube.update();
             }
-        } else {
-            console.log("test1");
+
         }
+        //  else if (event.deltaY > 0) { //"down" 
+        //     event.preventDefault;
+        //     gsap.to(window, {
+        //         duration: easeTime,
+        //         scrollTo: "#products-cube",
+        //         ease: "elastic",
+        //         onComplete: function() {
+        //             console.log('products-cube section done');
+        //         }
+        //     });
+        //     if (swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) { // push down only on last slide
+        //         console.log("test777");
+        //         swiperCube.allowSlidePrev = true;
+        //         gsap.to(window, { duration: easeTime, scrollTo: "#dop-prod", ease: "elastic" });
+        //         prohodDone = true;
+        //         // swiperCube.mousewheel.disable();
+        //     }
+        // } else {
+        //     console.log("test1");
+        // }
     } else {
-        console.log("Секция в поле видимости");
         if (swiperCube.mousewheel.enabled) {
             swiperCube.mousewheel.disable();
         }
     }
 };
 
+inView.threshold(0.5);
 inView('#products-cube')
     .on('enter', el => {
         document.addEventListener('wheel', listener);
     })
     .on('exit', el => {
         document.removeEventListener('wheel', listener)
-    });
+    })
 
 var namesDop = [];
 $(".js-sliderdemo-dop .swiper-slide").each(function(i) {
@@ -669,6 +699,15 @@ $("[data-prod-section]").on("click", function(e) {
     e.preventDefault;
     gsap.to(window, { duration: .5, scrollTo: "#products-cube" });
     swiperCube.slideTo($(this).data("prod-section"));
+    console.log("66666");
+    if (!firstEnterDone) {
+        console.log("77777");
+        swiperCube.mousewheel.enable();
+    } else {
+        firstEnterDone = true;
+        console.log("88888");
+    }
+
 });
 
 $("#products-cube .swiper-button-prev").on("click", function(e) {

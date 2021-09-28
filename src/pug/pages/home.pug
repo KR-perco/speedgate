@@ -101,6 +101,9 @@ main.home#main
 				.cell-3.cell-0-md
 				.cell-6.cell-12-md
 					.icons_list.characteristics.row
+						.icon__item.char-buffer
+							figure.icon.icon-char-0
+							span.icon__signature напряжение питания
 						each object, key in data.home.characteristics.icons
 							.icon__item.cell-2( class=object.tag data-aos-delay=object.delay data-aos="fade-in" data-aos-anchor-placement="top-bottom" )
 								figure.icon(
@@ -130,7 +133,7 @@ main.home#main
  
 
 	section.dop-prod.white-bg#dop-prod
-		.header__container.reserve-height__container.text-center(data-aos="fade-in" data-aos-anchor-placement="center-center")
+		.header__container.reserve-height__container.text-center
 			.reserve-height Установка дополнительного оборудования
 				h2.header__text.text-pinned#js-dynamic-text-4
 		.centered-v-container(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
@@ -264,7 +267,7 @@ main.home#main
 						.about__joint-photos.hide.show-elg.image-container.is-wide
 							.image-flex-center
 								img(src="images/about_photos.png", alt="")
-						.about__text(data-aos="fade-in" data-aos-anchor-placement="top-center") 
+						.about__text(data-aos="fade-in" data-aos-anchor-placement="top-bottom") 
 							span
 							| PERCo - ведущий российский производитель систем и оборудования безопасности
 							br

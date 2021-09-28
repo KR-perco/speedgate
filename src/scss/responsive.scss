@@ -399,4 +399,22 @@
     .home section.two {
         padding: 45px 0 0;
     }
+    .home .slider-prod .swiper-slide {
+        height: 45vh;
+    }
+    .home .icons_list .icon__item .icon__signature {
+        margin-top: 19px;
+    }
+}
+
+@media screen and (min-height: 1474px) {
+    .home .slider-cube-nav {
+        top: 51%;
+    }
+}
+
+@media screen and (min-height: 974px) {
+    .home .slider-cube-nav {
+        top: 53%;
+    }
 }
