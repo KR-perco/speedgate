@@ -7,70 +7,91 @@
                     .reserve-height 
                         span Скоростной проход ST-01 
                         h2.header-demo__text.header__text.text-pinned#js-dynamic-prod1
-                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") смотреть видео
-                     
-                //- Далее: Скоростной проход ST-11 
-                //- include svg_next_btn
-                .swiper-container.slider-demonstration.js-sliderdemo-0(data-aos="fade-in" data-aos-anchor-placement="top-center")
+                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") смотреть видео 
+                .swiper-container.slider-demonstration.js-sliderdemo-0(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы" data-ended="0")
                             //- poster: 'images/video-posters/poster1.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/1.mp4`,
+                                        srcset: `video/st01/990x560/1.mp4`,
                                         type: 'video/mp4',
-                                    },  
+                                    },
+                                    {
+                                        srcset: `video/st11/990x560/webm/1.webm`,
+                                        type: 'video/webm',
+                                    } 
                                 ]
-                            }).lozad#index-1(autoplay, muted)
+                            })#index-0_0(autoplay, muted, preload, playsinline)
                         .swiper-slide(data-name="Доступ" data-ended="0")
                             //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/2.mp4`,
+                                        srcset: `video/st01/990x560/2.mp4`,
                                         type: 'video/mp4',
-                                    },  
+                                    },
+                                    {
+                                        srcset: `video/st11/990x560/webm/1.webm`,
+                                        type: 'video/webm',
+                                    }  
                                 ]
-                            }).lozad#index-2(muted)
+                            })#index-0_1(muted, playsinline)
                         .swiper-slide(data-name="Габариты" data-ended="0")
                             //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/3.mp4`,
+                                        srcset: `video/st01/990x560/6.mp4`,
                                         type: 'video/mp4',
-                                    },  
+                                    },
+                                    {
+                                        srcset: `video/st11/990x560/webm/1.webm`,
+                                        type: 'video/webm',
+                                    }  
                                 ]
-                            }).lozad#index-2(muted)
+                            })#index-0_2(muted, playsinline)
                         .swiper-slide(data-name="Безопасность" data-ended="0") 
                             //- poster: 'images/video-posters/poster3.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/4.mp4`,
+                                        srcset: `video/st01/990x560/4.mp4`,
                                         type: 'video/mp4',
-                                    },  
+                                    },
+                                    {
+                                        srcset: `video/st11/990x560/webm/1.webm`,
+                                        type: 'video/webm',
+                                    }  
                                 ]
-                            }).lozad#index-3(muted)
+                            })#index-0_3(muted, playsinline)
                         .swiper-slide(data-name="Исполнение" data-ended="0")
                             //- poster: 'images/video-posters/poster4.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/5.mp4`,
+                                        srcset: `video/st01/990x560/5.mp4`,
                                         type: 'video/mp4',
-                                    },  
+                                    },
+                                    {
+                                        srcset: `video/st11/990x560/webm/1.webm`,
+                                        type: 'video/webm',
+                                    }  
                                 ]
-                            }).lozad#index-4(muted)
+                            })#index-0_4(muted, playsinline)
                         .swiper-slide(data-name="Интеграция" data-ended="0")
                             //- poster: 'images/video-posters/poster5.jpg',
                             +lazyVideo({
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/6.mp4`,
+                                        srcset: `video/st01/990x560/3.mp4`,
                                         type: 'video/mp4',
-                                    },  
+                                    },
+                                    {
+                                        srcset: `video/st11/990x560/webm/1.webm`,
+                                        type: 'video/webm',
+                                    } 
                                 ]
-                            }).lozad#index-5(muted) 
+                            })#index-0_5(muted, playsinline) 
                 .swiper-pagination

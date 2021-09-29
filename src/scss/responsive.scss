@@ -32,6 +32,18 @@
 }
 
 @media screen and (max-width: 1366px) {
+    .home section .header-demo {
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
+    .home section .header-demo__text {
+        font-size: 48px;
+        width: 100%;
+        line-height: 1.3em;
+        margin-bottom: 34px;
+        margin-right: 0;
+    }
     .header__nav-container {
         padding: 0 75px;
     }
@@ -71,20 +83,14 @@
 }
 
 @media screen and (max-width: 1200px) {
+    .home section.hero {
+        height: auto;
+    }
     .header__nav-container .nav-container__item .nav-sublist {
         width: 47vw;
     }
     .home .four {
         background: #003067;
-    }
-}
-
-@media screen and (max-width: 1024px) {
-    .nav-container__link[href="#products"]::after {
-        display: none;
-    }
-    .about {
-        font-size: 20px;
     }
     .home .dop-prod .slider-dop {
         height: auto;
@@ -98,17 +104,48 @@
     .home section.dop-prod {
         height: auto;
     }
-    .home .dop-prod .slider-dop__wrap.cell-8-md {
+    .home .dop-prod .slider-dop__wrap.cell-8-lg {
         order: 0;
         max-width: 66.66667%;
         height: auto;
     }
+    .home .dop-prod .slider-dop .swiper-slide .dop-prod__image {
+        height: calc(50vh - 340px);
+        min-height: 340px;
+        text-align: center;
+        max-width: 100%;
+        display: inline-block;
+    }
+    .home .dop-prod .slider-dop .swiper-slide .dop-prod__image>img {
+        width: auto;
+        height: 100%;
+        max-height: 100%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .home .slider-cube .swiper-pagination-custom .swiper-pagination-bullet .centered-bullet {
+        font-size: 18px;
+    }
+    .home .slider-cube .swiper-pagination-custom {
+        width: 94.8%;
+        margin: 0 auto;
+    }
+    .home section.hero .reserve-height {
+        min-height: initial;
+    }
+    .nav-container__link[href="#products"]::after {
+        display: none;
+    }
+    .about {
+        font-size: 20px;
+    }
     .slider-cube-nav {
         display: none;
     }
-    .js-video-main-wrap {
-        left: -10px;
-    }
+    // .js-video-main-wrap {
+    //     left: -10px;
+    // }
     .header__nav-container .nav-container__link {
         padding: 0 12px;
         font-size: 17px;
@@ -117,7 +154,10 @@
         left: -65px;
         width: 75px;
     }
-    .home .hero .reserve-height {
+    .home section.hero .reserve-height {
+        font-size: 57px;
+    }
+    .home section.hero h1.header__text {
         font-size: 57px;
     }
     .home .hero .header__text {
@@ -126,42 +166,47 @@
         margin: 0 0 12px;
         min-height: 69px;
     }
-    .home .hero .header__text_subtext {
+    .home section.hero .header__text_subtext {
         position: relative;
         top: 15px;
         line-height: 1.3em;
-    }
-    .home .hero .header__text_subtext {
         font-size: 36px;
-    }
-    .home section .header-demo {
-        flex-wrap: wrap;
-        text-align: center;
-        justify-content: center;
     }
     .home section .header-demo__video-btn {
         width: 100%;
     }
-    .home section .header-demo__text {
-        font-size: 48px;
-        width: 100%;
-        line-height: 1.3em;
+    .home section .header-demo__video-btn:hover {
+        background-size: 18px;
     }
     .home h2,
     .home h2.header__text,
     .home section .reserve-height {
         font-size: 48px;
         min-height: 60px;
-        margin-bottom: 27px;
+        margin-bottom: 17px;
     }
-    .four .header__text {
+    .home section.advantages .reserve-height {
+        margin-bottom: 0px;
+    }
+    .home section.four .reserve-height {
         margin-bottom: 35px;
     }
-    .home section.two .header__container {
+    .about .home section.two .header__container {
         padding: 0 10%;
     }
-    .home section.dop-prod .header__text {
-        padding: 0;
+    .home section.two {
+        padding: 80px 0 0;
+    }
+    // .fancybox__container.fullVid .fancybox__content {
+    //     width: 100% !important;
+    //     height: auto !important;
+    //     max-height: 100%!important;
+    //     max-width: 100%!important;
+    //     // max-width: inherit !important;
+    //     // max-height: 540px !important;
+    // }
+    .fancybox__slide {
+        padding: 48px 0px 8px 0px;
     }
 }
 
@@ -189,9 +234,31 @@
 }
 
 @media screen and (max-width: 768px) {
-    .two .swiper-button-prev,
-    .two .swiper-button-next {
-        display: none;
+    .home section.dop-prod .header__text {
+        text-align: center;
+    }
+    .home .slider-cube .swiper-pagination-custom .swiper-pagination-bullet:after {
+        max-width: 250px;
+    }
+    .home section {
+        padding: 50px 0;
+    }
+    .home .icons_list.characteristics .icon__signature {
+        margin-top: 17px;
+        opacity: 1;
+    }
+    .fancybox__container.fullVid .carousel__button.is-close {
+        top: -75px;
+        right: 40px;
+    }
+    .home section .header-demo__video-btn {
+        max-width: 116px;
+        height: 37px;
+        background-position: 10px center;
+        background-size: 16px;
+        padding-left: 37px;
+        font-size: 12px;
+        font-weight: 300;
     }
     .header__nav-container .nav-container__link {
         padding: 0 5px;
@@ -285,9 +352,9 @@
         width: 65px;
         margin: 0 9px;
     }
-    .swiper-pagination-bullet .centered-bullet {
-        display: none;
-    }
+    // .swiper-pagination-bullet .centered-bullet {
+    //     display: none;
+    // }
 }
 
 @media screen and (max-width: 640px) {
@@ -313,16 +380,13 @@
     .home .hero .header__text {
         min-height: auto;
     }
-    .home section .reserve-height .header__text {
-        text-align: center;
-    }
     .home section .reserve-height {
         font-size: 48px;
     }
     .home .hero .header__text {
         font-size: 48px;
     }
-    .home .hero .header__text_subtext {
+    .home section.hero .header__text_subtext {
         font-size: 21px;
     }
     .header__logo {
@@ -367,12 +431,12 @@
     .home section.hero .header__container {
         margin-bottom: 20px;
     }
-    .home .hero .reserve-height,
+    .home section.hero .reserve-height,
     .home .hero .header__text {
         font-size: 48px;
         margin-bottom: 12px;
     }
-    .home .hero .header__text_subtext {
+    .home section.hero .header__text_subtext {
         font-size: 20px;
     }
     .home h2,
@@ -397,7 +461,7 @@
 
 @media screen and (max-height: 874px) {
     .home section.two {
-        padding: 45px 0 0;
+        padding: 70px 0 0;
     }
     .home .slider-prod .swiper-slide {
         height: 45vh;
@@ -414,7 +478,56 @@
 }
 
 @media screen and (min-height: 974px) {
+    .home section.hero h1.header__text,
+    .home section.hero .reserve-height {
+        font-size: 64px;
+    }
     .home .slider-cube-nav {
-        top: 53%;
+        top: 51%;
     }
 }
+
+@media screen and (max-height: 714px) {
+    .home .slider-cube>.swiper-wrapper>.swiper-slide .ver1 {
+        padding: 80px 0 80px;
+    }
+    .home section.hero .reserve-height {
+        font-size: 57px;
+    }
+    .home section.hero h1.header__text {
+        font-size: 57px;
+    }
+    .home section .header-demo {
+        margin-bottom: 32px;
+    }
+    // .home section .header-demo__text {
+    //     font-size: 34px;
+    // }
+    .home section .header__container {
+        margin-bottom: 30px;
+    }
+    .home section.hero {
+        padding: 70px 0 0;
+    }
+    .home .slider-cube>.swiper-wrapper>.swiper-slide .ver1 {
+        padding: 50px 0 50px;
+        height: auto;
+        min-height: unset;
+    }
+    .home section .header-demo__video-btn {
+        max-width: 116px;
+        height: 37px;
+        background-position: 10px center;
+        background-size: 16px;
+        padding-left: 37px;
+        font-size: 12px;
+        font-weight: 300;
+    }
+    .home section .header-demo__text {
+        font-size: 30px;
+        white-space: initial;
+        margin-bottom: 25px;
+    }
+}
+
+@media screen and (min-height: 714px) and (max-width: 1024px) {}

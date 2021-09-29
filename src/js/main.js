@@ -1,5 +1,5 @@
 import './vendor';
-import './helpers';
+import helpers from './helpers';
 import './components/social';
 import { ieFix } from './vendor/ie-fix';
 import { vhFix } from './vendor/vh-fix';
@@ -15,7 +15,6 @@ import { Fancybox, Carousel, Panzoom } from "@fancyapps/ui";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { each } from 'jquery';
 
 ieFix();
 vhFix();
@@ -491,13 +490,12 @@ swiper3prod3.on('slideChange', function() {
     prevVideo.currentTime = 0;
 });
 
-
-var swiperCube = new Swiper(".slider-cube", {
+var swiperCubeOptions = {
     loop: false,
     effect: "cube",
-    slidesPerView: 3,
+    slidesPerView: 1,
     allowSlidePrev: false,
-    speed: 900,
+    speed: 1300,
     cubeEffect: {
         shadow: false,
         slideShadows: false,
@@ -551,8 +549,66 @@ var swiperCube = new Swiper(".slider-cube", {
             targetVid.play();
         }
     }
-});
+};
+
+if (helpers.isIOS()) {
+    console.log("swiper is device ios");
+    var swiperCubeOptions = {
+        loop: false,
+        slidesPerView: 1,
+        allowSlidePrev: false,
+        navigation: {
+            nextEl: '.slider-cube .swiper-button-next',
+            prevEl: '.slider-cube .swiper-button-prev',
+        },
+        on: {
+            slideChangeTransitionEnd: function() {
+                if (this.isEnd) {
+                    swiperCube.params.mousewheel.releaseOnEdges = true;
+                } else {
+                    swiperCube.params.mousewheel.releaseOnEdges = false;
+                }
+
+                let sliderVideosRefactor1 = $(".js-sliderdemo-" + this.previousIndex + " .swiper-slide video");
+                let sliderVideosRefactor2 = $(".js-sliderdemo-" + this.activeIndex + " .swiper-slide video");
+
+                sliderVideosRefactor1.each(function() {
+                    this.pause();
+                    this.currentTime = 0;
+                    console.log("Stop video: ");
+                    console.log(this.pause());
+                });
+                sliderVideosRefactor2.each(function() {
+                    this.pause();
+                    this.currentTime = 0;
+                    console.log("Stop video: ");
+                    console.log(this.pause());
+                });
+
+                if (this.activeIndex == 0) {
+                    swiper3prod0.slideTo(0);
+                    var targetVid = document.getElementById("prod-section-0").getElementsByTagName("video")[swiper3prod0.activeIndex];
+                } else if (this.activeIndex == 1) {
+                    swiper3prod1.slideTo(0);
+                    var targetVid = document.getElementById("prod-section-1").getElementsByTagName("video")[swiper3prod1.activeIndex];
+                } else if (this.activeIndex == 2) {
+                    swiper3prod2.slideTo(0);
+                    var targetVid = document.getElementById("prod-section-2").getElementsByTagName("video")[swiper3prod2.activeIndex];
+                } else if (this.activeIndex == 3) {
+                    swiper3prod3.slideTo(0);
+                    var targetVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
+                }
+
+                targetVid.play();
+            }
+        }
+    };
+}
+
+var swiperCube = new Swiper(".slider-cube", swiperCubeOptions);
 swiperCube.mousewheel.disable();
+
+console.log(swiperCube);
 
 var prohodDone = false;
 var firstEnterDone = false;
@@ -645,9 +701,9 @@ var swiperDop = new Swiper(".slider-dop", {
             for (let i = 1; i <= total; i++) {
                 let j = i - 1
                 if (current == i) {
-                    text += "<span class='cell-6 cell-4-md swiper-pagination-btn swiper-pagination-bullet swiper-pagination-btn-active'><div class='centered-btn'>" + namesDop[j] + "</div></span>";
+                    text += "<span class='cell-6 cell-4-lg swiper-pagination-btn swiper-pagination-bullet swiper-pagination-btn-active'><div class='centered-btn'>" + namesDop[j] + "</div></span>";
                 } else {
-                    text += "<span class='cell-6 cell-4-md swiper-pagination-btn swiper-pagination-bullet'><div class='centered-btn'>" + namesDop[j] + "</div></span>";
+                    text += "<span class='cell-6 cell-4-lg swiper-pagination-btn swiper-pagination-bullet'><div class='centered-btn'>" + namesDop[j] + "</div></span>";
                 }
             }
             return text;
