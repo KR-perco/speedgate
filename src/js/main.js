@@ -492,18 +492,7 @@ swiper3prod3.on('slideChange', function() {
 
 var swiperCubeOptions = {
     loop: false,
-    effect: "cube",
     slidesPerView: 1,
-    allowSlidePrev: false,
-    speed: 1300,
-    cubeEffect: {
-        shadow: false,
-        slideShadows: false,
-    },
-    mousewheel: {
-        eventsTarget: ".slider-cube",
-        releaseOnEdges: false,
-    },
     navigation: {
         nextEl: '.slider-cube .swiper-button-next',
         prevEl: '.slider-cube .swiper-button-prev',
@@ -550,13 +539,12 @@ var swiperCubeOptions = {
         }
     }
 };
-
 if (helpers.isIOS()) {
     console.log("swiper is device ios");
+    // быстрый костыль для iOs 
     var swiperCubeOptions = {
         loop: false,
         slidesPerView: 1,
-        allowSlidePrev: false,
         navigation: {
             nextEl: '.slider-cube .swiper-button-next',
             prevEl: '.slider-cube .swiper-button-prev',
