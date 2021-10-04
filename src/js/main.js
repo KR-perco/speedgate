@@ -10,7 +10,7 @@ import lazyLoading from './modules/lazyLoading';
 import Typed from "typed.js";
 import inView from "in-view";
 import Swiper from 'swiper';
-import SwiperCore, { Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel } from 'swiper/core';
+import SwiperCore, { Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel, Lazy } from 'swiper/core';
 import { Fancybox, Carousel, Panzoom } from "@fancyapps/ui";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -28,37 +28,41 @@ const lockScroll = e => {
     console.log("Scroll Locked");
 };
 
-SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel]);
+SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel, Lazy]);
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-Fancybox.bind("[data-fancybox-plyr]", {
-    mainClass: 'fullVid',
-    on: {
-        done: (fancybox, slide) => {
-
-            var sliderVideos = $("#prod-section-" + swiperCube.activeIndex + " video");
-            sliderVideos.each(function(index) {
-                this.pause();
-            });
-        },
-        closing: (fancybox, slide) => {
-            if (swiperCube.activeIndex == 0) {
-                var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
-            } else if (swiperCube.activeIndex == 1) {
-                var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
-            } else if (swiperCube.activeIndex == 2) {
-                var currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
-            } else if (swiperCube.activeIndex == 3) {
-                var currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
-            } else {
-                // var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
-            }
-            currentVideo.play();
-        }
-    }
-});
 
 window.onload = function() {
+
+
+    Fancybox.bind("[data-fancybox-plyr]", {
+        mainClass: 'fullVid',
+        on: {
+            done: (fancybox, slide) => {
+
+                var sliderVideos = $("#prod-section-" + swiperCube.activeIndex + " video");
+                sliderVideos.each(function(index) {
+                    this.pause();
+                });
+            },
+            closing: (fancybox, slide) => {
+                if (swiperCube.activeIndex == 0) {
+                    var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
+                } else if (swiperCube.activeIndex == 1) {
+                    var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
+                } else if (swiperCube.activeIndex == 2) {
+                    var currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
+                } else if (swiperCube.activeIndex == 3) {
+                    var currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
+                } else {
+                    // var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
+                }
+                currentVideo.play();
+            }
+        }
+    });
+
+
     var intViewportHeight = window.innerHeight;
     const ShowScroll = btnScrollTop => {
         var offsetToTrigger = document.getElementById("advantages").offsetTop + 250;
@@ -586,6 +590,24 @@ window.onload = function() {
     });
 
 
+    $("[data-prod-section]").on("click", function(e) {
+        e.preventDefault;
+        gsap.to(window, { duration: .5, scrollTo: "#products-cube" });
+        swiperCube.slideTo($(this).data("prod-section"));
+        if (!firstEnterDone) {
+            swiperCube.mousewheel.enable();
+        } else {
+            firstEnterDone = true;
+        }
+    });
+
+    $("#products-cube .swiper-button-prev").on("click", function(e) {
+        if (!swiperCube.allowSlidePrev) {
+            swiperCube.allowSlidePrev = true;
+            swiperCube.slidePrev();
+        }
+    });
+
 };
 
 window.addEventListener(`resize`, event => {
@@ -700,6 +722,10 @@ inView('#js-dynamic-prod1')
     })
 
 var swiper1 = new Swiper(".slider-hero", {
+    preloadImages: false,
+    lazy: {
+        loadPrevNext: true,
+    },
     effect: "fade",
     loop: true,
     speed: 1300,
@@ -724,6 +750,10 @@ var swiper1 = new Swiper(".slider-hero", {
 });
 
 var swiper2 = new Swiper(".slider-prod", {
+    preloadImages: false,
+    lazy: {
+        loadPrevNext: true,
+    },
     loop: true,
     pagination: {
         el: ".slider-prod .swiper-pagination",
@@ -788,6 +818,10 @@ var swiperDop = new Swiper(".slider-dop", {
 });
 
 var swiper4 = new Swiper(".slider-gallery", {
+    preloadImages: false,
+    lazy: {
+        loadPrevNext: true,
+    },
     effect: "fade",
     loop: true,
     autoplay: {
@@ -831,25 +865,6 @@ $("[data-prod-slide]").on("click", function(e) {
     }
 
 });
-
-$("[data-prod-section]").on("click", function(e) {
-    e.preventDefault;
-    gsap.to(window, { duration: .5, scrollTo: "#products-cube" });
-    swiperCube.slideTo($(this).data("prod-section"));
-    if (!firstEnterDone) {
-        swiperCube.mousewheel.enable();
-    } else {
-        firstEnterDone = true;
-    }
-});
-
-$("#products-cube .swiper-button-prev").on("click", function(e) {
-    if (!swiperCube.allowSlidePrev) {
-        swiperCube.allowSlidePrev = true;
-        swiperCube.slidePrev();
-    }
-});
-
 
 var sectionHero = document.querySelector(".slider-hero");
 var sectionGallery = document.querySelector(".three");

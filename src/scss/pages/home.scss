@@ -86,7 +86,7 @@
             justify-content: center;
             padding: 80px 0 0;
             .header__container {
-                margin-top: 59px;
+                // margin-top: 59px;
                 margin-bottom: 0px;
             }
             &#products-cube {
@@ -473,10 +473,7 @@
                 justify-content: center;
                 align-items: center;
                 padding: 30px 0 130px;
-                padding: 0;
-                height: calc(100vh - 160px);
-                height: 100vh;
-                min-height: 910px;
+                height: auto;
             }
         }
         .swiper-pagination-custom {
@@ -677,6 +674,9 @@
                 height: 95px;
                 &:hover+.icon__signature {
                     opacity: 1;
+                }
+                &__item {
+                    padding-bottom: 15px;
                 }
             }
             .icon__signature {
