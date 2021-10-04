@@ -225,14 +225,14 @@ main.home#main
 									.dop-prod__image 
 										img(src="images/gallery-dop/gallery-dop-slide6.jpg", alt="") 
 									span.slide-signature Стойка с картоприемником
-					.swiper-pagination-container.cell-4.push-2.push-2-lg.cell-8-lg.post-2-lg
+					.swiper-pagination-container.cell-4.push-2.push-2-lg.cell-8-lg.post-2-lg.push-1-xs.cell-10-xs.post-1-xs
 						.row.swiper-pagination
 
 	section.three
 		.header__container.reserve-height__container.text-center
 			.reserve-height Фотогалерея 
 				h2.header__text.text-pinned#js-dynamic-text-5
-		.swiper-container.slider-gallery#gallery(data-aos="fade-in" data-aos-anchor-placement="top-center")
+		.swiper-container.slider-gallery(data-aos="fade-in" data-aos-anchor-placement="top-center")
 			.swiper-wrapper
 				.swiper-slide
 					picture 
@@ -314,6 +314,7 @@ main.home#main
 					span.slide-signature Автоматическая калитка WMD-06, главный офис компании JYSK,Брабранд, Дания 
 			.swiper-button-prev
 			.swiper-button-next 
+			#gallery
 
 	section.four#about
 		.container 
@@ -326,11 +327,24 @@ main.home#main
 						.about__joint-photos.hide.show-elg.image-container.is-wide
 							.image-flex-center
 								img(src="images/about_photos.png", alt="")
-						.about__text(data-aos="fade-in" data-aos-anchor-placement="top-bottom") 
+						.about__text.hide-xs(data-aos="fade-in" data-aos-anchor-placement="top-bottom") 
 							span
 							| PERCo - ведущий российский производитель систем и оборудования безопасности
 							br
 							| PERCo разрабатывает и выпускает: шлагбаумы, турникеты, замки, контроллеры и считыватели, системы контроля доступа.
+							
+						.about__text.hide.show-xs(data-aos="fade-in" data-aos-anchor-placement="top-bottom") 
+							span
+							| PERCo - ведущий российский производитель систем и оборудования безопасности
+							br
+							| PERCo разрабатывает и выпускает: 
+							br
+							ul
+								li шлагбаумы
+								li турникеты
+								li замки
+								li контроллеры и считыватели
+								li системы контроля доступа 
 						.about__text_icons.row
 							each object, key in data.home.about.icons
 								.icon__item.cell-6.cell-12-xs( 
@@ -352,8 +366,8 @@ main.home#main
 				h2.header__text.text-pinned#js-dynamic-text-7
 		.container(data-aos="fade-up" data-aos-anchor-placement="center-bottom")
 			.row 
-				.cell-3.cell-2-md
-				.cell-6.cell-8-md
+				.cell-3.cell-2-md.cell-0-xs
+				.cell-6.cell-8-md.cell-12-xs
 					form.feedback-form(action="")
 						label.feedback-form-label 
 							input.feedback-form-label__input(name="name", placeholder="Имя*") 
@@ -378,7 +392,7 @@ main.home#main
 						.col.flex-middle
 							.recaptcha
 							button.feedback-form-btn(type="submit", aria-label="Отправить", data-fancybox="" data-src="#form-result-content") Отправить 
-				.cell-3.cell-2-md
+				.cell-3.cell-2-md.cell-0-xs
 			.row 
 				.push-4.cell-4.post-4.icons_list.social.push-2-sm.cell-8-sm.post-2-sm
 					each object, key in data.home.soc.icons

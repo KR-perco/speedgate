@@ -44,7 +44,7 @@
         }
         .reserve-height {
             display: block;
-            line-height: 1.1em;
+            line-height: 1.3em;
             font-size: $h2common-size;
             font-weight: 300;
             min-height: 95px;
@@ -79,25 +79,79 @@
             }
         }
         &.two {
-            height: 100vh;
+            height: auto;
             display: flex;
             flex-direction: column;
             background-color: white;
             justify-content: center;
             padding: 80px 0 0;
             .header__container {
+                margin-top: 59px;
                 margin-bottom: 0px;
             }
             &#products-cube {
                 padding: 0;
-                min-height: 1122px;
+                height: calc(100vh - 160px);
+                height: auto;
             }
-        }
-        &#products-cube {
             .reserve-height {
                 min-height: 1.1em;
-                margin-bottom: 34px;
                 padding-right: 15px;
+                margin-bottom: 35px;
+            }
+            .header-demo {
+                box-sizing: border-box;
+                text-align: left;
+                display: flex;
+                margin-bottom: 25px;
+                .reserve-height {
+                    margin-bottom: 0px;
+                }
+                &__text {
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: $h2common-size;
+                    line-height: 1.3em;
+                    color: #003067;
+                    margin: 0;
+                    white-space: nowrap;
+                    margin-right: 15px;
+                }
+                &__video-btn {
+                    display: flex;
+                    width: 167px;
+                    max-width: 167px;
+                    height: 60px;
+                    background-repeat: no-repeat;
+                    background-position: 18px center;
+                    background-image: url("../images/icons/play-gray.svg");
+                    padding: 5px;
+                    padding-right: 23px;
+                    padding-left: 55px;
+                    margin: 0;
+                    text-align: left;
+                    line-height: 1.3em;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #003067;
+                    border: 3px solid #003067;
+                    color: white;
+                    transition: none;
+                    &:hover {
+                        background-size: 30px;
+                        background-position: 16px center;
+                    }
+                }
+                .video-btn__wrap {
+                    margin: 30px 0;
+                }
+                .text-pinned {
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                &+.slider-demonstration {
+                    padding-bottom: 0px;
+                }
             }
         }
         &.dop-prod {
@@ -220,56 +274,9 @@
                 }
             }
         }
-        .header-demo {
-            box-sizing: border-box;
-            text-align: left;
-            display: flex;
-            margin-bottom: 72px;
-            &__text {
-                font-style: normal;
-                font-weight: 300;
-                font-size: $h2common-size;
-                line-height: 1.3em;
-                color: #003067;
-                margin: 0;
-                white-space: nowrap;
-                margin-right: 15px;
-            }
-            &__video-btn {
-                display: flex;
-                width: 167px;
-                max-width: 167px;
-                height: 60px;
-                background-repeat: no-repeat;
-                background-position: 18px center;
-                background-image: url("../images/icons/play-gray.svg");
-                padding: 5px;
-                padding-right: 23px;
-                padding-left: 55px;
-                margin: 0;
-                text-align: left;
-                line-height: 1.3em;
-                justify-content: center;
-                align-items: center;
-                background-color: #003067;
-                border: 3px solid #003067;
-                color: white;
-                transition: none;
-                &:hover {
-                    background-size: 30px;
-                    background-position: 16px center;
-                }
-            }
-            .text-pinned {
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            &+.slider-demonstration {
-                padding-bottom: 0px;
-            }
-        }
         .slider-gallery {
             --swiper-nav-color: white;
+            position: relative;
             .slide-signature {
                 width: 100%;
                 position: absolute;
@@ -286,6 +293,10 @@
                 color: #FFFFFF;
                 justify-content: center;
                 align-items: center;
+            }
+            #gallery {
+                position: absolute;
+                top: calc(300px - 50vh);
             }
         }
     }
@@ -462,8 +473,10 @@
                 justify-content: center;
                 align-items: center;
                 padding: 30px 0 130px;
+                padding: 0;
                 height: calc(100vh - 160px);
-                min-height: 810px;
+                height: 100vh;
+                min-height: 910px;
             }
         }
         .swiper-pagination-custom {
@@ -837,6 +850,10 @@
                     }
                 }
             }
+            li {
+                margin-left: 27px;
+                list-style-type: disc;
+            }
         }
     }
     // .photo-holder {
@@ -1015,6 +1032,7 @@
                     margin-right: 20px;
                     block-size: 18px;
                     inline-size: 18px;
+                    inline-size: 32px;
                 }
             }
             &:after {
@@ -1309,8 +1327,9 @@
 // }
 .js-video-main-wrap {
     position: relative;
-    padding-bottom: 45px;
+    padding-bottom: 85px;
     box-sizing: border-box;
+    overflow: hidden;
     .btn-gray {
         position: absolute;
         top: calc(50% - 25px);

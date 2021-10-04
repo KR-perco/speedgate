@@ -6,92 +6,93 @@
                 .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")
                     .reserve-height 
                         span Скоростной проход ST-01 
-                        h2.header-demo__text.header__text.text-pinned#js-dynamic-prod1
-                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") смотреть видео 
+                        h2.header-demo__text.text-pinned#js-dynamic-prod1
+                    .video-btn__wrap
+                        a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") смотреть видео 
                 .swiper-container.slider-demonstration.js-sliderdemo-0(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы" data-ended="0")
-                            //- poster: 'images/video-posters/poster1.jpg',
                             +lazyVideo({
+                                poster: 'images/video-posters/poster2.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st01/990x560/1.mp4`,
-                                        type: 'video/mp4',
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
                                     },
                                     {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    } 
+                                        srcset: `video/st01/586x330/1.mp4`,
+                                        type: 'video/mp4',
+                                    },
                                 ]
-                            })#index-0_0(autoplay, muted, preload, playsinline)
+                            })#index-0_0(muted, preload, playsinline)
                         .swiper-slide(data-name="Доступ" data-ended="0")
-                            //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
+                                poster: 'images/video-posters/poster2.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st01/990x560/2.mp4`,
-                                        type: 'video/mp4',
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
                                     },
                                     {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    }  
+                                        srcset: `video/st01/586x330/2.mp4`,
+                                        type: 'video/mp4',
+                                    },
                                 ]
                             })#index-0_1(muted, playsinline)
                         .swiper-slide(data-name="Габариты" data-ended="0")
-                            //- poster: 'images/video-posters/poster2.jpg',
                             +lazyVideo({
+                                poster: 'images/video-posters/poster2.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st01/990x560/6.mp4`,
-                                        type: 'video/mp4',
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
                                     },
                                     {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    }  
+                                        srcset: `video/st01/586x330/6.mp4`,
+                                        type: 'video/mp4',
+                                    },
                                 ]
                             })#index-0_2(muted, playsinline)
-                        .swiper-slide(data-name="Безопасность" data-ended="0") 
-                            //- poster: 'images/video-posters/poster3.jpg',
+                        .swiper-slide(data-name="Безопасность" data-ended="0")
                             +lazyVideo({
+                                poster: 'images/video-posters/poster2.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st01/990x560/4.mp4`,
-                                        type: 'video/mp4',
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
                                     },
                                     {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    }  
+                                        srcset: `video/st01/586x330/4.mp4`,
+                                        type: 'video/mp4',
+                                    },
                                 ]
                             })#index-0_3(muted, playsinline)
                         .swiper-slide(data-name="Исполнение" data-ended="0")
-                            //- poster: 'images/video-posters/poster4.jpg',
                             +lazyVideo({
+                                poster: 'images/video-posters/poster2.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st01/990x560/5.mp4`,
-                                        type: 'video/mp4',
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
                                     },
                                     {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    }  
+                                        srcset: `video/st01/586x330/5.mp4`,
+                                        type: 'video/mp4',
+                                    },
                                 ]
                             })#index-0_4(muted, playsinline)
                         .swiper-slide(data-name="Интеграция" data-ended="0")
-                            //- poster: 'images/video-posters/poster5.jpg',
                             +lazyVideo({
+                                poster: 'images/video-posters/poster2.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st01/990x560/3.mp4`,
-                                        type: 'video/mp4',
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
                                     },
                                     {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    } 
+                                        srcset: `video/st01/586x330/3.mp4`,
+                                        type: 'video/mp4',
+                                    },
                                 ]
                             })#index-0_5(muted, playsinline) 
                 .swiper-pagination

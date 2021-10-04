@@ -5,6 +5,11 @@ import $ from "jquery";
 import objectFitImages from "object-fit-images";
 import MmenuLight from "mmenu-light";
 import AOS from "aos";
+// import videojs from "@videojs";
+// let video = videojs('my-video', {
+//     autoplay: true,
+//   });
+
 
 // import objectFitVideos from 'object-fit-videos';
 

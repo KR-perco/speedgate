@@ -3,9 +3,12 @@
     .container
         .row 
             .js-video-main-wrap.push-2.cell-8.post-2.push-0-md.cell-12-md.post-0-md
-                .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")     
-                    h2.header-demo__text Калитка WMD-06, ограждение ВН06
-                    a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.wmd06 mainClass="full-vid") смотреть видео 
+                .header-demo.flex-between.flex-middle(data-aos="fade-in" data-aos-anchor-placement="center-center")
+                    .reserve-height 
+                        span Калитка WMD-06, ограждение ВН06
+                        h2.header-demo__text.text-pinned Калитка WMD-06, ограждение ВН06 
+                    .video-btn__wrap
+                        a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.wmd06 mainClass="full-vid") смотреть видео 
                 .swiper-container.slider-demonstration.js-sliderdemo-3.test(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы" data-ended="0")
@@ -13,19 +16,18 @@
                                 poster: 'images/video-posters/poster1.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/1.mp4`,
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
+                                    },
+                                    {
+                                        srcset: `video/st11/586x330/1.mp4`,
                                         type: 'video/mp4',
                                     }, 
                                     { 
                                         srcset: `video/st02/740x418/1.mp4`,
                                         type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)",
-                                        dataMw: "740"
+                                        media: "all and (max-width: 740px)", 
                                     },
-                                    {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    } 
                                 ]
                             })#index-3_0(muted, preload, playsinline)
                         .swiper-slide(data-name="Доступ" data-ended="0")
@@ -33,19 +35,18 @@
                                 poster: 'images/video-posters/poster2.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/2.mp4`, 
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
+                                    },
+                                    {
+                                        srcset: `video/st11/586x330/2.mp4`, 
                                         type: 'video/mp4',
                                     },
                                     { 
                                         srcset: `video/st02/740x418/1.mp4`,
                                         type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)",
-                                        dataMw: "740"
+                                        media: "all and (max-width: 740px)", 
                                     },
-                                    {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    } 
                                 ]
                             })#index-3_1(muted, playsinline)
                         .swiper-slide(data-name="Габариты" data-ended="0") 
@@ -53,19 +54,18 @@
                                 poster: 'images/video-posters/poster3.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/3.mp4`, 
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
+                                    },
+                                    {
+                                        srcset: `video/st11/586x330/3.mp4`, 
                                         type: 'video/mp4',
                                     },
                                     { 
                                         srcset: `video/st02/740x418/1.mp4`,
                                         type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)",
-                                        dataMw: "740"
+                                        media: "all and (max-width: 740px)", 
                                     },
-                                    {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    } 
                                 ]
                             })#index-3_2(muted, playsinline)
                         .swiper-slide(data-name="Исполнение" data-ended="0")
@@ -73,19 +73,18 @@
                                 poster: 'images/video-posters/poster4.jpg',
                                 source: [
                                     {
-                                        srcset: `video/st11/990x560/4.mp4`, 
+                                        srcset: `video/st11/586x330/webm/1.webm`,
+                                        type: 'video/webm',
+                                    },
+                                    {
+                                        srcset: `video/st11/586x330/4.mp4`, 
                                         type: 'video/mp4',
                                     },
                                     { 
                                         srcset: `video/st02/740x418/1.mp4`,
                                         type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)",
-                                        dataMw: "740"
+                                        media: "all and (max-width: 740px)", 
                                     },
-                                    {
-                                        srcset: `video/st11/990x560/webm/1.webm`,
-                                        type: 'video/webm',
-                                    } 
                                 ]
                             })#index-3_3(muted, playsinline) 
                 .swiper-pagination
