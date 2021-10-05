@@ -10,81 +10,97 @@
                     .video-btn__wrap
                         a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.wmd06 mainClass="full-vid") смотреть видео 
                 .swiper-container.slider-demonstration.js-sliderdemo-3.test(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
-                    .swiper-wrapper
+                    .swiper-wrapper 
                         .swiper-slide(data-name="Ракурсы" data-ended="0")
                             +lazyVideo({
                                 poster: 'images/video-posters/1003/poster3_0-min.jpg',
                                 source: [
                                     {
-                                        srcset: `video/wmd-06_bh-06/586x330/webm/1.webm`,
+                                        srcset: `video/wmd06_bh06/586х330/webm/1.webm`,
                                         type: 'video/webm',
                                     },
                                     {
-                                        srcset: `video/wmd-06_bh-06/586x330/1.mp4`,
+                                        srcset: `video/wmd06_bh06/586х330/1.mp4`,
                                         type: 'video/mp4',
                                     }, 
                                     { 
-                                        srcset: `video/wmd-06_bh-06/740x418/1.mp4`,
+                                        srcset: `video/wmd06_bh06/740x418/1.mp4`,
                                         type: 'video/mp4', 
                                         media: "all and (max-width: 740px)", 
                                     },
                                 ]
                             })#index-3_0(muted, preload="none", playsinline)
                         .swiper-slide(data-name="Доступ" data-ended="0")
-                            +lazyVideo({
-                                poster: 'images/video-posters/1003/poster3_1-min.jpg',
-                                source: [
-                                    {
-                                        srcset: `video/wmd-06_bh-06/586x330/webm/2.webm`,
-                                        type: 'video/webm',
-                                    },
-                                    {
-                                        srcset: `video/wmd-06_bh-06/586x330/2.mp4`, 
-                                        type: 'video/mp4',
-                                    },
-                                    { 
-                                        srcset: `video/wmd-06_bh-06/740x418/2.mp4`,
-                                        type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)", 
-                                    },
-                                ]
-                            })#index-3_1(muted, preload="none", playsinline)
+                            //- +lazyVideo({
+                            //-     poster: 'images/video-posters/1003/poster3_1-min.jpg',
+                            //-     source: [
+                            //-         {
+                            //-             srcset: `video/wmd06_bh06/586х330/webm/2.webm`,
+                            //-             type: 'video/webm',
+                            //-         },
+                            //-         {
+                            //-             srcset: `video/wmd06_bh06/586х330/2.mp4`, 
+                            //-             type: 'video/mp4',
+                            //-         },
+                            //-         { 
+                            //-             srcset: `video/wmd06_bh06/740x418/2.mp4`,
+                            //-             type: 'video/mp4', 
+                            //-             media: "all and (max-width: 740px)", 
+                            //-         },
+                            //-     ]
+                            //- })#index-3_1(muted, preload="none", playsinline)
+                            
+                            video#index-3_1(muted, preload="none", playsinline, poster="images/video-posters/1003/poster3_1-min.jpg")
+                                source(src="video/wmd06_bh06/586х330/webm/2.webm" type="video/webm")
+                                source(src="video/wmd06_bh06/586х330/2.mp4" type="video/mp4") 
+                                | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
+                                a(href="video/wmd06_bh06/586х330/webm/2.webm") ссылкой 
                         .swiper-slide(data-name="Габариты" data-ended="0") 
-                            +lazyVideo({
-                                poster: 'images/video-posters/1003/poster3_2-min.jpg',
-                                source: [
-                                    {
-                                        srcset: `video/wmd-06_bh-06/586x330/webm/3.webm`,
-                                        type: 'video/webm',
-                                    },
-                                    {
-                                        srcset: `video/wmd-06_bh-06/586x330/3.mp4`, 
-                                        type: 'video/mp4',
-                                    },
-                                    { 
-                                        srcset: `video/wmd-06_bh-06/740x418/3.mp4`,
-                                        type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)", 
-                                    },
-                                ]
-                            })#index-3_2(muted, preload="none", playsinline)
+                            //- +lazyVideo({
+                            //-     poster: 'images/video-posters/1003/poster3_2-min.jpg',
+                            //-     source: [
+                            //-         {
+                            //-             srcset: `video/wmd06_bh06/586х330/webm/3.webm`,
+                            //-             type: 'video/webm',
+                            //-         },
+                            //-         {
+                            //-             srcset: `video/wmd06_bh06/586х330/3.mp4`, 
+                            //-             type: 'video/mp4',
+                            //-         },
+                            //-         { 
+                            //-             srcset: `video/wmd06_bh06/740x418/3.mp4`,
+                            //-             type: 'video/mp4', 
+                            //-             media: "all and (max-width: 740px)", 
+                            //-         },
+                            //-     ]
+                            //- })#index-3_2(muted, preload="none", playsinline)
+                            video#index-3_2(muted, preload="none", playsinline, poster="images/video-posters/1003/poster3_2-min.jpg")
+                                source(src="video/wmd06_bh06/586х330/webm/3.webm" type="video/webm")
+                                source(src="video/wmd06_bh06/586х330/3.mp4" type="video/mp4") 
+                                | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
+                                a(href="video/wmd06_bh06/586х330/webm/3.webm") ссылкой 
                         .swiper-slide(data-name="Исполнение" data-ended="0")
-                            +lazyVideo({
-                                poster: 'images/video-posters/1003/poster3_3-min.jpg',
-                                source: [
-                                    {
-                                        srcset: `video/wmd-06_bh-06/586x330/webm/4.webm`,
-                                        type: 'video/webm',
-                                    },
-                                    {
-                                        srcset: `video/wmd-06_bh-06/586x330/4.mp4`, 
-                                        type: 'video/mp4',
-                                    },
-                                    { 
-                                        srcset: `video/wmd-06_bh-06/740x418/4.mp4`,
-                                        type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)", 
-                                    },
-                                ]
-                            })#index-3_3(muted, preload="none", playsinline) 
+                            //- +lazyVideo({
+                            //-     poster: 'images/video-posters/1003/poster3_3-min.jpg',
+                            //-     source: [
+                            //-         {
+                            //-             srcset: `video/wmd06_bh06/586х330/webm/4.webm`,
+                            //-             type: 'video/webm',
+                            //-         },
+                            //-         {
+                            //-             srcset: `video/wmd06_bh06/586х330/4.mp4`, 
+                            //-             type: 'video/mp4',
+                            //-         },
+                            //-         { 
+                            //-             srcset: `video/wmd06_bh06/740x418/4.mp4`,
+                            //-             type: 'video/mp4', 
+                            //-             media: "all and (max-width: 740px)", 
+                            //-         },
+                            //-     ]
+                            //- })#index-3_3(muted, preload="none", playsinline) 
+                            video#index-3_3(muted, preload="none", playsinline, poster="images/video-posters/1003/poster3_3-min.jpg")
+                                source(src="video/wmd06_bh06/586х330/webm/4.webm" type="video/webm")
+                                source(src="video/wmd06_bh06/586х330/4.mp4" type="video/mp4") 
+                                | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
+                                a(href="video/wmd06_bh06/586х330/webm/4.webm") ссылкой 
                 .swiper-pagination

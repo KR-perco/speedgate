@@ -407,10 +407,6 @@ window.onload = function() {
                 } else if (this.activeIndex == 3) {
                     swiper3prod3.slideTo(0);
                     var targetVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
-
-                    console.log(swiperCube.navigation.$nextEl[0].classList);
-                    this.navigation.$nextEl[0].classList.add("swiper-button-disabled");
-                    // swiperCube.update(); 
                 }
 
                 targetVid.play();
@@ -612,6 +608,13 @@ window.onload = function() {
         })
 
     if (intViewportWidth < 640) {
+
+        // function InsertCorrectVideo(url, prod, resolution, id, extension) { 
+        //     url 
+        //             let pathToVid = 'video/{$this.prod}/{$this.resolution}/{$this.id}.{$this.extension}'; 
+        //     }
+        // }
+
         var cubeContainer = document.querySelector("#products-cube");
         var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
 
@@ -944,19 +947,7 @@ inView('.slider-gallery')
 //       li= item
 
 
-// class InsertCorrectVideo {
-//     constructor(url) {
-//         this.url = url;
-//     } 
-//     async getVideo(prod, resolution, id, extension ) {
-//         try {
-//             let pathToVid = 'video/{$this.prod}/{$this.resolution}/{$this.id}.{$this.extension}';
-//             return pathToVid;
-//         } catch (error) {
-//             throw new Error('Неправильный путь к видео');
-//         }
-//     }
-// }
+
 
 // (async () => {
 //     let insertCorrectVideo = new InsertCorrectVideo("video/");
