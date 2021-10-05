@@ -472,8 +472,10 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 30px 0 130px;
+                padding: 80px 0 80px;
                 height: auto;
+                position: relative;
+                z-index: 10;
             }
         }
         .swiper-pagination-custom {
@@ -600,6 +602,13 @@
             // &:hover:after {
             //     background-image: url("../images/icons/next-section-blue.svg");
             // }
+        }
+        .slider-cube-nav {
+            &.sliderCube-index-3 {
+                .swiper-button-next {
+                    display: none;
+                }
+            }
         }
         // .swiper-button-prev {
         //     &:after {

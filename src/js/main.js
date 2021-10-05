@@ -15,6 +15,8 @@ import { Fancybox, Carousel, Panzoom } from "@fancyapps/ui";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import MmenuLight from "mmenu-light";
+import AOS from "aos";
 
 ieFix();
 vhFix();
@@ -23,10 +25,6 @@ actualYear();
 header.init();
 lazyLoading.init();
 
-const lockScroll = e => {
-    e.preventDefault();
-    console.log("Scroll Locked");
-};
 
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel, Lazy]);
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -34,6 +32,28 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 window.onload = function() {
 
+
+    AOS.init({
+        // Global settings:
+        // disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+        // startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+        // initClassName: 'aos-init', // class applied after initialization
+        // animatedClassName: 'aos-animate', // class applied on animation
+        // useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+        // disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+        // debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+        // throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+
+        // // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+        // offset: 120, // offset (in px) from the original trigger point
+        // delay: 0, // values from 0 to 3000, with step 50ms
+        // duration: 400, // values from 0 to 3000, with step 50ms
+        // easing: 'ease', // default easing for AOS animations
+        once: true, // whether animation should happen only once - while scrolling down
+        // mirror: false, // whether elements should animate out while scrolling past them
+        // anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+    });
 
     Fancybox.bind("[data-fancybox-plyr]", {
         mainClass: 'fullVid',
@@ -64,6 +84,7 @@ window.onload = function() {
 
 
     var intViewportHeight = window.innerHeight;
+    var intViewportWidth = window.innerWidth;
     const ShowScroll = btnScrollTop => {
         var offsetToTrigger = document.getElementById("advantages").offsetTop + 250;
         window.addEventListener('scroll', () => {
@@ -386,13 +407,24 @@ window.onload = function() {
                 } else if (this.activeIndex == 3) {
                     swiper3prod3.slideTo(0);
                     var targetVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
+
+                    console.log(swiperCube.navigation.$nextEl[0].classList);
+                    this.navigation.$nextEl[0].classList.add("swiper-button-disabled");
+                    // swiperCube.update(); 
                 }
 
                 targetVid.play();
+
+                // костыль
+                let sliderCubeNav = $(".slider-cube-nav");
+                sliderCubeNav.removeClass("sliderCube-index-" + this.previousIndex);
+                sliderCubeNav.addClass("sliderCube-index-" + this.activeIndex);
             }
         }
     };
     if (helpers.isIOS()) {
+
+
         // Попробовать менее глючный скролл для iOs:
         // document.querySelectorAll('.logo, .main-btn, .dop-btn_mail, .menu-btn').forEach(btn => {
         //     btn.addEventListener('click', () => {
@@ -418,7 +450,7 @@ window.onload = function() {
                 slideChangeTransitionEnd: function() {
                     let sliderVideosRefactor1 = $(".js-sliderdemo-" + this.previousIndex + " .swiper-slide video");
                     let sliderVideosRefactor2 = $(".js-sliderdemo-" + this.activeIndex + " .swiper-slide video");
-
+                    console.log(this.allowSlidePrev);
                     sliderVideosRefactor1.each(function() {
                         this.pause();
                         $(this).trigger('pause');
@@ -446,9 +478,17 @@ window.onload = function() {
                     } else if (this.activeIndex == 3) {
                         swiper3prod3.slideTo(0);
                         var targetVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
+
+                        document.querySelector(".slider-cube-nav")
+                        this.navigation.$nextEl[0].classList.add("swiper-button-disabled");
                     }
 
                     targetVid.play();
+
+                    // костыль
+                    let sliderCubeNav = $(".slider-cube-nav");
+                    sliderCubeNav.removeClass("sliderCube-index-" + this.slides[this.previousIndex].dataset.swiperSlideIndex);
+                    sliderCubeNav.addClass("sliderCube-index-" + this.slides[this.activeIndex].dataset.swiperSlideIndex);
                 }
             }
         };
@@ -479,15 +519,26 @@ window.onload = function() {
 
     var prohodDone = false;
     var firstEnterDone = false;
-    var easeTime = .1;
+    var easeTime = .5;
 
     var controlScene = function(event) {
+        console.log(swiperCube);
 
-        console.log(prohodDone);
         if (!prohodDone) {
-            document.addEventListener('wheel', lockScroll);
-            if (!firstEnterDone) {
+            if (!firstEnterDone && event.deltaY > 0) {
                 setTimeout(() => swiperCube.mousewheel.enable(), 1500);
+                firstEnterDone = true;
+
+                // gsap.set('.slider-cube-nav', { yPercent: -50 })
+                // gsap.timeline({
+                //         scrollTrigger: {
+                //             trigger: "#products-cube",
+                //             pin: true,
+                //             start: "top top",
+                //         }
+                //     })
+                //     .to('#products-cube', { autoAlpha: 1, y: 0, duration: 1, stagger: 1 })
+
                 gsap.to(window, {
                     delay: 0,
                     duration: easeTime,
@@ -496,28 +547,20 @@ window.onload = function() {
                     onComplete: function() {
                         console.log('products-cube section done');
                         swiperCube.mousewheel.enable();
-                        firstEnterDone = true;
                     }
                 });
-            } else if (!swiperCube.params.mousewheel.releaseOnEdges && event.deltaY > 0) {
-                gsap.to(window, {
-                    duration: easeTime,
-                    scrollTo: "#products-cube",
-                });
-            } else if ((swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges) || (event.deltaY < 0)) { // push down only on last slide 
+            } else if ((swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges && event.deltaY > 0) || (event.deltaY < 0)) { // let move down only on last slide or if wheel "up"
                 prohodDone = true;
                 swiperCube.mousewheel.disable();
-                //  костыльный фикс бага с появляющейся стрелкой
-                console.log(prohodDone);
-                if (swiperCube.navigation.$nextEl[0].classList) {
-                    console.log(swiperCube.navigation.$nextEl[0].classList.add("swiper-button-disabled"));
-                    swiperCube.update();
-                }
-
             }
         } else {
-            window.removeEventListener('wheel', lockScroll);
-            console.log("Disable Scroll Lock");
+            // gsap.timeline({
+            //     scrollTrigger: {
+            //         trigger: "#products-cube",
+            //         pin: false,
+            //         start: "top top",
+            //     }
+            // });
             if (swiperCube.mousewheel.enabled) {
                 swiperCube.mousewheel.disable();
             }
@@ -542,12 +585,12 @@ window.onload = function() {
             console.log("enter demo block");
             currentVideo.play();
             document.addEventListener('wheel', controlScene);
+
             const triggerSlidePrevEnable = function(event) {
                 if (!swiperCube.allowSlidePrev) {
                     swiperCube.allowSlidePrev = true;
                 }
             };
-
             el.addEventListener('touchstart', triggerSlidePrevEnable, false);
             el.addEventListener('touchmove', triggerSlidePrevEnable, false);
         })
@@ -568,31 +611,58 @@ window.onload = function() {
             currentVideo.pause();
         })
 
+    if (intViewportWidth < 640) {
+        var cubeContainer = document.querySelector("#products-cube");
+        var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
 
-    var cubeContainer = document.querySelector("#products-cube");
-    var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
+        itemsToDisableSwiperTouch.forEach(function(item) {
+            const disableTouchEvent = function(event) {
+                if (swiperCube.allowTouchMove) {
+                    swiperCube.allowTouchMove = false;
+                }
+            };
+            const enableTouchEvent = function(event) {
+                if (!swiperCube.allowTouchMove) {
+                    swiperCube.allowTouchMove = true;
+                }
+            };
+            item.addEventListener('touchstart', disableTouchEvent, false);
+            item.addEventListener('touchmove', disableTouchEvent, false);
+            item.addEventListener('touchend', enableTouchEvent, false);
+            item.addEventListener('touchcancel', enableTouchEvent, false);
+        });
 
-    itemsToDisableSwiperTouch.forEach(function(item) {
-        const disableTouchEvent = function(event) {
-            if (swiperCube.allowTouchMove) {
-                swiperCube.allowTouchMove = false;
-            }
-        };
-        const enableTouchEvent = function(event) {
-            if (!swiperCube.allowTouchMove) {
-                swiperCube.allowTouchMove = true;
-            }
-        };
-        item.addEventListener('touchstart', disableTouchEvent, false);
-        item.addEventListener('touchmove', disableTouchEvent, false);
-        item.addEventListener('touchend', enableTouchEvent, false);
-        item.addEventListener('touchcancel', enableTouchEvent, false);
+        var vidsForMobile = document.getElementsByTagName("video");
+        for (var i = 0; i < vidsForMobile.length; i++) {
+            console.log(vidsForMobile[i]);
+            vidsForMobile[i].removeAttribute("autoplay");
+        }
+    }
+
+    // $(".alphabet").on("click", function(e) {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     var scrollID = $(this).data('scrollto');
+    //     var brand_scroll = "scrollto_" + scrollID;
+    //     var elem = document.getElementById(brand_scroll);
+    //     var posY = elem.offsetTop;
+    //     $('#scrolling_div').scrollTop(posY);
+    // });
+
+
+    $("[data-prod-slide]").on("click", function(e) {
+        e.preventDefault;
+        gsap.to(window, { delay: 0, duration: easeTime, scrollTo: "#products" });
+        swiper2.slideTo($(this).data("prod-slide"));
+        if (!helpers.isMobile()) {
+            document.querySelector(".nav-sublist").style.top = "-9999px";
+            setTimeout(() => document.querySelector(".nav-sublist").removeAttribute("style"), 1500);
+        }
     });
-
 
     $("[data-prod-section]").on("click", function(e) {
         e.preventDefault;
-        gsap.to(window, { duration: .5, scrollTo: "#products-cube" });
+        gsap.to(window, { delay: 0, duration: easeTime, scrollTo: "#products-cube" });
         swiperCube.slideTo($(this).data("prod-section"));
         if (!firstEnterDone) {
             swiperCube.mousewheel.enable();
@@ -608,6 +678,18 @@ window.onload = function() {
         }
     });
 
+    var sectionHero = document.querySelector(".slider-hero");
+    var sectionGallery = document.querySelector(".three");
+    var sectionDopProd = document.querySelector(".slider-dop");
+    sectionHero.addEventListener('click', function(event) {
+        console.log(swiper1.slideNext());
+    });
+    sectionGallery.addEventListener('click', function(event) {
+        console.log(swiper4.slideNext());
+    });
+    sectionDopProd.addEventListener('click', function(event) {
+        console.log(swiperDop.slideNext());
+    });
 };
 
 window.addEventListener(`resize`, event => {
@@ -795,7 +877,7 @@ $(".js-sliderdemo-dop .swiper-slide").each(function(i) {
 });
 var swiperDop = new Swiper(".slider-dop", {
     effect: "fade",
-    loop: false,
+    loop: true,
     slidesPerView: 1,
     speed: 500,
     pagination: {
@@ -845,39 +927,15 @@ inView('.slider-gallery')
         swiper4.autoplay.start();
     })
 
-$(".btn-change").on("click", function(e) {
-    $(".btn-change").toggleClass("active");
-    $("#main").toggleClass("ver2");
-});
+// $(".btn-change").on("click", function(e) {
+//     $(".btn-change").toggleClass("active");
+//     $("#main").toggleClass("ver2");
+// });
 
-$(".btn-change").on("click", function(e) {
-    $(".btn-change").toggleClass("active");
-    $("#main").toggleClass("ver2");
-});
-
-$("[data-prod-slide]").on("click", function(e) {
-    e.preventDefault;
-    gsap.to(window, { duration: .5, scrollTo: "#products" });
-    swiper2.slideTo($(this).data("prod-slide"));
-    if (!helpers.isMobile()) {
-        document.querySelector(".nav-sublist").style.top = "-9999px";
-        setTimeout(() => document.querySelector(".nav-sublist").removeAttribute("style"), 1500);
-    }
-
-});
-
-var sectionHero = document.querySelector(".slider-hero");
-var sectionGallery = document.querySelector(".three");
-var sectionDopProd = document.querySelector(".slider-dop");
-sectionHero.addEventListener('click', function(event) {
-    console.log(swiper1.slideNext());
-});
-sectionGallery.addEventListener('click', function(event) {
-    console.log(swiper4.slideNext());
-});
-sectionDopProd.addEventListener('click', function(event) {
-    console.log(swiperDop.slideNext());
-});
+// $(".btn-change").on("click", function(e) {
+//     $(".btn-change").toggleClass("active");
+//     $("#main").toggleClass("ver2");
+// });
 
 
 // mixin list(id, ...items)

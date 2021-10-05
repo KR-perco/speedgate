@@ -59,6 +59,10 @@
 }
 
 @media screen and (max-width: 1366px) {
+    .home .icons_list.characteristics .icon__signature {
+        margin-top: 17px;
+        opacity: 1;
+    }
     .home section.two#products-cube {
         height: auto;
     }
@@ -148,6 +152,12 @@
         height: 100%;
         max-height: 100%;
     }
+    .home section.hero .header__container {
+        min-height: 23vh;
+    }
+    .hero .swiper-container {
+        min-height: 55vh;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -213,6 +223,7 @@
         top: 15px;
         line-height: 1.3em;
         font-size: 36px;
+        height: 55px;
     }
     .home h2,
     .home h2.header__text,
@@ -229,6 +240,10 @@
     }
     .home section.four .reserve-height {
         margin-bottom: 35px;
+    }
+    .home section.two .header__container {
+        height: 190px;
+        justify-content: flex-start;
     }
     .about .home section.two .header__container {
         padding: 0 10%;
@@ -296,10 +311,6 @@
     }
     .home section {
         padding: 50px 0;
-    }
-    .home .icons_list.characteristics .icon__signature {
-        margin-top: 17px;
-        opacity: 1;
     }
     .fancybox__container.fullVid .carousel__button.is-close {
         top: -75px;
@@ -414,7 +425,18 @@
 }
 
 @media screen and (max-width: 640px) {
-    .home section.two .header-demo .reserve-height {}
+    .home .about__text_icons .icon__item {
+        padding: 0 0 30px 0;
+    }
+    .home .about__text_icons .icon__item .icon-about-2,
+    .home .about__text_icons .icon__item .icon-about-4,
+    .home .about__text_icons .icon__item .icon-about-6 {
+        flex: 0 0 90px;
+        background-size: 65px 43px;
+    }
+    .home section.two .header__container {
+        height: 95px;
+    }
     .home .swiper-container-horizontal:not(.slider-demonstration)>.swiper-pagination .swiper-pagination-bullet,
     .home .swiper-container-horizontal:not(.slider-demonstration)+.swiper-pagination .swiper-pagination-bullet {
         width: 35px;
