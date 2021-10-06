@@ -12,24 +12,26 @@
                 .swiper-container.slider-demonstration.js-sliderdemo-1(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы" data-ended="0")
-                            +lazyVideo({
-                                poster: 'images/video-posters/1003/poster1_0-min.jpg',
-                                source: [
-                                    {
-                                        srcset: `video/st11/586x330/webm/1.webm`,
-                                        type: 'video/webm',
-                                    },
-                                    {
-                                        srcset: `video/st11/586x330/1.mp4`,
-                                        type: 'video/mp4',
-                                    }, 
-                                    { 
-                                        srcset: `video/st02/740x418/1.mp4`,
-                                        type: 'video/mp4', 
-                                        media: "all and (max-width: 740px)", 
-                                    },
-                                ]
-                            })#index-1_0(muted, preload="none", playsinline)
+                            //- +lazyVideo({
+                            //-     poster: 'images/video-posters/1003/poster1_0-min.jpg',
+                            //-     source: [
+                            //-         {
+                            //-             srcset: `video/st11/586x330/webm/1.webm`,
+                            //-             type: 'video/webm',
+                            //-             media: "all and (max-width: 1200px)", 
+                            //-         },
+                            //-         {
+                            //-             srcset: `video/st11/586x330/1.mp4`,
+                            //-             type: 'video/mp4',
+                            //-             media: "all and (max-width: 1200px)", 
+                            //-         },
+                            //-     ]
+                            //- })#index-1_0(muted, preload="none", playsinline)
+                            video#index-1_0(muted, preload="none", playsinline, poster="images/video-posters/1003/poster1_0-min.jpg")
+                                source(src="video/st11/586x330/webm/1.webm" type="video/webm")
+                                source(src="video/st11/586x330/1.mp4" type="video/mp4") 
+                                | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
+                                a(href="video/st11/586x330/webm/1.webm") ссылкой 
                         .swiper-slide(data-name="Доступ" data-ended="0")
                             //- +lazyVideo({
                             //-     poster: 'images/video-posters/1003/poster1_1-min.jpg',

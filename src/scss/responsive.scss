@@ -102,6 +102,10 @@
         padding-top: 40px;
         padding-bottom: 40px;
     }
+    .home section.five {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
     .home .four .about-title {
         top: 158px;
     }
@@ -161,6 +165,12 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .hero .swiper-container {
+        min-height: initial;
+    }
+    .home section.hero .header__container {
+        min-height: 21vh;
+    }
     .home .slider-prod .swiper-slide>img:hover {
         transform: initial;
     }
@@ -261,6 +271,23 @@
 }
 
 @media screen and (max-width: 920px) {
+    .header__language {
+        order: 2;
+    }
+    .header__language .select-lang__name::after {
+        content: none;
+    }
+    .header__language .select-lang {
+        width: 52px;
+        right: 0px;
+        left: auto;
+    }
+    .header__language .select-lang__name {
+        left: 0px;
+    }
+    .header__language .select-lang__list {
+        right: 0;
+    }
     .home section.dop-prod .header__text {
         text-align: center;
     }
@@ -359,23 +386,6 @@
     .home section .header__text_subtext {
         font-size: 29px;
         line-height: 34px;
-    }
-    .header__language {
-        order: 2;
-    }
-    .header__language .select-lang__name::after {
-        content: none;
-    }
-    .header__language .select-lang {
-        width: 52px;
-        right: 0px;
-        left: auto;
-    }
-    .header__language .select-lang__name {
-        left: 0px;
-    }
-    .header__language .select-lang__list {
-        right: 0;
     }
     .header__pen-img {
         width: 75px;

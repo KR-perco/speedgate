@@ -30,8 +30,87 @@ SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousew
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 
-window.onload = function() {
+const refactorProdMap = new Map([
+    ['0_0', ['st01', '1']],
+    ['0_1', ['st01', '2']],
+    ['0_2', ['st01', '6']],
+    ['0_3', ['st01', '4']],
+    ['0_4', ['st01', '5']],
+    ['0_5', ['st01', '3']],
+    ['1_0', ['st11', '1']],
+    ['1_1', ['st11', '2']],
+    ['1_2', ['st11', '3']],
+    ['1_3', ['st11', '4']],
+    ['1_4', ['st11', '5']],
+    ['1_5', ['st11', '6']],
+    ['2_0', ['st02', '1']],
+    ['2_1', ['st02', '2']],
+    ['2_2', ['st02', '5']],
+    ['2_3', ['st02', '4']],
+    ['2_4', ['st02', '3']],
+    ['3_0', ['wmd06_bh06', '1']],
+    ['3_1', ['wmd06_bh06', '2']],
+    ['3_2', ['wmd06_bh06', '3']],
+    ['3_3', ['wmd06_bh06', '4']],
+]);
+let resolution_s = "320x182";
+let resolution_lg = "586x330";
+let resolution_wide = "990x560";
 
+var intViewportHeight = window.innerHeight;
+var intViewportWidth = window.innerWidth;
+
+const vidLoading = async(video) => {
+    return new Promise((resolve, reject) => {
+        console.log();
+        if (video.load()) {
+            resolve();
+        } else {
+            reject();
+        }
+    });
+}
+
+//   const run = async () => {
+//     console.log('run started');
+//     setTimeout(() => console.log('setTimeout finised'), 2000);
+//     console.log('setTimeout started');
+//     const promise = await vidLoading();
+//     console.log('Promise resolved');
+//     console.log('run finished');
+//   }
+
+//   run();
+
+
+function InsertCorrectVideo(mapVidOptions, resolution) {
+    var videos = document.getElementsByTagName("video")
+    var videosList = Array.prototype.slice.call(videos);
+
+    videosList.forEach((value, ar) => {
+        mapVidOptions.forEach((model, id) => {
+            if (value.id == `index-${id}`) {
+                // console.log(`Options -> index-${id} = value.id: ${value.id}`);
+                let pathToVid1 = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
+                let pathToVid2 = `video/${model[0]}/${resolution}/webm/${model[1]}.webm`;
+
+                let video = document.getElementById(value.id);
+                let vidSources = video.getElementsByTagName('source');
+                vidSources[0].setAttribute('src', pathToVid1);
+                vidSources[1].setAttribute('src', pathToVid2);
+                vidLoading(video);
+                // video.load();
+            }
+        });
+    });
+}
+
+// async getBooksByAuthorWithAwait(authorId) {
+//     const books = await bookModel.fetchAll();
+//     return books.filter(b => b.authorId === authorId);
+// }
+
+window.onload = function() {
 
     AOS.init({
         // Global settings:
@@ -83,8 +162,99 @@ window.onload = function() {
     });
 
 
-    var intViewportHeight = window.innerHeight;
-    var intViewportWidth = window.innerWidth;
+    var tOptions1 = {
+        strings: ['Скоростные проходы'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    var tOptions2 = {
+        strings: ['Преимущества'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    var tOptions3 = {
+        strings: ['Скоростной проход ST-01'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    var tOptions4 = {
+        strings: ['Установка дополнительного оборудования'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    var tOptions5 = {
+        strings: ['Фотогалерея'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    var tOptions6 = {
+        strings: ['Почему PERCo'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    var tOptions7 = {
+        strings: ['Напишите нам'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    var tOptions8 = {
+        strings: ['Скоростной проход ST-01'],
+        typeSpeed: 40,
+        showCursor: false,
+    };
+
+    inView('#js-dynamic-text-1')
+        .once('enter', el => {
+            var typed1 = new Typed(el, tOptions1);
+        })
+
+    inView('#js-dynamic-text-2')
+        .once('enter', el => {
+            var typed2 = new Typed(el, tOptions2);
+        })
+
+    inView('#js-dynamic-text-3')
+        .once('enter', el => {
+            var typed3 = new Typed(el, tOptions3);
+        })
+
+    inView('#js-dynamic-text-4')
+        .once('enter', el => {
+            var typed4 = new Typed(el, tOptions4);
+        })
+
+    inView('#js-dynamic-text-5')
+        .once('enter', el => {
+            var typed5 = new Typed(el, tOptions5);
+        })
+
+    inView('#js-dynamic-text-6')
+        .once('enter', el => {
+            var typed6 = new Typed(el, tOptions6);
+        })
+
+    inView('#js-dynamic-text-7')
+        .once('enter', el => {
+            var typed7 = new Typed(el, tOptions7);
+        })
+
+    // Скоростной проход ST-01
+    inView('#js-dynamic-prod1')
+        .once('enter', el => {
+            var typed8 = new Typed(el, tOptions8);
+        })
+
+    inView('.slider-gallery')
+        .once('enter', el => {
+            swiper4.autoplay.start();
+        })
     const ShowScroll = btnScrollTop => {
         var offsetToTrigger = document.getElementById("advantages").offsetTop + 250;
         window.addEventListener('scroll', () => {
@@ -415,6 +585,11 @@ window.onload = function() {
                 let sliderCubeNav = $(".slider-cube-nav");
                 sliderCubeNav.removeClass("sliderCube-index-" + this.previousIndex);
                 sliderCubeNav.addClass("sliderCube-index-" + this.activeIndex);
+                if (!(this.activeIndex == 3)) {
+                    if (sliderCubeNav.hasClass('sliderCube-index-3')) {
+                        sliderCubeNav.addClass("sliderCube-index-3");
+                    }
+                }
             }
         }
     };
@@ -518,7 +693,6 @@ window.onload = function() {
     var easeTime = .5;
 
     var controlScene = function(event) {
-        console.log(swiperCube);
 
         if (!prohodDone) {
             if (!firstEnterDone && event.deltaY > 0) {
@@ -607,13 +781,20 @@ window.onload = function() {
             currentVideo.pause();
         })
 
-    if (intViewportWidth < 640) {
 
-        // function InsertCorrectVideo(url, prod, resolution, id, extension) { 
-        //     url 
-        //             let pathToVid = 'video/{$this.prod}/{$this.resolution}/{$this.id}.{$this.extension}'; 
-        //     }
-        // }
+    if (intViewportWidth < 640) {
+        console.log("test width < 640");
+        InsertCorrectVideo(refactorProdMap, resolution_s);
+
+        let vidRefactor = document.getElementById("index-0_0");
+        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+        let pathToVid1 = `video/st01/${resolution_s}/1.mp4`;
+        let pathToVid2 = `video/st01/${resolution_s}/webm/1.webm`;
+        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+        vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
+        vidRefactor.load();
 
         var cubeContainer = document.querySelector("#products-cube");
         var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
@@ -640,6 +821,30 @@ window.onload = function() {
             console.log(vidsForMobile[i]);
             vidsForMobile[i].removeAttribute("autoplay");
         }
+    } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+        console.log("test width is: 640 < intViewportWidth < 1200");
+        let vidRefactor = document.getElementById("index-0_0");
+        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+        let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
+        let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
+        InsertCorrectVideo(refactorProdMap, resolution_lg);
+        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+        vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
+        vidRefactor.load();
+    } else {
+        console.log("test width > 1200");
+        InsertCorrectVideo(refactorProdMap, resolution_wide);
+        let vidRefactor = document.getElementById("index-0_0");
+        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+        let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
+        let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
+        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+        vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
+        vidRefactor.load();
     }
 
     // $(".alphabet").on("click", function(e) {
@@ -666,6 +871,7 @@ window.onload = function() {
     $("[data-prod-section]").on("click", function(e) {
         e.preventDefault;
         gsap.to(window, { delay: 0, duration: easeTime, scrollTo: "#products-cube" });
+        swiperCube.allowSlidePrev = true;
         swiperCube.slideTo($(this).data("prod-section"));
         if (!firstEnterDone) {
             swiperCube.mousewheel.enable();
@@ -715,96 +921,60 @@ window.addEventListener(`resize`, event => {
         sliderArrows.classList.add('push-1', 'cell-10', 'post-1');
         sliderArrows.classList.remove('push-2', 'cell-8', 'post-2');
     }
+
+    if (intViewportWidth < 640) {
+
+        InsertCorrectVideo(refactorProdMap, resolution_s);
+
+        var cubeContainer = document.querySelector("#products-cube");
+        var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
+
+        itemsToDisableSwiperTouch.forEach(function(item) {
+            const disableTouchEvent = function(event) {
+                if (swiperCube.allowTouchMove) {
+                    swiperCube.allowTouchMove = false;
+                }
+            };
+            const enableTouchEvent = function(event) {
+                if (!swiperCube.allowTouchMove) {
+                    swiperCube.allowTouchMove = true;
+                }
+            };
+            item.addEventListener('touchstart', disableTouchEvent, false);
+            item.addEventListener('touchmove', disableTouchEvent, false);
+            item.addEventListener('touchend', enableTouchEvent, false);
+            item.addEventListener('touchcancel', enableTouchEvent, false);
+        });
+
+        var vidsForMobile = document.getElementsByTagName("video");
+        for (var i = 0; i < vidsForMobile.length; i++) {
+            console.log(vidsForMobile[i]);
+            vidsForMobile[i].removeAttribute("autoplay");
+        }
+    } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+        let vidRefactor = document.getElementById("index-0_0");
+        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+        let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
+        let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
+        InsertCorrectVideo(refactorProdMap, resolution_lg);
+        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+        vidRefactor.load();
+        vidRefactor.play();
+    } else {
+        InsertCorrectVideo(refactorProdMap, resolution_wide);
+        let vidRefactor = document.getElementById("index-0_0");
+        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+        let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
+        let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
+        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+        vidRefactor.load();
+        vidRefactor.play();
+    }
+
 }, false);
 
-var tOptions1 = {
-    strings: ['Скоростные проходы'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions2 = {
-    strings: ['Преимущества'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions3 = {
-    strings: ['Скоростной проход ST-01'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions4 = {
-    strings: ['Установка дополнительного оборудования'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions5 = {
-    strings: ['Фотогалерея'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions6 = {
-    strings: ['Почему PERCo'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions7 = {
-    strings: ['Напишите нам'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-var tOptions8 = {
-    strings: ['Скоростной проход ST-01'],
-    typeSpeed: 40,
-    showCursor: false,
-};
-
-inView('#js-dynamic-text-1')
-    .once('enter', el => {
-        var typed1 = new Typed(el, tOptions1);
-    })
-
-inView('#js-dynamic-text-2')
-    .once('enter', el => {
-        var typed2 = new Typed(el, tOptions2);
-    })
-
-inView('#js-dynamic-text-3')
-    .once('enter', el => {
-        var typed3 = new Typed(el, tOptions3);
-    })
-
-inView('#js-dynamic-text-4')
-    .once('enter', el => {
-        var typed4 = new Typed(el, tOptions4);
-    })
-
-inView('#js-dynamic-text-5')
-    .once('enter', el => {
-        var typed5 = new Typed(el, tOptions5);
-    })
-
-inView('#js-dynamic-text-6')
-    .once('enter', el => {
-        var typed6 = new Typed(el, tOptions6);
-    })
-
-inView('#js-dynamic-text-7')
-    .once('enter', el => {
-        var typed7 = new Typed(el, tOptions7);
-    })
-
-// Скоростной проход ST-01
-inView('#js-dynamic-prod1')
-    .once('enter', el => {
-        var typed8 = new Typed(el, tOptions8);
-    })
 
 var swiper1 = new Swiper(".slider-hero", {
     preloadImages: false,
@@ -879,6 +1049,10 @@ $(".js-sliderdemo-dop .swiper-slide").each(function(i) {
     namesDop.push($(this).data("name"));
 });
 var swiperDop = new Swiper(".slider-dop", {
+    preloadImages: false,
+    lazy: {
+        loadPrevNext: true,
+    },
     effect: "fade",
     loop: true,
     slidesPerView: 1,
@@ -925,10 +1099,6 @@ var swiper4 = new Swiper(".slider-gallery", {
 });
 swiper4.autoplay.stop();
 
-inView('.slider-gallery')
-    .once('enter', el => {
-        swiper4.autoplay.start();
-    })
 
 // $(".btn-change").on("click", function(e) {
 //     $(".btn-change").toggleClass("active");
@@ -945,17 +1115,3 @@ inView('.slider-gallery')
 //   ul(id=id)
 //     each item in items
 //       li= item
-
-
-
-
-// (async () => {
-//     let insertCorrectVideo = new InsertCorrectVideo("video/");
-
-//     try {
-//         let currVideo = await insertCorrectVideo.getVideo("st01", "586x330", 1, "mp4");
-//         console.log(currVideo);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// })();

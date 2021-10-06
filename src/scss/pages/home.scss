@@ -458,8 +458,11 @@
     .slider-cube {
         --swiper-navigation-size: 100px;
         position: relative;
+        .swiper-slide {
+            flex: 1 0 100%;
+        }
         video {
-            min-width: none;
+            min-width: 100%;
         }
         &-nav {
             position: absolute;
