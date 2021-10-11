@@ -8,25 +8,30 @@
                         span Скоростной проход ST-01 
                         h2.header-demo__text.text-pinned#js-dynamic-prod1
                     .video-btn__wrap
-                        a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid") смотреть видео 
-                .swiper-container.slider-demonstration.js-sliderdemo-0(data-aos="fade-in" data-aos-anchor-placement="top-bottom")
+                        a.btn.header-demo__video-btn(data-fancybox-plyr data-src=data.home.ytLink.st01 mainClass="full-vid" data-aos="fade-in" data-aos-anchor-placement="top-center") смотреть видео 
+                .swiper-container.slider-demonstration.js-sliderdemo-0
                     .swiper-wrapper
                         .swiper-slide(data-name="Ракурсы" data-ended="0")
-                            +lazyVideo({
-                                poster: 'images/video-posters/1003/poster0_0-min.jpg',
-                                source: [
-                                    {
-                                        srcset: `video/st01/586x330/webm/1.webm`,
-                                        type: 'video/webm',
-                                        media: "all and (max-width: 1200px)",
-                                    },
-                                    {
-                                        srcset: `video/st01/586x330/1.mp4`,
-                                        type: 'video/mp4',
-                                        media: "all and (max-width: 1200px)",
-                                    },
-                                ]
-                            })#index-0_0(muted, preload, playsinline)
+                            //- +lazyVideo({
+                            //-     poster: 'images/video-posters/1003/poster0_0-min.jpg',
+                            //-     source: [
+                            //-         {
+                            //-             srcset: `video/st01/586x330/webm/1.webm`,
+                            //-             type: 'video/webm',
+                            //-             media: "all and (max-width: 1200px)",
+                            //-         },
+                            //-         {
+                            //-             srcset: `video/st01/586x330/1.mp4`,
+                            //-             type: 'video/mp4',
+                            //-             media: "all and (max-width: 1200px)",
+                            //-         },
+                            //-     ]
+                            //- })#index-0_0(muted, preload, playsinline)
+                            video.is-loading#index-0_0(muted, preload, playsinline, poster="images/video-posters/1003/poster0_0-min.v1.jpg")
+                                //- source(src="video/st01/586x330/webm/1.webm" type="video/webm")
+                                //- source(src="video/st01/586x330/1.mp4" type="video/mp4") 
+                                | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
+                                a(href="video/st01/586x330/webm/1.webm") ссылкой 
                         .swiper-slide(data-name="Доступ" data-ended="0")
                             //- +lazyVideo({
                             //-     poster: 'images/video-posters/1003/poster0_1-min.jpg',
@@ -41,9 +46,9 @@
                             //-         },
                             //-     ]
                             //- })#index-0_1(muted, preload="none", playsinline)
-                            video#index-0_1(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_1-min.jpg")
-                                source(src="video/st01/586x330/webm/2.webm" type="video/webm")
-                                source(src="video/st01/586x330/2.mp4" type="video/mp4") 
+                            video.is-loading#index-0_1(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_1-min.v1.jpg")
+                                //- source(src="video/st01/586x330/webm/2.webm" type="video/webm")
+                                //- source(src="video/st01/586x330/2.mp4" type="video/mp4") 
                                 | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
                                 a(href="video/st01/586x330/webm/2.webm") ссылкой 
                         .swiper-slide(data-name="Габариты" data-ended="0")
@@ -60,9 +65,9 @@
                             //-         },
                             //-     ]
                             //- })#index-0_2(muted, preload="none", playsinline)
-                            video#index-0_2(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_2-min.jpg")
-                                source(src="video/st01/586x330/webm/6.webm" type="video/webm")
-                                source(src="video/st01/586x330/6.mp4" type="video/mp4") 
+                            video.is-loading#index-0_2(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_2-min.v1.jpg")
+                                //- source(src="video/st01/586x330/webm/6.webm" type="video/webm")
+                                //- source(src="video/st01/586x330/6.mp4" type="video/mp4") 
                                 | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
                                 a(href="video/st01/586x330/webm/6.webm") ссылкой 
                         .swiper-slide(data-name="Безопасность" data-ended="0")
@@ -79,9 +84,9 @@
                             //-         },
                             //-     ]
                             //- })#index-0_3(muted, preload="none", playsinline)
-                            video#index-0_3(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_3-min.jpg")
-                                source(src="video/st01/586x330/webm/4.webm" type="video/webm")
-                                source(src="video/st01/586x330/4.mp4" type="video/mp4") 
+                            video.is-loading#index-0_3(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_3-min.v1.jpg")
+                                //- source(src="video/st01/586x330/webm/4.webm" type="video/webm")
+                                //- source(src="video/st01/586x330/4.mp4" type="video/mp4") 
                                 | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
                                 a(href="video/st01/586x330/webm/4.webm") ссылкой 
                         .swiper-slide(data-name="Исполнение" data-ended="0")
@@ -98,9 +103,9 @@
                             //-         },
                             //-     ]
                             //- })#index-0_4(muted, preload="none", playsinline)
-                            video#index-0_4(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_4-min.jpg")
-                                source(src="video/st01/586x330/webm/5.webm" type="video/webm")
-                                source(src="video/st01/586x330/5.mp4" type="video/mp4") 
+                            video.is-loading#index-0_4(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_4-min.v1.jpg")
+                                //- source(src="video/st01/586x330/webm/5.webm" type="video/webm")
+                                //- source(src="video/st01/586x330/5.mp4" type="video/mp4") 
                                 | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
                                 a(href="video/st01/586x330/webm/5.webm") ссылкой 
                         .swiper-slide(data-name="Интеграция" data-ended="0")
@@ -117,9 +122,9 @@
                             //-         },
                             //-     ]
                             //- })#index-0_5(muted, preload="none", playsinline) 
-                            video#index-0_5(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_5-min.jpg")
-                                source(src="video/st01/586x330/webm/3.webm" type="video/webm")
-                                source(src="video/st01/586x330/3.mp4" type="video/mp4") 
+                            video.is-loading#index-0_5(muted, preload="none", playsinline, poster="images/video-posters/1003/poster0_5-min.v1.jpg")
+                                //- source(src="video/st01/586x330/webm/3.webm" type="video/webm")
+                                //- source(src="video/st01/586x330/3.mp4" type="video/mp4") 
                                 | Ваш браузер не поддерживает HTML5, для просмотра видео воспользуйтесь 
                                 a(href="video/st01/586x330/webm/3.webm") ссылкой 
                 .swiper-pagination

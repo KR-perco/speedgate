@@ -60,50 +60,90 @@ let resolution_wide = "990x560";
 var intViewportHeight = window.innerHeight;
 var intViewportWidth = window.innerWidth;
 
-const vidLoading = async(video) => {
+
+
+function asyncVidLoad(video, vidSource) {
     return new Promise((resolve, reject) => {
-        console.log();
-        if (video.load()) {
-            resolve();
-        } else {
-            reject();
+
+        video.appendChild(vidSource);
+
+        var playPromise = video.play();
+        // console.log(playPromise);
+        // playPromise
+        //     .then(() => {console.log('ok')})
+        //     .catch((err) => {console.log('err')});
+        if (playPromise !== undefined) {
+            playPromise.then(function() {
+                // if (video.id != "index-0_0") {
+                //     video.pause();
+                // }
+                video.pause();
+                video.oncanplaythrough = () =>
+                    video.classList.remove("is-loading");
+                resolve();
+            }).catch(function(error) {
+                reject(error);
+            });
         }
-    });
+
+    })
 }
-
-//   const run = async () => {
-//     console.log('run started');
-//     setTimeout(() => console.log('setTimeout finised'), 2000);
-//     console.log('setTimeout started');
-//     const promise = await vidLoading();
-//     console.log('Promise resolved');
-//     console.log('run finished');
-//   }
-
-//   run();
-
+async function asyncVideo(video, vidSource) {
+    const awaitedVid = await asyncVidLoad(video, vidSource).catch(error => console.error(error));
+};
 
 function InsertCorrectVideo(mapVidOptions, resolution) {
-    var videos = document.getElementsByTagName("video")
+    var videos = document.getElementsByTagName("video");
     var videosList = Array.prototype.slice.call(videos);
 
+    console.log(resolution);
     videosList.forEach((value, ar) => {
         mapVidOptions.forEach((model, id) => {
             if (value.id == `index-${id}`) {
-                // console.log(`Options -> index-${id} = value.id: ${value.id}`);
-                let pathToVid1 = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
-                let pathToVid2 = `video/${model[0]}/${resolution}/webm/${model[1]}.webm`;
-
+                // console.log(`Options -> index-${id} = value.id: ${value.id}`); 
                 let video = document.getElementById(value.id);
-                let vidSources = video.getElementsByTagName('source');
-                vidSources[0].setAttribute('src', pathToVid1);
-                vidSources[1].setAttribute('src', pathToVid2);
-                vidLoading(video);
-                // video.load();
+                let vidSource = document.createElement('source');
+                if (video.canPlayType('video/mp4').length > 0) {
+                    var typeVid = "video/mp4";
+                    var pathToVid = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
+                } else if (video.canPlayType('video/webm').length > 0) {
+                    var typeVid = "video/webm";
+                    var pathToVid = `video/${model[0]}/${resolution}/webm/${model[1]}.webm`;
+                } else {
+                    var pathToVid = "";
+                }
+                vidSource.setAttribute('src', pathToVid);
+                vidSource.setAttribute('type', typeVid);
+
+                asyncVideo(video, vidSource);
             }
         });
     });
 }
+
+
+// function InsertCorrectVideo(mapVidOptions, resolution) {
+//     var videos = document.getElementsByTagName("video")
+//     var videosList = Array.prototype.slice.call(videos);
+
+//     videosList.forEach((value, ar) => {
+//         mapVidOptions.forEach((model, id) => {
+//             if (value.id == `index-${id}`) {
+//                 // console.log(`Options -> index-${id} = value.id: ${value.id}`);
+//                 let pathToVid1 = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
+//                 let pathToVid2 = `video/${model[0]}/${resolution}/webm/${model[1]}.webm`;
+
+//                 let video = document.getElementById(value.id);
+//                 let vidSources = video.getElementsByTagName('source');
+//                 vidSources[0].setAttribute('src', pathToVid1);
+//                 vidSources[1].setAttribute('src', pathToVid2);
+//                 vidLoading(video);
+//                 // video.load();
+//             }
+//         });
+//     });
+// } 
+
 
 // async getBooksByAuthorWithAwait(authorId) {
 //     const books = await bookModel.fetchAll();
@@ -208,6 +248,10 @@ window.onload = function() {
         strings: ['Скоростной проход ST-01'],
         typeSpeed: 40,
         showCursor: false,
+        onComplete: function(self) {
+            document.querySelector(".js-sliderdemo-0").classList.add("reveal");
+            document.getElementById("index-0_0").play();
+        }
     };
 
     inView('#js-dynamic-text-1')
@@ -737,10 +781,63 @@ window.onload = function() {
         }
     };
 
-    inView.threshold(0.5);
+
+    $(".icon .icon-char-4").on("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(this);
+        console.log(this.offsetTop);
+
+        // var scrollID = $(this).data('scrollto');
+        // var brand_scroll = "scrollto_" + scrollID;
+        // var elem = document.getElementById(brand_scroll);
+        // var posX = elem.offsetTop;
+        ////////// this.parentNode.scroll.scrollLeft(posX);
+        // $('#scrolling_div').scrollLeft(posX);
+    });
+    inView.threshold(.5);
     inView('#products-cube')
         .on('enter', el => {
+            var intViewportWidth = window.innerWidth;
+            console.log(intViewportWidth);
+            if (intViewportWidth < 640) {
 
+                InsertCorrectVideo(refactorProdMap, resolution_s);
+
+                // let vidRefactor = document.getElementById("index-0_0");
+                // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+                // let pathToVid1 = `video/st01/${resolution_s}/1.mp4`;
+                // let pathToVid2 = `video/st01/${resolution_s}/webm/1.webm`;
+                // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+                // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+                // vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
+                // vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
+                // vidRefactor.load();
+            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+                console.log("test width is: 640 < intViewportWidth < 1200");
+                // let vidRefactor = document.getElementById("index-0_0");
+                // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+                // let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
+                // let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
+                InsertCorrectVideo(refactorProdMap, resolution_lg);
+                // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+                // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+                // vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
+                // vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
+                // vidRefactor.load();
+            } else {
+                console.log("test width > 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_wide);
+                // let vidRefactor = document.getElementById("index-0_0");
+                // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+                // let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
+                // let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
+                // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+                // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+                // vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
+                // vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
+                // vidRefactor.load();
+            }
             if (swiperCube.activeIndex == 0) {
                 var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
             } else if (swiperCube.activeIndex == 1) {
@@ -781,20 +878,8 @@ window.onload = function() {
             currentVideo.pause();
         })
 
-
     if (intViewportWidth < 640) {
         console.log("test width < 640");
-        InsertCorrectVideo(refactorProdMap, resolution_s);
-
-        let vidRefactor = document.getElementById("index-0_0");
-        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-        let pathToVid1 = `video/st01/${resolution_s}/1.mp4`;
-        let pathToVid2 = `video/st01/${resolution_s}/webm/1.webm`;
-        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-        vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
-        vidRefactor.load();
 
         var cubeContainer = document.querySelector("#products-cube");
         var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
@@ -818,45 +903,9 @@ window.onload = function() {
 
         var vidsForMobile = document.getElementsByTagName("video");
         for (var i = 0; i < vidsForMobile.length; i++) {
-            console.log(vidsForMobile[i]);
             vidsForMobile[i].removeAttribute("autoplay");
         }
-    } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-        console.log("test width is: 640 < intViewportWidth < 1200");
-        let vidRefactor = document.getElementById("index-0_0");
-        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-        let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
-        let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
-        InsertCorrectVideo(refactorProdMap, resolution_lg);
-        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-        vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
-        vidRefactor.load();
-    } else {
-        console.log("test width > 1200");
-        InsertCorrectVideo(refactorProdMap, resolution_wide);
-        let vidRefactor = document.getElementById("index-0_0");
-        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-        let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
-        let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
-        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-        vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
-        vidRefactor.load();
     }
-
-    // $(".alphabet").on("click", function(e) {
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    //     var scrollID = $(this).data('scrollto');
-    //     var brand_scroll = "scrollto_" + scrollID;
-    //     var elem = document.getElementById(brand_scroll);
-    //     var posY = elem.offsetTop;
-    //     $('#scrolling_div').scrollTop(posY);
-    // });
-
 
     $("[data-prod-slide]").on("click", function(e) {
         e.preventDefault;
@@ -948,29 +997,28 @@ window.addEventListener(`resize`, event => {
 
         var vidsForMobile = document.getElementsByTagName("video");
         for (var i = 0; i < vidsForMobile.length; i++) {
-            console.log(vidsForMobile[i]);
             vidsForMobile[i].removeAttribute("autoplay");
         }
     } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-        let vidRefactor = document.getElementById("index-0_0");
-        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-        let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
-        let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
+        // let vidRefactor = document.getElementById("index-0_0");
+        // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+        // let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
+        // let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
         InsertCorrectVideo(refactorProdMap, resolution_lg);
-        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-        vidRefactor.load();
-        vidRefactor.play();
+        // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+        // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+        // vidRefactor.load();
+        // vidRefactor.play();
     } else {
         InsertCorrectVideo(refactorProdMap, resolution_wide);
-        let vidRefactor = document.getElementById("index-0_0");
-        let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-        let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
-        let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
-        vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-        vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-        vidRefactor.load();
-        vidRefactor.play();
+        // let vidRefactor = document.getElementById("index-0_0");
+        // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
+        // let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
+        // let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
+        // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
+        // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
+        // vidRefactor.load();
+        // vidRefactor.play();
     }
 
 }, false);

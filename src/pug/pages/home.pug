@@ -118,7 +118,7 @@ main.home#main
 			.reserve-height Преимущества 
 				h2.advantages__header.text-pinned#js-dynamic-text-2
 		.container.text-center 
-			.advantages__icons.container 
+			.advantages__icons 
 				.icons_wrap
 					.icons_list.advan.row
 						each object, key in data.home.advanages.icons
@@ -148,19 +148,19 @@ main.home#main
 					.swiper-container.slider-prod
 						.swiper-wrapper 
 							a.swiper-slide.js-to-anchor(href="#prod-section-0" data-prod-section="0" data-text="Скоростной проход ST-01" data-subtext="Универсальный скоростной проход с распашными створками")
-								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide1.jpg" src="images/gallery-prod/prod-slide__slide1.jpg", alt="")
+								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide1.ver3-min.jpg" src="images/gallery-prod/prod-slide__slide1.ver3-min.jpg", alt="")
 								.swiper-lazy-preloader
 							a.swiper-slide.js-to-anchor(href="#prod-section-1" data-prod-section="1" data-text="Скоростной проход ST-11" data-subtext="Компактный скоростной проход с распашными створками")
-								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide2.jpg" src="images/gallery-prod/prod-slide__slide2.jpg", alt="")
+								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide2.ver3-min.jpg" src="images/gallery-prod/prod-slide__slide2.ver3-min.jpg", alt="")
 								.swiper-lazy-preloader
 							a.swiper-slide.js-to-anchor(href="#prod-section-2" data-prod-section="2" data-text="Скоростной проход ST-02" data-subtext="Скоростной проход с раздвижными створками")
-								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide3.jpg" src="images/gallery-prod/prod-slide__slide3.jpg", alt="")
+								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide3.ver3-min.jpg" src="images/gallery-prod/prod-slide__slide3.ver3-min.jpg", alt="")
 								.swiper-lazy-preloader
 							a.swiper-slide.js-to-anchor(href="#prod-section-3" data-prod-section="3" data-text="Калитка WMD-06" data-subtext="Автоматическая калитка со створкой из закаленного стекла")
-								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide4.jpg" src="images/gallery-prod/prod-slide__slide4.v2.jpg", alt="")
+								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide4.ver3-min.jpg" src="images/gallery-prod/prod-slide__slide4.ver3-min.jpg", alt="")
 								.swiper-lazy-preloader
 							a.swiper-slide.js-to-anchor(href="#prod-section-3" data-prod-section="3" data-text="Ограждение ВН06" data-subtext="Ограждение из закаленного стекла")
-								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide5.jpg" src="images/gallery-prod/prod-slide__slide5.jpg", alt="") 
+								img.swiper-lazy(data-src="images/gallery-prod/prod-slide__slide5.ver3-min.jpg" src="images/gallery-prod/prod-slide__slide5.ver3-min.jpg", alt="") 
 								.swiper-lazy-preloader
 						.swiper-button-prev
 						.swiper-button-next
@@ -318,8 +318,8 @@ main.home#main
 					picture 
 						source(media="(max-width: 1024px)" 								data-srcset="images/gallery/gallery-slide12.jpg")
 						source(media="(max-height: 768px) and (min-width:768px)" 		data-srcset="images/gallery/wide/gallery-slide12-wide.jpg")
-						img.swiper-lazy(data-src="images/gallery/gallery-slide12.jpg", alt="Скоростные проходы ST-01 и калитки WMD-06, Назарбаев Университет, Астана") 
-					span.slide-signature Скоростные проходы ST-01 и калитки WMD-06, Назарбаев Университет, Астана
+						img.swiper-lazy(data-src="images/gallery/gallery-slide12.jpg", alt="Скоростные проходы ST-01 и калитки WMD-06, Назарбаев Университет, Нур-Султан") 
+					span.slide-signature Скоростные проходы ST-01 и калитки WMD-06, Назарбаев Университет, Нур-Султан
 					.swiper-lazy-preloader
 				.swiper-slide
 					picture 
@@ -359,7 +359,7 @@ main.home#main
 								img(src="images/about_photos.png", alt="")
 						.about__text.hide-xs(data-aos="fade-in" data-aos-anchor-placement="top-bottom") 
 							span
-							| PERCo - ведущий российский производитель систем и оборудования безопасности
+							| PERCo - ведущий российский производитель систем и оборудования безопасности.
 							br
 							| PERCo разрабатывает и выпускает: шлагбаумы, турникеты, замки, контроллеры и считыватели, системы контроля доступа.
 							
@@ -426,7 +426,7 @@ main.home#main
 			.row 
 				.push-4.cell-4.post-4.icons_list.social.push-2-sm.cell-8-sm.post-2-sm
 					each object, key in data.home.soc.icons
-						a.icon__item(href=object.link)
+						a.icon__item(href=object.link target="_blank")
 							figure.icon(
 								class=object.svg
 							)

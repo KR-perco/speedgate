@@ -5,6 +5,9 @@
 @media screen and (max-width: 1675px) {}
 
 @media screen and (max-width: 1550px) {
+    .home section.two .header-demo {
+        margin-bottom: 33px;
+    }
     .home section.two .header-demo__text {
         text-align: center;
         white-space: unset;
@@ -59,6 +62,9 @@
 }
 
 @media screen and (max-width: 1366px) {
+    .home section .header-demo .reserve-height {
+        font-size: 48px;
+    }
     .home .icons_list.characteristics .icon__signature {
         margin-top: 17px;
         opacity: 1;
@@ -165,6 +171,12 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .home .dop-prod .slider-dop__wrap {
+        margin-bottom: 0;
+    }
+    .home section.dop-prod .reserve-height {
+        margin-bottom: 0;
+    }
     .hero .swiper-container {
         min-height: initial;
     }
@@ -271,6 +283,40 @@
 }
 
 @media screen and (max-width: 920px) {
+    .footer {
+        padding: 45px 0;
+    }
+    .footer__header {
+        margin-bottom: 45px;
+    }
+    .footer__mail {
+        margin-top: 45px;
+    }
+    .home .about__text_icons .icon__item {
+        padding-right: 17px;
+    }
+    .home .about {
+        font-size: 18px;
+        line-height: 1.2em;
+    }
+    .home section.five {
+        padding: 50px 0;
+    }
+    .home section.five .header__container {
+        margin-bottom: 7px;
+    }
+    .home section.dop-prod {
+        padding: 50px 0;
+    }
+    .home section.two {
+        padding-top: 50px;
+    }
+    .home .slider-prod .swiper-button-next {
+        right: -35px;
+    }
+    .home .slider-prod .swiper-button-prev {
+        left: -35px;
+    }
     .header__language {
         order: 2;
     }
@@ -314,6 +360,13 @@
 }
 
 @media screen and (max-width: 768px) {
+    .home .swiper-button-next,
+    .home .swiper-button-prev {
+        width: 50px;
+    }
+    .home section .reserve-height {
+        font-size: 48px;
+    }
     .home section .header-demo .video-btn__wrap {
         display: flex;
         margin: 30px 0;
@@ -323,6 +376,7 @@
     }
     .home .slider-cube>.swiper-wrapper>.swiper-slide .ver1 {
         min-height: 685px;
+        padding: 35px 0;
     }
     .home section .header-demo__text {
         white-space: initial;
@@ -348,7 +402,7 @@
         height: 37px;
         background-position: 10px center;
         background-size: 16px;
-        padding-left: 37px;
+        padding-left: 30px;
         font-size: 12px;
         font-weight: 300;
     }
@@ -373,12 +427,6 @@
     }
     .home .swiper-button-prev {
         left: 0;
-    }
-    .home .slider-prod .swiper-button-next {
-        right: -35px;
-    }
-    .home .slider-prod .swiper-button-prev {
-        left: -35px;
     }
     .home section .header__container {
         padding: 0 75px;
@@ -435,6 +483,15 @@
 }
 
 @media screen and (max-width: 640px) {
+    .home h2,
+    .home h2.header__text,
+    .home section .reserve-height {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+    .home section.dop-prod .reserve-height {
+        margin-bottom: 37px;
+    }
     .home .about__text_icons .icon__item {
         padding: 0 0 30px 0;
     }
@@ -465,7 +522,7 @@
         justify-content: space-between;
         flex-wrap: nowrap;
         white-space: nowrap;
-        overflow-x: auto;
+        overflow-x: hidden;
     }
     .home .slider-cube .swiper-pagination-custom .swiper-pagination-bullet {
         padding: 0;
@@ -497,9 +554,6 @@
     }
     .home .hero .header__text {
         min-height: auto;
-    }
-    .home section .reserve-height {
-        font-size: 48px;
     }
     .home .hero .header__text {
         font-size: 48px;
@@ -627,11 +681,15 @@
     }
     .home .swiper-button-next,
     .home .swiper-button-prev {
-        height: 73%;
+        height: 0;
+        padding-bottom: 42%;
     }
     .home .swiper-button-prev:after,
     .home .swiper-button-next:after {
         font-size: 21px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
     }
     .home section .reserve-height .text-pinned#js-dynamic-text-5 {
         top: 0;
@@ -767,15 +825,6 @@
     .home section .header__text_subline {
         top: -7px;
     }
-    .home h2,
-    .home h2.header__text,
-    .home section .reserve-height {
-        font-size: 30px;
-        margin-bottom: 20px;
-    }
-    .home section.dop-prod .reserve-height {
-        margin-bottom: 37px;
-    }
     .header__pen-img {
         top: 21px;
         right: 21.1px;
@@ -788,7 +837,11 @@
     }
 }
 
-@media screen and (max-width: 380px) {}
+@media screen and (max-width: 380px) {
+    .home .icons_list .icon__item .icon__signature {
+        font-size: 11px;
+    }
+}
 
 @media screen and (max-height: 874px) {
     .home .slider-prod .swiper-slide {
@@ -852,6 +905,7 @@
     .home .slider-cube>.swiper-wrapper>.swiper-slide .ver1 {
         height: auto;
         min-height: unset;
+        padding: 35px 0;
     }
     .home section.two .header-demo .video-btn__wrap {
         margin: 15px 0 0;
@@ -864,7 +918,7 @@
         height: 35px;
         background-position: 10px center;
         background-size: 16px;
-        padding-left: 35px;
+        padding-left: 30px;
         font-size: 12px;
         font-weight: 300;
     }
@@ -895,7 +949,7 @@
     }
 }
 
-@media screen and (max-height: 851px) and (max-width: 480px) {
+@media screen and (max-height: 851px) and (max-width: 640px) {
     .home section.two .header-demo .reserve-height {
         font-size: 30px;
     }

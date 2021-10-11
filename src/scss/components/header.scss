@@ -129,6 +129,7 @@
         flex: 1 1 0;
         overflow: visible;
         position: relative;
+        z-index: 5;
         .select-lang {
             position: absolute;
             height: 43px;

@@ -93,17 +93,19 @@
                 padding: 0;
                 height: calc(100vh - 160px);
                 height: auto;
+                .reserve-height {
+                    padding-right: 15px;
+                }
             }
             .reserve-height {
                 min-height: 1.1em;
-                padding-right: 15px;
                 margin-bottom: 35px;
             }
             .header-demo {
                 box-sizing: border-box;
                 text-align: left;
                 display: flex;
-                margin-bottom: 25px;
+                margin-bottom: 41px;
                 .reserve-height {
                     margin-bottom: 0px;
                 }
@@ -361,9 +363,6 @@
             z-index: 999;
         }
     }
-    @include desktop {
-        padding: 0;
-    }
     .swiper-container {
         width: 100%;
     }
@@ -400,7 +399,7 @@
             .swiper-pagination-bullet {
                 opacity: 1;
                 border-radius: 0;
-                width: 99px;
+                width: 95px;
                 height: 0px;
                 margin: 0 15px;
                 border-top: 2px solid var(--bullets-color);
@@ -478,7 +477,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 80px 0 80px;
+                padding: 41px 0 0;
                 height: auto;
                 position: relative;
                 z-index: 10;
@@ -624,7 +623,7 @@
     }
     .slider-prod {
         --bullets-color: #999999;
-        margin-bottom: 50px;
+        margin-bottom: 40px;
         .swiper-slide {
             height: 50vh;
             display: flex;
@@ -1116,6 +1115,42 @@
     }
 }
 
+.js-sliderdemo-0,
+.js-sliderdemo-0+.swiper-pagination-custom {
+    opacity: .3;
+    transition: 300ms opacity;
+}
+
+.js-sliderdemo-0+.swiper-pagination-custom {
+    transition-delay: 250ms;
+}
+
+.js-sliderdemo-0.reveal {
+    opacity: 1;
+}
+
+.js-sliderdemo-0.reveal+.swiper-pagination-custom {
+    opacity: 1;
+}
+
+.slider-demonstration video {
+    opacity: 1;
+    transition: 300ms opacity;
+}
+
+.is-loading {
+    opacity: 0;
+}
+
+.js-lazy {
+    opacity: 0;
+    transition: 300ms all;
+}
+
+.js-lazy.is-loaded {
+    opacity: 1;
+}
+
 .fancybox {
     &__container {
         z-index: 3050;
@@ -1342,7 +1377,7 @@
 // }
 .js-video-main-wrap {
     position: relative;
-    padding-bottom: 85px;
+    padding-bottom: 110px;
     box-sizing: border-box;
     overflow: hidden;
     .btn-gray {
