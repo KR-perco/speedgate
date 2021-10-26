@@ -17,6 +17,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import MmenuLight from "mmenu-light";
 import AOS from "aos";
+import { each } from 'jquery';
 
 ieFix();
 vhFix();
@@ -28,6 +29,24 @@ lazyLoading.init();
 
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel, Lazy]);
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+
+var promises = [];
+var responsePromises = [];
+const MOCK_URL_SOURCE = [
+    "ehZqNokVylyWk",
+    "hDqq4LalRAUiQ",
+    "yjTccXlnh6LXW",
+    "3FjEPbKqEPhPpmC8uY",
+    "3ohs7NLUXtNW98mtIQ",
+    "9U8wVRThbHWA8ADPa2",
+    "3og0IvJaagEkDMbRi8",
+];
+var randomItem = () => {
+    return MOCK_URL_SOURCE[
+        Math.floor(Math.random() * MOCK_URL_SOURCE.length)
+    ];
+};
 
 
 const refactorProdMap = new Map([
@@ -61,117 +80,92 @@ var intViewportHeight = window.innerHeight;
 var intViewportWidth = window.innerWidth;
 
 
-
-function asyncVidLoad(video, vidSource) {
-    return new Promise((resolve, reject) => {
-
-        video.appendChild(vidSource);
-
-        var playPromise = video.play();
-        // console.log(playPromise);
-        // playPromise
-        //     .then(() => {console.log('ok')})
-        //     .catch((err) => {console.log('err')});
-        if (playPromise !== undefined) {
-            playPromise.then(function() {
-                // if (video.id != "index-0_0") {
-                //     video.pause();
-                // }
-                video.pause();
-                video.oncanplaythrough = () =>
-                    video.classList.remove("is-loading");
-                resolve();
-            }).catch(function(error) {
-                reject(error);
-            });
-        }
-
-    })
+function startPlayback(video) {
+    return video.play();
 }
-async function asyncVideo(video, vidSource) {
-    const awaitedVid = await asyncVidLoad(video, vidSource).catch(error => console.error(error));
-};
 
-function InsertCorrectVideo(mapVidOptions, resolution) {
-    var videos = document.getElementsByTagName("video");
+async function InsertCorrectVideo(mapVidOptions, resolution) {
+    var videos = document.getElementsByTagName("video")
     var videosList = Array.prototype.slice.call(videos);
 
-    console.log(resolution);
     videosList.forEach((value, ar) => {
         mapVidOptions.forEach((model, id) => {
             if (value.id == `index-${id}`) {
-                // console.log(`Options -> index-${id} = value.id: ${value.id}`); 
+
                 let video = document.getElementById(value.id);
                 let vidSource = document.createElement('source');
                 if (video.canPlayType('video/mp4').length > 0) {
-                    var typeVid = "video/mp4";
+                    var typeVid = 'video/mp4; codecs="avc1.4D401E, mp4a.40.2"';
+                    var urlVid = `https://media0.giphy.com/media/${randomItem()}/giphy.mp4`;
                     var pathToVid = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
                 } else if (video.canPlayType('video/webm').length > 0) {
-                    var typeVid = "video/webm";
+                    var typeVid = 'video/webm';
                     var pathToVid = `video/${model[0]}/${resolution}/webm/${model[1]}.webm`;
                 } else {
                     var pathToVid = "";
                 }
+                if (video.getElementsByTagName('source').length > 0) {
+                    var sourceEl = video.getElementsByTagName("source"),
+                        index;
+                    for (index = sourceEl.length - 1; index >= 0; index--) {
+                        sourceEl[index].parentNode.removeChild(sourceEl[index]);
+                    };
+                }
                 vidSource.setAttribute('src', pathToVid);
                 vidSource.setAttribute('type', typeVid);
 
-                asyncVideo(video, vidSource);
+                video.appendChild(vidSource);
+
+                promises.push(video);
+                // asyncVideo(video);
             }
         });
     });
+    console.log(promises);
+    responsePromises = await Promise.all(promises).then(() => {
+        console.log('The play() fulfilled');
+        for (let index = 0; index < promises.length; index++) {
+
+            promises[index].load();
+            // startPlayback(promises[index]);
+        }
+    }).catch(error => {
+        console.log('The play() rejected');
+        console.log(error);
+        // console.log('Use the Play button instead.');
+        // var playButton = document.querySelector('#play'); 
+    });
 }
 
+function anchorPhotoGallery() {
+    var galleryToScrollElHeight = document.querySelector(".slider-gallery").offsetHeight / 2;
+    var galleryConst = (intViewportHeight / 2) - galleryToScrollElHeight + 90;
+    document.getElementById("gallery").style.top = "-" + galleryConst + "px";
+}
 
-// function InsertCorrectVideo(mapVidOptions, resolution) {
-//     var videos = document.getElementsByTagName("video")
-//     var videosList = Array.prototype.slice.call(videos);
-
-//     videosList.forEach((value, ar) => {
-//         mapVidOptions.forEach((model, id) => {
-//             if (value.id == `index-${id}`) {
-//                 // console.log(`Options -> index-${id} = value.id: ${value.id}`);
-//                 let pathToVid1 = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
-//                 let pathToVid2 = `video/${model[0]}/${resolution}/webm/${model[1]}.webm`;
-
-//                 let video = document.getElementById(value.id);
-//                 let vidSources = video.getElementsByTagName('source');
-//                 vidSources[0].setAttribute('src', pathToVid1);
-//                 vidSources[1].setAttribute('src', pathToVid2);
-//                 vidLoading(video);
-//                 // video.load();
-//             }
-//         });
-//     });
-// } 
-
-
-// async getBooksByAuthorWithAwait(authorId) {
-//     const books = await bookModel.fetchAll();
-//     return books.filter(b => b.authorId === authorId);
-// }
+function positionArrowsCube() {
+    var cubeWrapVideoHeight = document.querySelector(".js-sliderdemo-0").offsetHeight / 2;
+    var cubeBtnHeight = document.querySelector(".header-demo__video-btn").offsetHeight / 2;
+    var cubeWrapVideoOffset = document.querySelector(".js-sliderdemo-0").offsetTop;
+    var cubeBtnOffset = document.querySelector(".header-demo__video-btn").offsetTop;
+    var cubeProdSection = document.getElementById("prod-section-0");
+    var styleProdSection = cubeProdSection.currentStyle || window.getComputedStyle(cubeProdSection);
+    styleProdSection = styleProdSection.paddingTop;
+    styleProdSection = parseInt(styleProdSection.replace('px', ''), 10);
+    if (intViewportWidth > 1024) {
+        // для десктопа 
+        document.querySelector(".slider-cube-nav").style.top = (cubeWrapVideoHeight + cubeWrapVideoOffset + styleProdSection) + "px";
+    } else {
+        // для планшета   
+        console.log("cubeBtnHeight: " + cubeBtnHeight + " cubeBtnOffset: " + cubeBtnOffset + " styleProdSection: " + styleProdSection);
+        document.querySelector(".slider-cube-nav").style.top = (cubeBtnHeight + cubeBtnOffset + styleProdSection) + "px";
+    }
+}
 
 window.onload = function() {
 
     AOS.init({
-        // Global settings:
-        // disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
-        // startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
-        // initClassName: 'aos-init', // class applied after initialization
-        // animatedClassName: 'aos-animate', // class applied on animation
-        // useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
-        // disableMutationObserver: false, // disables automatic mutations' detections (advanced)
-        // debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
-        // throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
-
-
-        // // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-        // offset: 120, // offset (in px) from the original trigger point
-        // delay: 0, // values from 0 to 3000, with step 50ms
-        // duration: 400, // values from 0 to 3000, with step 50ms
-        // easing: 'ease', // default easing for AOS animations
-        once: true, // whether animation should happen only once - while scrolling down
-        // mirror: false, // whether elements should animate out while scrolling past them
-        // anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+        once: true,
     });
 
     Fancybox.bind("[data-fancybox-plyr]", {
@@ -182,6 +176,7 @@ window.onload = function() {
                 var sliderVideos = $("#prod-section-" + swiperCube.activeIndex + " video");
                 sliderVideos.each(function(index) {
                     this.pause();
+                    console.log("pause из Fancybox");
                 });
             },
             closing: (fancybox, slide) => {
@@ -193,14 +188,12 @@ window.onload = function() {
                     var currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
                 } else if (swiperCube.activeIndex == 3) {
                     var currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
-                } else {
-                    // var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
-                }
+                } else {}
                 currentVideo.play();
+                console.log("play из Fancybox");
             }
         }
     });
-
 
     var tOptions1 = {
         strings: ['Скоростные проходы'],
@@ -215,7 +208,7 @@ window.onload = function() {
     };
 
     var tOptions3 = {
-        strings: ['Скоростной проход ST-01'],
+        strings: ['Скоростной проход ST‑01'],
         typeSpeed: 40,
         showCursor: false,
     };
@@ -245,28 +238,98 @@ window.onload = function() {
     };
 
     var tOptions8 = {
-        strings: ['Скоростной проход ST-01'],
+        strings: ['Скоростной проход ST‑01'],
         typeSpeed: 40,
         showCursor: false,
         onComplete: function(self) {
             document.querySelector(".js-sliderdemo-0").classList.add("reveal");
             document.getElementById("index-0_0").play();
+            const refactorProdMap = new Map([
+                ['0_1', ['st01', '2']],
+                ['0_2', ['st01', '6']],
+                ['0_3', ['st01', '4']],
+                ['0_4', ['st01', '5']],
+                ['0_5', ['st01', '3']],
+                ['1_1', ['st11', '2']],
+                ['1_2', ['st11', '3']],
+                ['1_3', ['st11', '4']],
+                ['1_4', ['st11', '5']],
+                ['1_5', ['st11', '6']],
+                ['2_1', ['st02', '2']],
+                ['2_2', ['st02', '5']],
+                ['2_3', ['st02', '4']],
+                ['2_4', ['st02', '3']],
+                ['3_1', ['wmd06_bh06', '2']],
+                ['3_2', ['wmd06_bh06', '3']],
+                ['3_3', ['wmd06_bh06', '4']],
+            ]);
+
+            if (intViewportWidth < 640) {
+                InsertCorrectVideo(refactorProdMap, resolution_s);
+            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+                console.log("test width is: 640 < intViewportWidth < 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_lg);
+            } else {
+                console.log("test width > 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_wide);
+            }
         }
     };
 
     inView('#js-dynamic-text-1')
         .once('enter', el => {
             var typed1 = new Typed(el, tOptions1);
+            const refactorProdMap = new Map([
+                ['0_0', ['st01', '1']]
+            ]);
+
+            if (intViewportWidth < 640) {
+                InsertCorrectVideo(refactorProdMap, resolution_s);
+            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+                console.log("test width is: 640 < intViewportWidth < 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_lg);
+            } else {
+                console.log("test width > 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_wide);
+            }
+            positionArrowsCube();
         })
 
     inView('#js-dynamic-text-2')
         .once('enter', el => {
             var typed2 = new Typed(el, tOptions2);
+            const refactorProdMap = new Map([
+                ['1_0', ['st11', '1']],
+            ]);
+
+            if (intViewportWidth < 640) {
+                InsertCorrectVideo(refactorProdMap, resolution_s);
+            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+                console.log("test width is: 640 < intViewportWidth < 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_lg);
+            } else {
+                console.log("test width > 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_wide);
+            }
         })
 
     inView('#js-dynamic-text-3')
         .once('enter', el => {
             var typed3 = new Typed(el, tOptions3);
+            const refactorProdMap = new Map([
+                ['2_0', ['st02', '1']],
+                ['3_0', ['wmd06_bh06', '1']],
+            ]);
+
+            if (intViewportWidth < 640) {
+                InsertCorrectVideo(refactorProdMap, resolution_s);
+            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+                console.log("test width is: 640 < intViewportWidth < 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_lg);
+            } else {
+                console.log("test width > 1200");
+                InsertCorrectVideo(refactorProdMap, resolution_wide);
+            }
         })
 
     inView('#js-dynamic-text-4')
@@ -289,7 +352,7 @@ window.onload = function() {
             var typed7 = new Typed(el, tOptions7);
         })
 
-    // Скоростной проход ST-01
+    // Скоростной проход ST‑01
     inView('#js-dynamic-prod1')
         .once('enter', el => {
             var typed8 = new Typed(el, tOptions8);
@@ -317,8 +380,8 @@ window.onload = function() {
             top: 0,
         });
 
-        window.location.hash = '#'; //remove hash text
-        window.location.href.replace('#', ''); //remove hash
+        window.location.hash = '#';
+        window.location.href.replace('#', '');
 
         $("html, body").animate({
             scrollTop: 0
@@ -332,12 +395,8 @@ window.onload = function() {
     } else {
         console.log("test height > 851");
     }
-    // якорь по центру фотогалереи
-    var galleryToScrollElHeight = document.querySelector(".slider-gallery").offsetHeight / 2;
-    var galleryConst = (intViewportHeight / 2) - galleryToScrollElHeight + 90;
-    document.getElementById("gallery").style.top = "-" + galleryConst + "px";
 
-    // ST-01 
+    // ST‑01 
     var names0 = [];
     var ended0 = [];
     $(".js-sliderdemo-0 .swiper-slide").each(function(i) {
@@ -369,11 +428,13 @@ window.onload = function() {
     var sliderVideos0 = $(".js-sliderdemo-0 .swiper-slide video");
     sliderVideos0.each(function(index) {
         this.addEventListener('ended', () => {
+            // if slider-cube .swiper-wrapper .swiper-slide-active have video0 { 
             if (swiper3prod0.activeIndex == swiper3prod0.slides.length - 1) {
                 swiper3prod0.slideTo(0)
             } else {
                 swiper3prod0.slideNext();
             }
+            // }
         });
         this.addEventListener('playing', () => {
             ended0[swiper3prod0.activeIndex] = 1;
@@ -385,15 +446,28 @@ window.onload = function() {
         let currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
         let prevVideo = swiper3prod0.slides[swiper3prod0.previousIndex].children[0];
         sliderVideos0.each(function(index) {
-            this.pause();
-            this.currentTime = 0;
+            if (!this.paused) {
+                this.pause();
+                console.log("pause из swiper3prod0-slideChange");
+                this.currentTime = 0;
+            }
         });
         currentVideo.play();
+        console.log(currentVideo);
+        console.log("play из swiper3prod0-slideChange");
         prevVideo.pause();
+        console.log(prevVideo);
+        console.log("pause из swiper3prod0-slideChange");
         prevVideo.currentTime = 0;
+        if (intViewportWidth < 640) {
+            var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
+            var bulletsWrap = this.el.nextElementSibling;
+            var posX = activeBullet.offsetLeft - (intViewportWidth / 2);
+            bulletsWrap.scrollLeft = posX;
+        }
     });
 
-    // ST-11  
+    // ST‑11  
     var names1 = [];
     var ended1 = [];
     $(".js-sliderdemo-1 .swiper-slide").each(function(i) {
@@ -441,15 +515,29 @@ window.onload = function() {
         let currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
         let prevVideo = swiper3prod1.slides[swiper3prod1.previousIndex].children[0];
         sliderVideos1.each(function(index) {
-            this.pause();
-            this.currentTime = 0;
+            if (!this.paused) {
+                this.pause();
+                console.log("pause из swiper3prod0-slideChange");
+                this.currentTime = 0;
+            }
         });
         currentVideo.play();
+        console.log(currentVideo);
+        console.log("play из swiper3prod1-slideChange");
         prevVideo.pause();
+        console.log(prevVideo);
+        console.log("pause из swiper3prod1-slideChange");
         prevVideo.currentTime = 0;
+
+        if (intViewportWidth < 640) {
+            var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
+            var bulletsWrap = this.el.nextElementSibling;
+            var posX = activeBullet.offsetLeft - (intViewportWidth / 2);
+            bulletsWrap.scrollLeft = posX;
+        }
     });
 
-    // ST-02 
+    // ST‑02 
     var names2 = [];
     var ended2 = [];
     $(".js-sliderdemo-2 .swiper-slide").each(function(i) {
@@ -499,12 +587,26 @@ window.onload = function() {
         let currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
         let prevVideo = swiper3prod2.slides[swiper3prod2.previousIndex].children[0];
         sliderVideos2.each(function(index) {
-            this.pause();
-            this.currentTime = 0;
+            if (!this.paused) {
+                this.pause();
+                console.log("pause из swiper3prod0-slideChange");
+                this.currentTime = 0;
+            }
         });
         currentVideo.play();
+        console.log(currentVideo);
+        console.log("play из swiper3prod2-slideChange");
+        console.log(prevVideo);
         prevVideo.pause();
+        console.log("pause из swiper3prod2-slideChange");
         prevVideo.currentTime = 0;
+
+        if (intViewportWidth < 640) {
+            var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
+            var bulletsWrap = this.el.nextElementSibling;
+            var posX = activeBullet.offsetLeft - (intViewportWidth / 2);
+            bulletsWrap.scrollLeft = posX;
+        }
     });
 
     // Калитка
@@ -556,12 +658,26 @@ window.onload = function() {
         let currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
         let prevVideo = swiper3prod3.slides[swiper3prod3.previousIndex].children[0];
         sliderVideos3.each(function(index) {
-            this.pause();
-            this.currentTime = 0;
+            if (!this.paused) {
+                this.pause();
+                console.log("pause из swiper3prod0-slideChange");
+                this.currentTime = 0;
+            }
         });
         currentVideo.play();
+        console.log(currentVideo);
+        console.log("play из swiper3prod3-slideChange");
+        console.log(prevVideo);
         prevVideo.pause();
+        console.log("pause из swiper3prod3-slideChange");
         prevVideo.currentTime = 0;
+
+        if (intViewportWidth < 640) {
+            var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
+            var bulletsWrap = this.el.nextElementSibling;
+            var posX = activeBullet.offsetLeft - (intViewportWidth / 2);
+            bulletsWrap.scrollLeft = posX;
+        }
     });
 
     var swiperCubeOptions = {
@@ -570,7 +686,7 @@ window.onload = function() {
         slidesPerView: 1,
         allowSlidePrev: false,
         allowTouchMove: false,
-        speed: 1300,
+        speed: 1500,
         cubeEffect: {
             shadow: false,
             slideShadows: false,
@@ -596,17 +712,15 @@ window.onload = function() {
 
                 sliderVideosRefactor1.each(function() {
                     this.pause();
-                    $(this).trigger('pause');
+                    console.log("pause из swiperCubeOptions-slideChangeTransitionEnd");
+                    $(this).trigger("pause");
                     this.currentTime = 0;
-                    // console.log("Stop video: ");
-                    // console.log(this.pause());
                 });
                 sliderVideosRefactor2.each(function() {
                     this.pause();
-                    $(this).trigger('pause');
+                    console.log("pause из swiperCubeOptions-slideChangeTransitionEnd");
+                    $(this).trigger("pause");
                     this.currentTime = 0;
-                    // console.log("Stop video: ");
-                    // console.log(this.pause());
                 });
 
                 if (this.activeIndex == 0) {
@@ -624,22 +738,34 @@ window.onload = function() {
                 }
 
                 targetVid.play();
+                console.log("play из swiperCubeOptions-slideChangeTransitionEnd");
 
-                // костыль
+
+                // проходимся по всем слайдам и добавляем класс для удаления постера именно в конце анимаци
+                $(".slider-cube > .swiper-wrapper > .swiper-slide").each(function(i, thisSlide) {
+                    console.log(thisSlide);
+                });
+
+                // sliderCubeSlides.forEach(element => {
+                //     element.removeClass("remove-poster");
+                // });
+                $(".slider-cube > .swiper-wrapper > .swiper-slide.swiper-slide-active").addClass("remove-poster");
+                console.log($(".slider-cube .swiper-wrapper > .swiper-slide.swiper-slide-active"));
+
+                // Для фикса глюка с появляющейся стрелкой
                 let sliderCubeNav = $(".slider-cube-nav");
                 sliderCubeNav.removeClass("sliderCube-index-" + this.previousIndex);
                 sliderCubeNav.addClass("sliderCube-index-" + this.activeIndex);
+                console.log((this.activeIndex == 3));
                 if (!(this.activeIndex == 3)) {
-                    if (sliderCubeNav.hasClass('sliderCube-index-3')) {
-                        sliderCubeNav.addClass("sliderCube-index-3");
+                    if (sliderCubeNav.hasClass("sliderCube-index-3")) {
+                        sliderCubeNav.removeClass("sliderCube-index-3");
                     }
                 }
             }
         }
     };
     if (helpers.isIOS()) {
-
-
         // Попробовать менее глючный скролл для iOs:
         // document.querySelectorAll('.logo, .main-btn, .dop-btn_mail, .menu-btn').forEach(btn => {
         //     btn.addEventListener('click', () => {
@@ -649,10 +775,8 @@ window.onload = function() {
         //             behavior: 'smooth'
         //         });
         //     });
-        // });
-
-
-        console.log("swiper is device ios");
+        // }); 
+        // console.log("swiper is device ios");
         // быстрый костыль для iOs 
         var swiperCubeOptions = {
             loop: false,
@@ -665,20 +789,22 @@ window.onload = function() {
                 slideChangeTransitionEnd: function() {
                     let sliderVideosRefactor1 = $(".js-sliderdemo-" + this.previousIndex + " .swiper-slide video");
                     let sliderVideosRefactor2 = $(".js-sliderdemo-" + this.activeIndex + " .swiper-slide video");
-                    console.log(this.allowSlidePrev);
+                    // console.log(this.allowSlidePrev);
                     sliderVideosRefactor1.each(function() {
                         this.pause();
-                        $(this).trigger('pause');
+                        console.log("pause из swiperCubeOptions-slideChangeTransitionEnd iOs");
+                        // $(this).trigger('pause');
                         this.currentTime = 0;
-                        console.log("Stop video: ");
-                        console.log(this.pause());
+                        // console.log("Stop video: ");
+                        // console.log(this.pause());
                     });
                     sliderVideosRefactor2.each(function() {
                         this.pause();
-                        $(this).trigger('pause');
+                        console.log("pause из swiperCubeOptions-slideChangeTransitionEnd iOs");
+                        // $(this).trigger('pause');
                         this.currentTime = 0;
-                        console.log("Stop video: ");
-                        console.log(this.pause());
+                        // console.log("Stop video: ");
+                        // console.log(this.pause());
                     });
 
                     if (this.activeIndex == 0) {
@@ -699,6 +825,7 @@ window.onload = function() {
                     }
 
                     targetVid.play();
+                    console.log("play из swiperCubeOptions-slideChangeTransitionEnd iOs");
 
                     // костыль
                     let sliderCubeNav = $(".slider-cube-nav");
@@ -708,26 +835,6 @@ window.onload = function() {
             }
         };
     }
-
-
-    // var cubeContainer = document.querySelector("#products-cube");
-    // // var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
-    // var video = cubeContainer.getElementsByTagName('video');
-
-    // videos.forEach(function(videoEl) {
-    //     var sources = videoEl.getElementsByTagName('source');
-    //     sources[0].src = 'video2.mp4';
-    //     sources[1].src = 'video2.ogv';
-
-    //     videoEl.addEventListener('touchstart', disableTouchEvent, false);
-    //     videoEl.addEventListener('touchmove', disableTouchEvent, false);
-    //     videoEl.addEventListener('touchend', enableTouchEvent, false);
-    //     videoEl.addEventListener('touchcancel', enableTouchEvent, false);
-    //     video.load();
-
-    // });
-
-
 
     var swiperCube = new Swiper(".slider-cube", swiperCubeOptions);
     swiperCube.mousewheel.disable();
@@ -759,7 +866,7 @@ window.onload = function() {
                     scrollTo: "#products-cube",
                     ease: "power1",
                     onComplete: function() {
-                        console.log('products-cube section done');
+                        // console.log('products-cube section done');
                         swiperCube.mousewheel.enable();
                     }
                 });
@@ -780,77 +887,23 @@ window.onload = function() {
             }
         }
     };
-
-
-    $(".icon .icon-char-4").on("click", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(this);
-        console.log(this.offsetTop);
-
-        // var scrollID = $(this).data('scrollto');
-        // var brand_scroll = "scrollto_" + scrollID;
-        // var elem = document.getElementById(brand_scroll);
-        // var posX = elem.offsetTop;
-        ////////// this.parentNode.scroll.scrollLeft(posX);
-        // $('#scrolling_div').scrollLeft(posX);
-    });
     inView.threshold(.5);
+    var alreadyEnterOnce = false;
     inView('#products-cube')
         .on('enter', el => {
-            var intViewportWidth = window.innerWidth;
-            console.log(intViewportWidth);
-            if (intViewportWidth < 640) {
-
-                InsertCorrectVideo(refactorProdMap, resolution_s);
-
-                // let vidRefactor = document.getElementById("index-0_0");
-                // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-                // let pathToVid1 = `video/st01/${resolution_s}/1.mp4`;
-                // let pathToVid2 = `video/st01/${resolution_s}/webm/1.webm`;
-                // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-                // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-                // vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
-                // vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
-                // vidRefactor.load();
-            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-                console.log("test width is: 640 < intViewportWidth < 1200");
-                // let vidRefactor = document.getElementById("index-0_0");
-                // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-                // let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
-                // let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
-                InsertCorrectVideo(refactorProdMap, resolution_lg);
-                // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-                // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-                // vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
-                // vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
-                // vidRefactor.load();
-            } else {
-                console.log("test width > 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_wide);
-                // let vidRefactor = document.getElementById("index-0_0");
-                // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-                // let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
-                // let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
-                // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-                // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-                // vidSourcesRefactor[0].setAttribute('data-src', pathToVid1);
-                // vidSourcesRefactor[1].setAttribute('data-src', pathToVid2);
-                // vidRefactor.load();
+            if (alreadyEnterOnce) {
+                if (swiperCube.activeIndex == 0) {
+                    var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
+                } else if (swiperCube.activeIndex == 1) {
+                    var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
+                } else if (swiperCube.activeIndex == 2) {
+                    var currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
+                } else if (swiperCube.activeIndex == 3) {
+                    var currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
+                } else {}
+                currentVideo.play();
+                console.log("play из inView-#products-cube");
             }
-            if (swiperCube.activeIndex == 0) {
-                var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
-            } else if (swiperCube.activeIndex == 1) {
-                var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
-            } else if (swiperCube.activeIndex == 2) {
-                var currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
-            } else if (swiperCube.activeIndex == 3) {
-                var currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
-            } else {
-                // var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
-            }
-            console.log("enter demo block");
-            currentVideo.play();
             document.addEventListener('wheel', controlScene);
 
             const triggerSlidePrevEnable = function(event) {
@@ -862,6 +915,7 @@ window.onload = function() {
             el.addEventListener('touchmove', triggerSlidePrevEnable, false);
         })
         .on('exit', el => {
+            alreadyEnterOnce = true;
             document.removeEventListener('wheel', controlScene);
             if (swiperCube.activeIndex == 0) {
                 var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
@@ -871,11 +925,9 @@ window.onload = function() {
                 var currentVideo = swiper3prod2.slides[swiper3prod2.activeIndex].children[0];
             } else if (swiperCube.activeIndex == 3) {
                 var currentVideo = swiper3prod3.slides[swiper3prod3.activeIndex].children[0];
-            } else {
-                // var currentVideo = swiper3prod1.slides[swiper3prod1.activeIndex].children[0];
-            }
-            console.log("leave demo block");
+            } else {}
             currentVideo.pause();
+            console.log("pause из inView.on('exit'-#products-cube");
         })
 
     if (intViewportWidth < 640) {
@@ -948,6 +1000,12 @@ window.onload = function() {
     sectionDopProd.addEventListener('click', function(event) {
         console.log(swiperDop.slideNext());
     });
+
+
+    // якорь по центру фотогалереи
+    anchorPhotoGallery();
+    // центрируем стрелки куба
+
 };
 
 window.addEventListener(`resize`, event => {
@@ -975,54 +1033,23 @@ window.addEventListener(`resize`, event => {
 
         InsertCorrectVideo(refactorProdMap, resolution_s);
 
-        var cubeContainer = document.querySelector("#products-cube");
-        var itemsToDisableSwiperTouch = cubeContainer.querySelectorAll("#products-cube .swiper-pagination-custom");
-
-        itemsToDisableSwiperTouch.forEach(function(item) {
-            const disableTouchEvent = function(event) {
-                if (swiperCube.allowTouchMove) {
-                    swiperCube.allowTouchMove = false;
-                }
-            };
-            const enableTouchEvent = function(event) {
-                if (!swiperCube.allowTouchMove) {
-                    swiperCube.allowTouchMove = true;
-                }
-            };
-            item.addEventListener('touchstart', disableTouchEvent, false);
-            item.addEventListener('touchmove', disableTouchEvent, false);
-            item.addEventListener('touchend', enableTouchEvent, false);
-            item.addEventListener('touchcancel', enableTouchEvent, false);
-        });
-
+        // удаляем автовоспроизведение - добавить кнопку плей для мобильных видео
         var vidsForMobile = document.getElementsByTagName("video");
         for (var i = 0; i < vidsForMobile.length; i++) {
             vidsForMobile[i].removeAttribute("autoplay");
         }
     } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-        // let vidRefactor = document.getElementById("index-0_0");
-        // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-        // let pathToVid1 = `video/st01/${resolution_lg}/1.mp4`;
-        // let pathToVid2 = `video/st01/${resolution_lg}/webm/1.webm`;
         InsertCorrectVideo(refactorProdMap, resolution_lg);
-        // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-        // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-        // vidRefactor.load();
-        // vidRefactor.play();
     } else {
         InsertCorrectVideo(refactorProdMap, resolution_wide);
-        // let vidRefactor = document.getElementById("index-0_0");
-        // let vidSourcesRefactor = vidRefactor.getElementsByTagName('source');
-        // let pathToVid1 = `video/st01/${resolution_wide}/1.mp4`;
-        // let pathToVid2 = `video/st01/${resolution_wide}/webm/1.webm`;
-        // vidSourcesRefactor[0].setAttribute('src', pathToVid1);
-        // vidSourcesRefactor[1].setAttribute('src', pathToVid2);
-        // vidRefactor.load();
-        // vidRefactor.play();
     }
 
-}, false);
 
+    // якорь по центру фотогалереи
+    anchorPhotoGallery();
+
+
+}, false);
 
 var swiper1 = new Swiper(".slider-hero", {
     preloadImages: false,
@@ -1045,7 +1072,6 @@ var swiper1 = new Swiper(".slider-hero", {
     },
     on: {
         slideChange: function(swiper) {
-            // let dynamicText = document.getElementById("js-dynamic-text-1");
             let dynamicSubtext = document.getElementById("js-dynamic-subtext-1");
             dynamicSubtext.innerHTML = swiper.slides[swiper.activeIndex].dataset.subtext;
         }
@@ -1066,11 +1092,6 @@ var swiper2 = new Swiper(".slider-prod", {
         nextEl: '.slider-prod .swiper-button-next',
         prevEl: '.slider-prod .swiper-button-prev',
     },
-    // on: {
-    //     init: function() {
-    //         correctTyped(this.slides[this.activeIndex].dataset.text);
-    //     }
-    // }
 });
 
 swiper2.on('slideChangeTransitionEnd', function() {
@@ -1091,11 +1112,11 @@ swiper2.on('slideChangeTransitionEnd', function() {
     sliderCharsRefactor.addClass("prodIcons-index-" + this.slides[this.activeIndex].dataset.swiperSlideIndex);
 });
 
-
 var namesDop = [];
 $(".js-sliderdemo-dop .swiper-slide").each(function(i) {
     namesDop.push($(this).data("name"));
 });
+
 var swiperDop = new Swiper(".slider-dop", {
     preloadImages: false,
     lazy: {
