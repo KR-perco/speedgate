@@ -15,6 +15,7 @@ import { Fancybox, Carousel, Panzoom } from "@fancyapps/ui";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import LocomotiveScroll from "locomotive-scroll";
 import MmenuLight from "mmenu-light";
 import AOS from "aos";
 import { each } from 'jquery';
@@ -30,20 +31,122 @@ lazyLoading.init();
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel, Lazy]);
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// const MOCK_URL_SOURCE = [
-//     "ehZqNokVylyWk",
-//     "hDqq4LalRAUiQ",
-//     "yjTccXlnh6LXW",
-//     "3FjEPbKqEPhPpmC8uY",
-//     "3ohs7NLUXtNW98mtIQ",
-//     "9U8wVRThbHWA8ADPa2",
-//     "3og0IvJaagEkDMbRi8",
-// ];
-// var randomItem = () => {
-//     return MOCK_URL_SOURCE[
-//         Math.floor(Math.random() * MOCK_URL_SOURCE.length)
-//     ];
-// };
+
+const locoScroll = new LocomotiveScroll({
+    el: document.querySelector(".smooth-scroll"),
+    smooth: true
+});
+
+locoScroll.on('scroll', (args) => {
+    // Get all current elements : args.currentElements
+    if (typeof args.currentElements['hey'] === 'object') {
+        let progress = args.currentElements['hey'].progress;
+        console.log(progress);
+        // ouput log example: 0.34
+        // gsap example : myGsapAnimation.progress(progress);
+    }
+});
+// each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
+// locoScroll.on("scroll", ScrollTrigger.update);
+
+// // tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element since Locomotive Scroll is hijacking things
+// ScrollTrigger.scrollerProxy(".smooth-scroll", {
+//     scrollTop(value) {
+//         return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+//     }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+//     getBoundingClientRect() {
+//         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+//     },
+//     // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+//     pinType: document.querySelector(".smooth-scroll").style.transform ? "transform" : "fixed"
+// });
+
+
+// ScrollTrigger.defaults({
+//     scroller: '.smooth-scroll'
+// })
+
+// gsap.set('.content:not(.initial)', { autoAlpha: 0 })
+
+// var headlines = gsap.utils.toArray(".text");
+
+// var totalDuration = 1000;
+// var singleDuration = totalDuration / headlines.length;
+
+
+
+// const lineTimeline = gsap.timeline();
+
+// ScrollTrigger.create({
+//     trigger: ".pin-up",
+//     start: "top top",
+//     end: "+=" + totalDuration,
+//     //markers: true,
+//     pin: true,
+//     scrub: true,
+//     animation: lineTimeline,
+// });
+
+// lineTimeline
+//     .to('.sideline', { duration: 1 }, 0)
+//     .to('.sideline', { duration: 0.9, scaleY: 1, ease: "none" }, 0)
+
+
+
+
+
+// headlines.forEach((elem, i) => {
+
+//     const smallTimeline = gsap.timeline();
+
+//     const content = document.querySelector('.content-wrap');
+//     const relevantContent = content.querySelector('span.content-' + i);
+
+//     ScrollTrigger.create({
+
+//         trigger: ".wrapper",
+
+//         start: "top -=" + (singleDuration * i),
+//         end: "+=" + singleDuration,
+
+//         //markers: true,
+
+//         animation: smallTimeline,
+//         toggleActions: relevantContent.classList.contains('remaining') ? "play none play reverse" : "play reverse play reverse",
+
+//     });
+
+//     smallTimeline
+//     //.to(elem,{ duration: 0.25, fontSize: "40px", color: "orange"}, 0)  
+//         .to(elem, { duration: 0.25, color: "orange" }, 0)
+//         .set(relevantContent, { autoAlpha: 1 }, 0);
+
+// });
+
+// var showYowza = gsap.timeline()
+// showYowza.to('.below span', { autoAlpha: 1, y: 0 })
+
+// ScrollTrigger.create({
+//     trigger: ".below",
+//     start: "top center",
+
+//     //endTrigger: ".footer",
+//     end: "bottom bottom",
+
+//     //scrub: 1,
+
+//     //markers: true,
+//     animation: showYowza,
+
+//     toggleActions: "none play none reverse"
+//         //toggleActions: "play reverse play reverse"
+// });
+
+// // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+// ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+
+// // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+// ScrollTrigger.refresh();
 
 
 const refactorProdMap = new Map([
@@ -76,25 +179,28 @@ let resolution_wide = "990x560";
 var intViewportHeight = window.innerHeight;
 var intViewportWidth = window.innerWidth;
 
-async function InsertCorrectVideo(mapVidOptions, resolution) {
+async function InsertCorrectVideo(videoOptions, resolution) {
     var videos = document.getElementsByTagName("video")
     var videosList = Array.prototype.slice.call(videos);
     var promises = [];
     var responsePromises = [];
 
-    videosList.forEach((value, ar) => {
-        mapVidOptions.forEach((model, id) => {
-            if (value.id == `index-${id}`) {
+    videosList.forEach((value) => {
+        videoOptions.forEach((id) => {
+
+            let model = id[1][0];
+            let video_name = id[1][1];
+            if (value.id == `index-${id[0]}`) {
 
                 let video = document.getElementById(value.id);
                 let vidSource = document.createElement('source');
                 if (video.canPlayType('video/mp4').length > 0) {
                     var typeVid = 'video/mp4; codecs="avc1.4D401E, mp4a.40.2"';
                     // var urlVid = `https://media0.giphy.com/media/${randomItem()}/giphy.mp4`;
-                    var pathToVid = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
+                    var pathToVid = `video/${model}/${resolution}/${video_name}.mp4`;
                 } else if (video.canPlayType('video/webm').length > 0) {
                     var typeVid = 'video/webm';
-                    var pathToVid = `video/${model[0]}/${resolution}/webm/${model[1]}.webm`;
+                    var pathToVid = `video/${model}/${resolution}/webm/${video_name}.webm`;
                 } else {
                     var pathToVid = "";
                 }
@@ -114,7 +220,6 @@ async function InsertCorrectVideo(mapVidOptions, resolution) {
             }
         });
     });
-    console.log(promises);
     responsePromises = await Promise.all(promises).then(() => {
         console.log('The Promise.all fulfilled for videos');
         for (let index = 0; index < promises.length; index++) {
@@ -154,6 +259,72 @@ function positionArrowsCube() {
 }
 
 window.onload = function() {
+
+    // порядок подгрузки видео
+    var refactorProdMap = [
+        ['0_0', ['st01', '1']],
+        ['1_0', ['st11', '1']],
+        ['2_0', ['st02', '1']],
+        ['3_0', ['wmd06_bh06', '1']],
+        ['0_1', ['st01', '2']],
+        ['0_2', ['st01', '6']],
+        ['0_3', ['st01', '4']],
+        ['0_4', ['st01', '5']],
+        ['0_5', ['st01', '3']],
+        ['1_1', ['st11', '2']],
+        ['1_2', ['st11', '3']],
+        ['1_3', ['st11', '4']],
+        ['1_4', ['st11', '5']],
+        ['1_5', ['st11', '6']],
+        ['2_1', ['st02', '2']],
+        ['2_2', ['st02', '5']],
+        ['2_3', ['st02', '4']],
+        ['2_4', ['st02', '3']],
+        ['3_1', ['wmd06_bh06', '2']],
+        ['3_2', ['wmd06_bh06', '3']],
+        ['3_3', ['wmd06_bh06', '4']],
+    ];
+
+    if (intViewportWidth < 640) {
+        InsertCorrectVideo(refactorProdMap, resolution_s);
+    } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+        console.log("test width is: 640 < intViewportWidth < 1200");
+        InsertCorrectVideo(refactorProdMap, resolution_lg);
+    } else {
+        console.log("test width > 1200");
+        InsertCorrectVideo(refactorProdMap, resolution_wide);
+    }
+
+    // if (intViewportWidth < 640) {
+    //     InsertCorrectVideo(refactorProdMap, resolution_s);
+    // } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+    //     console.log("test width is: 640 < intViewportWidth < 1200");
+    //     InsertCorrectVideo(refactorProdMap, resolution_lg);
+    // } else {
+    //     console.log("test width > 1200");
+    //     InsertCorrectVideo(refactorProdMap, resolution_wide);
+    // } 
+
+    // if (intViewportWidth < 640) {
+    //     InsertCorrectVideo(refactorProdMap, resolution_s);
+    // } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+    //     console.log("test width is: 640 < intViewportWidth < 1200");
+    //     InsertCorrectVideo(refactorProdMap, resolution_lg);
+    // } else {
+    //     console.log("test width > 1200");
+    //     InsertCorrectVideo(refactorProdMap, resolution_wide);
+    // } 
+
+    // if (intViewportWidth < 640) {
+    //     InsertCorrectVideo(refactorProdMap, resolution_s);
+    // } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+    //     console.log("test width is: 640 < intViewportWidth < 1200");
+    //     InsertCorrectVideo(refactorProdMap, resolution_lg);
+    // } else {
+    //     console.log("test width > 1200");
+    //     InsertCorrectVideo(refactorProdMap, resolution_wide);
+    // }
+
 
     history.pushState('', document.title, window.location.pathname + window.location.search);
 
@@ -237,92 +408,23 @@ window.onload = function() {
         onComplete: function(self) {
             document.querySelector(".js-sliderdemo-0").classList.add("reveal");
             document.getElementById("index-0_0").play();
-            const refactorProdMap = new Map([
-                ['0_1', ['st01', '2']],
-                ['0_2', ['st01', '6']],
-                ['0_3', ['st01', '4']],
-                ['0_4', ['st01', '5']],
-                ['0_5', ['st01', '3']],
-                ['1_1', ['st11', '2']],
-                ['1_2', ['st11', '3']],
-                ['1_3', ['st11', '4']],
-                ['1_4', ['st11', '5']],
-                ['1_5', ['st11', '6']],
-                ['2_1', ['st02', '2']],
-                ['2_2', ['st02', '5']],
-                ['2_3', ['st02', '4']],
-                ['2_4', ['st02', '3']],
-                ['3_1', ['wmd06_bh06', '2']],
-                ['3_2', ['wmd06_bh06', '3']],
-                ['3_3', ['wmd06_bh06', '4']],
-            ]);
-
-            if (intViewportWidth < 640) {
-                InsertCorrectVideo(refactorProdMap, resolution_s);
-            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-                console.log("test width is: 640 < intViewportWidth < 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_lg);
-            } else {
-                console.log("test width > 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_wide);
-            }
         }
     };
 
     inView('#js-dynamic-text-1')
         .once('enter', el => {
             var typed1 = new Typed(el, tOptions1);
-            const refactorProdMap = new Map([
-                ['0_0', ['st01', '1']]
-            ]);
-
-            if (intViewportWidth < 640) {
-                InsertCorrectVideo(refactorProdMap, resolution_s);
-            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-                console.log("test width is: 640 < intViewportWidth < 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_lg);
-            } else {
-                console.log("test width > 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_wide);
-            }
             positionArrowsCube();
         })
 
     inView('#js-dynamic-text-2')
         .once('enter', el => {
             var typed2 = new Typed(el, tOptions2);
-            const refactorProdMap = new Map([
-                ['1_0', ['st11', '1']],
-            ]);
-
-            if (intViewportWidth < 640) {
-                InsertCorrectVideo(refactorProdMap, resolution_s);
-            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-                console.log("test width is: 640 < intViewportWidth < 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_lg);
-            } else {
-                console.log("test width > 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_wide);
-            }
         })
 
     inView('#js-dynamic-text-3')
         .once('enter', el => {
             var typed3 = new Typed(el, tOptions3);
-            const refactorProdMap = new Map([
-                ['2_0', ['st02', '1']],
-                ['3_0', ['wmd06_bh06', '1']],
-            ]);
-
-            if (intViewportWidth < 640) {
-                InsertCorrectVideo(refactorProdMap, resolution_s);
-            } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-                console.log("test width is: 640 < intViewportWidth < 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_lg);
-            } else {
-                console.log("test width > 1200");
-                InsertCorrectVideo(refactorProdMap, resolution_wide);
-            }
         })
 
     inView('#js-dynamic-text-4')
@@ -704,28 +806,28 @@ window.onload = function() {
             prevEl: '.slider-cube .swiper-button-prev',
         },
         on: {
-            slideChangeTransitionEnd: function() {
-                if (this.isEnd) {
-                    swiperCube.params.mousewheel.releaseOnEdges = true;
-                } else {
-                    swiperCube.params.mousewheel.releaseOnEdges = false;
+            slideChangeTransitionStart: function() {
+
+                if (this.activeIndex == 0) {
+                    swiper3prod0.slideTo(0);
+                    var prevVid = document.getElementById("prod-section-0").getElementsByTagName("video")[swiper3prod0.activeIndex];
+                } else if (this.activeIndex == 1) {
+                    swiper3prod1.slideTo(0);
+                    var prevVid = document.getElementById("prod-section-1").getElementsByTagName("video")[swiper3prod1.activeIndex];
+                } else if (this.activeIndex == 2) {
+                    swiper3prod2.slideTo(0);
+                    var prevVid = document.getElementById("prod-section-2").getElementsByTagName("video")[swiper3prod2.activeIndex];
+                } else if (this.activeIndex == 3) {
+                    swiper3prod3.slideTo(0);
+                    var prevVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
                 }
+                console.log(prevVid);
+                prevVid.pause();
+                prevVid.currentTime = 0;
+                console.log("pause из swiperCubeOptions-slideChangeTransitionEnd");
 
-                let sliderVideosRefactor1 = $(".js-sliderdemo-" + this.previousIndex + " .swiper-slide video");
-                let sliderVideosRefactor2 = $(".js-sliderdemo-" + this.activeIndex + " .swiper-slide video");
-
-                sliderVideosRefactor1.each(function() {
-                    this.pause();
-                    console.log("pause из swiperCubeOptions-slideChangeTransitionEnd");
-                    $(this).trigger("pause");
-                    this.currentTime = 0;
-                });
-                sliderVideosRefactor2.each(function() {
-                    this.pause();
-                    console.log("pause из swiperCubeOptions-slideChangeTransitionEnd");
-                    $(this).trigger("pause");
-                    this.currentTime = 0;
-                });
+            },
+            slideChangeTransitionEnd: function() {
 
                 if (this.activeIndex == 0) {
                     swiper3prod0.slideTo(0);
@@ -740,6 +842,7 @@ window.onload = function() {
                     swiper3prod3.slideTo(0);
                     var targetVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
                 }
+
 
                 targetVid.play();
                 console.log("play из swiperCubeOptions-slideChangeTransitionEnd");
@@ -782,26 +885,28 @@ window.onload = function() {
                 prevEl: '.slider-cube .swiper-button-prev',
             },
             on: {
+                slideChangeTransitionStart: function() {
+
+                    if (this.activeIndex == 0) {
+                        swiper3prod0.slideTo(0);
+                        var prevVid = document.getElementById("prod-section-0").getElementsByTagName("video")[swiper3prod0.activeIndex];
+                    } else if (this.activeIndex == 1) {
+                        swiper3prod1.slideTo(0);
+                        var prevVid = document.getElementById("prod-section-1").getElementsByTagName("video")[swiper3prod1.activeIndex];
+                    } else if (this.activeIndex == 2) {
+                        swiper3prod2.slideTo(0);
+                        var prevVid = document.getElementById("prod-section-2").getElementsByTagName("video")[swiper3prod2.activeIndex];
+                    } else if (this.activeIndex == 3) {
+                        swiper3prod3.slideTo(0);
+                        var prevVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
+                    }
+                    console.log(prevVid);
+                    prevVid.pause();
+                    prevVid.currentTime = 0;
+                    console.log("pause из swiperCubeOptions-slideChangeTransitionEnd");
+
+                },
                 slideChangeTransitionEnd: function() {
-                    let sliderVideosRefactor1 = $(".js-sliderdemo-" + this.previousIndex + " .swiper-slide video");
-                    let sliderVideosRefactor2 = $(".js-sliderdemo-" + this.activeIndex + " .swiper-slide video");
-                    // console.log(this.allowSlidePrev);
-                    sliderVideosRefactor1.each(function() {
-                        this.pause();
-                        console.log("pause из swiperCubeOptions-slideChangeTransitionEnd iOs");
-                        // $(this).trigger('pause');
-                        this.currentTime = 0;
-                        // console.log("Stop video: ");
-                        // console.log(this.pause());
-                    });
-                    sliderVideosRefactor2.each(function() {
-                        this.pause();
-                        console.log("pause из swiperCubeOptions-slideChangeTransitionEnd iOs");
-                        // $(this).trigger('pause');
-                        this.currentTime = 0;
-                        // console.log("Stop video: ");
-                        // console.log(this.pause());
-                    });
 
                     if (this.activeIndex == 0) {
                         swiper3prod0.slideTo(0);
@@ -815,18 +920,26 @@ window.onload = function() {
                     } else if (this.activeIndex == 3) {
                         swiper3prod3.slideTo(0);
                         var targetVid = document.getElementById("prod-section-3").getElementsByTagName("video")[swiper3prod3.activeIndex];
-
-                        document.querySelector(".slider-cube-nav")
-                        this.navigation.$nextEl[0].classList.add("swiper-button-disabled");
                     }
 
-                    targetVid.play();
-                    console.log("play из swiperCubeOptions-slideChangeTransitionEnd iOs");
 
-                    // костыль
+                    targetVid.play();
+                    console.log("play из swiperCubeOptions-slideChangeTransitionEnd");
+
+                    // проходимся по всем слайдам и добавляем класс для удаления постера именно в конце анимаци
+                    $(".remove-poster").removeClass("remove-poster");
+                    $(".slider-cube > .swiper-wrapper > .swiper-slide.swiper-slide-active").addClass("remove-poster");
+
+                    // Для фикса глюка с появляющейся стрелкой
                     let sliderCubeNav = $(".slider-cube-nav");
-                    sliderCubeNav.removeClass("sliderCube-index-" + this.slides[this.previousIndex].dataset.swiperSlideIndex);
-                    sliderCubeNav.addClass("sliderCube-index-" + this.slides[this.activeIndex].dataset.swiperSlideIndex);
+                    sliderCubeNav.removeClass("sliderCube-index-" + this.previousIndex);
+                    sliderCubeNav.addClass("sliderCube-index-" + this.activeIndex);
+                    console.log((this.activeIndex == 3));
+                    if (!(this.activeIndex == 3)) {
+                        if (sliderCubeNav.hasClass("sliderCube-index-3")) {
+                            sliderCubeNav.removeClass("sliderCube-index-3");
+                        }
+                    }
                 }
             }
         };
@@ -838,38 +951,59 @@ window.onload = function() {
     var prohodDone = false;
     var firstEnterDone = false;
     var easeTime = .5;
+    var totalDuration = 1000;
 
     var controlScene = function(event) {
 
         if (!prohodDone) {
-
             if (!firstEnterDone && event.deltaY > 0) {
                 setTimeout(() => swiperCube.mousewheel.enable(), 1500);
                 firstEnterDone = true;
 
-                // gsap.set('.slider-cube-nav', { yPercent: -50 })
-                // gsap.timeline({
-                //         scrollTrigger: {
-                //             trigger: "#products-cube",
-                //             pin: true,
-                //             start: "top top",
-                //         }
-                //     })
-                //     .to('#products-cube', { autoAlpha: 1, y: 0, duration: 1, stagger: 1 })
+                // ScrollTrigger.create({
 
+                //     trigger: '.container',
+
+                //     pin: '#products-cube',
+
+                //     start: () => "top top",
+
+                //     end: () => "+=" + (window.innerHeight - 300),
+
+
+                // //   });
+                // gsap.timeline({
+                //     scrollTrigger: {
+                //         trigger: "#products-cube",
+                //         start: "top top",
+                //         end: "+=" + totalDuration,
+                //         //markers: true,
+                //         pin: true,
+                //         scrub: true,
+                //         // animation: lineTimeline,
+                //     }
+                // })
                 gsap.to(window, {
+
                     delay: 0,
                     duration: easeTime,
                     scrollTo: "#products-cube",
                     ease: "power1",
                     onComplete: function() {
-                        // console.log('products-cube section done');
                         swiperCube.mousewheel.enable();
                     }
                 });
             } else if ((swiperCube.activeIndex == 3 && swiperCube.params.mousewheel.releaseOnEdges && event.deltaY > 0) || (event.deltaY < 0)) { // let move down only on last slide or if wheel "up"
                 prohodDone = true;
                 swiperCube.mousewheel.disable();
+                // gsap.timeline({
+                //     scrollTrigger: {
+                //         trigger: "#products-cube",
+                //         pin: false,
+                //         start: "top top",
+                //         pinSpacing: false
+                //     }
+                // });
             }
         } else {
             // gsap.timeline({
@@ -877,6 +1011,7 @@ window.onload = function() {
             //         trigger: "#products-cube",
             //         pin: false,
             //         start: "top top",
+            //         pinSpacing: false
             //     }
             // });
             if (swiperCube.mousewheel.enabled) {
@@ -884,7 +1019,7 @@ window.onload = function() {
             }
         }
     };
-    inView.threshold(.5);
+    inView.threshold(.7);
     var alreadyEnteredOnce = false;
     inView('#products-cube')
         .on('enter', el => {
@@ -1029,20 +1164,20 @@ window.addEventListener(`resize`, event => {
         sliderArrows.classList.remove('push-2', 'cell-8', 'post-2');
     }
 
-    if (intViewportWidth < 640) {
+    // if (intViewportWidth < 640) {
 
-        InsertCorrectVideo(refactorProdMap, resolution_s);
+    //     InsertCorrectVideo(refactorProdMap, resolution_s);
 
-        // удаляем автовоспроизведение - добавить кнопку плей для мобильных видео
-        var vidsForMobile = document.getElementsByTagName("video");
-        for (var i = 0; i < vidsForMobile.length; i++) {
-            vidsForMobile[i].removeAttribute("autoplay");
-        }
-    } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
-        InsertCorrectVideo(refactorProdMap, resolution_lg);
-    } else {
-        InsertCorrectVideo(refactorProdMap, resolution_wide);
-    }
+    //     // удаляем автовоспроизведение - добавить кнопку плей для мобильных видео
+    //     var vidsForMobile = document.getElementsByTagName("video");
+    //     for (var i = 0; i < vidsForMobile.length; i++) {
+    //         vidsForMobile[i].removeAttribute("autoplay");
+    //     }
+    // } else if (intViewportWidth > 640 && intViewportWidth < 1200) {
+    //     InsertCorrectVideo(refactorProdMap, resolution_lg);
+    // } else {
+    //     InsertCorrectVideo(refactorProdMap, resolution_wide);
+    // }
 
 
     // якорь по центру фотогалереи
