@@ -594,8 +594,8 @@
             position: absolute;
             z-index: 3;
             opacity: 1;
-            transition-delay: 1.5s;
-            transition: 300ms all;
+            transition: 400ms all;
+            transition-delay: 100ms;
         }
         .swiper-slide-active.remove-poster .poster-custom {
             opacity: 0;

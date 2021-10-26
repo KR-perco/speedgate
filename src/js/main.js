@@ -30,23 +30,20 @@ lazyLoading.init();
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, EffectCube, Mousewheel, Lazy]);
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-
-var promises = [];
-var responsePromises = [];
-const MOCK_URL_SOURCE = [
-    "ehZqNokVylyWk",
-    "hDqq4LalRAUiQ",
-    "yjTccXlnh6LXW",
-    "3FjEPbKqEPhPpmC8uY",
-    "3ohs7NLUXtNW98mtIQ",
-    "9U8wVRThbHWA8ADPa2",
-    "3og0IvJaagEkDMbRi8",
-];
-var randomItem = () => {
-    return MOCK_URL_SOURCE[
-        Math.floor(Math.random() * MOCK_URL_SOURCE.length)
-    ];
-};
+// const MOCK_URL_SOURCE = [
+//     "ehZqNokVylyWk",
+//     "hDqq4LalRAUiQ",
+//     "yjTccXlnh6LXW",
+//     "3FjEPbKqEPhPpmC8uY",
+//     "3ohs7NLUXtNW98mtIQ",
+//     "9U8wVRThbHWA8ADPa2",
+//     "3og0IvJaagEkDMbRi8",
+// ];
+// var randomItem = () => {
+//     return MOCK_URL_SOURCE[
+//         Math.floor(Math.random() * MOCK_URL_SOURCE.length)
+//     ];
+// };
 
 
 const refactorProdMap = new Map([
@@ -79,14 +76,11 @@ let resolution_wide = "990x560";
 var intViewportHeight = window.innerHeight;
 var intViewportWidth = window.innerWidth;
 
-
-function startPlayback(video) {
-    return video.play();
-}
-
 async function InsertCorrectVideo(mapVidOptions, resolution) {
     var videos = document.getElementsByTagName("video")
     var videosList = Array.prototype.slice.call(videos);
+    var promises = [];
+    var responsePromises = [];
 
     videosList.forEach((value, ar) => {
         mapVidOptions.forEach((model, id) => {
@@ -96,7 +90,7 @@ async function InsertCorrectVideo(mapVidOptions, resolution) {
                 let vidSource = document.createElement('source');
                 if (video.canPlayType('video/mp4').length > 0) {
                     var typeVid = 'video/mp4; codecs="avc1.4D401E, mp4a.40.2"';
-                    var urlVid = `https://media0.giphy.com/media/${randomItem()}/giphy.mp4`;
+                    // var urlVid = `https://media0.giphy.com/media/${randomItem()}/giphy.mp4`;
                     var pathToVid = `video/${model[0]}/${resolution}/${model[1]}.mp4`;
                 } else if (video.canPlayType('video/webm').length > 0) {
                     var typeVid = 'video/webm';
@@ -115,22 +109,19 @@ async function InsertCorrectVideo(mapVidOptions, resolution) {
                 vidSource.setAttribute('type', typeVid);
 
                 video.appendChild(vidSource);
-
+                video.load();
                 promises.push(video);
-                // asyncVideo(video);
             }
         });
     });
     console.log(promises);
     responsePromises = await Promise.all(promises).then(() => {
-        console.log('The play() fulfilled');
+        console.log('The Promise.all fulfilled for videos');
         for (let index = 0; index < promises.length; index++) {
-
-            promises[index].load();
-            // startPlayback(promises[index]);
+            console.log(promises[index])
         }
     }).catch(error => {
-        console.log('The play() rejected');
+        console.log('The Promise.all rejected');
         console.log(error);
         // console.log('Use the Play button instead.');
         // var playButton = document.querySelector('#play'); 
@@ -163,6 +154,8 @@ function positionArrowsCube() {
 }
 
 window.onload = function() {
+
+    history.pushState('', document.title, window.location.pathname + window.location.search);
 
     AOS.init({
         once: true,
@@ -452,13 +445,15 @@ window.onload = function() {
                 this.currentTime = 0;
             }
         });
-        currentVideo.play();
-        console.log(currentVideo);
-        console.log("play из swiper3prod0-slideChange");
-        prevVideo.pause();
-        console.log(prevVideo);
-        console.log("pause из swiper3prod0-slideChange");
-        prevVideo.currentTime = 0;
+        if (swiperCube.activeIndex == 0) {
+            currentVideo.play();
+            console.log(currentVideo);
+            console.log("play из swiper3prod0-slideChange");
+            prevVideo.pause();
+            console.log(prevVideo);
+            console.log("pause из swiper3prod0-slideChange");
+            prevVideo.currentTime = 0;
+        }
         if (intViewportWidth < 640) {
             var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
             var bulletsWrap = this.el.nextElementSibling;
@@ -521,13 +516,16 @@ window.onload = function() {
                 this.currentTime = 0;
             }
         });
-        currentVideo.play();
-        console.log(currentVideo);
-        console.log("play из swiper3prod1-slideChange");
-        prevVideo.pause();
-        console.log(prevVideo);
-        console.log("pause из swiper3prod1-slideChange");
-        prevVideo.currentTime = 0;
+
+        if (swiperCube.activeIndex == 1) {
+            currentVideo.play();
+            console.log(currentVideo);
+            console.log("play из swiper3prod1-slideChange");
+            prevVideo.pause();
+            console.log(prevVideo);
+            console.log("pause из swiper3prod1-slideChange");
+            prevVideo.currentTime = 0;
+        }
 
         if (intViewportWidth < 640) {
             var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
@@ -593,13 +591,16 @@ window.onload = function() {
                 this.currentTime = 0;
             }
         });
-        currentVideo.play();
-        console.log(currentVideo);
-        console.log("play из swiper3prod2-slideChange");
-        console.log(prevVideo);
-        prevVideo.pause();
-        console.log("pause из swiper3prod2-slideChange");
-        prevVideo.currentTime = 0;
+
+        if (swiperCube.activeIndex == 2) {
+            currentVideo.play();
+            console.log(currentVideo);
+            console.log("play из swiper3prod2-slideChange");
+            console.log(prevVideo);
+            prevVideo.pause();
+            console.log("pause из swiper3prod2-slideChange");
+            prevVideo.currentTime = 0;
+        }
 
         if (intViewportWidth < 640) {
             var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
@@ -664,13 +665,16 @@ window.onload = function() {
                 this.currentTime = 0;
             }
         });
-        currentVideo.play();
-        console.log(currentVideo);
-        console.log("play из swiper3prod3-slideChange");
-        console.log(prevVideo);
-        prevVideo.pause();
-        console.log("pause из swiper3prod3-slideChange");
-        prevVideo.currentTime = 0;
+
+        if (swiperCube.activeIndex == 3) {
+            currentVideo.play();
+            console.log(currentVideo);
+            console.log("play из swiper3prod3-slideChange");
+            console.log(prevVideo);
+            prevVideo.pause();
+            console.log("pause из swiper3prod3-slideChange");
+            prevVideo.currentTime = 0;
+        }
 
         if (intViewportWidth < 640) {
             var activeBullet = this.el.nextElementSibling.querySelector('.swiper-pagination-bullet-active')
@@ -740,17 +744,9 @@ window.onload = function() {
                 targetVid.play();
                 console.log("play из swiperCubeOptions-slideChangeTransitionEnd");
 
-
                 // проходимся по всем слайдам и добавляем класс для удаления постера именно в конце анимаци
-                $(".slider-cube > .swiper-wrapper > .swiper-slide").each(function(i, thisSlide) {
-                    console.log(thisSlide);
-                });
-
-                // sliderCubeSlides.forEach(element => {
-                //     element.removeClass("remove-poster");
-                // });
+                $(".remove-poster").removeClass("remove-poster");
                 $(".slider-cube > .swiper-wrapper > .swiper-slide.swiper-slide-active").addClass("remove-poster");
-                console.log($(".slider-cube .swiper-wrapper > .swiper-slide.swiper-slide-active"));
 
                 // Для фикса глюка с появляющейся стрелкой
                 let sliderCubeNav = $(".slider-cube-nav");
@@ -846,6 +842,7 @@ window.onload = function() {
     var controlScene = function(event) {
 
         if (!prohodDone) {
+
             if (!firstEnterDone && event.deltaY > 0) {
                 setTimeout(() => swiperCube.mousewheel.enable(), 1500);
                 firstEnterDone = true;
@@ -888,10 +885,10 @@ window.onload = function() {
         }
     };
     inView.threshold(.5);
-    var alreadyEnterOnce = false;
+    var alreadyEnteredOnce = false;
     inView('#products-cube')
         .on('enter', el => {
-            if (alreadyEnterOnce) {
+            if (alreadyEnteredOnce) {
                 if (swiperCube.activeIndex == 0) {
                     var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
                 } else if (swiperCube.activeIndex == 1) {
@@ -903,6 +900,9 @@ window.onload = function() {
                 } else {}
                 currentVideo.play();
                 console.log("play из inView-#products-cube");
+            } else {
+                console.log(swiperCube.slides[swiperCube.activeIndex]);
+                console.log(swiperCube.slides[swiperCube.activeIndex].classList.add("remove-poster"));
             }
             document.addEventListener('wheel', controlScene);
 
@@ -915,7 +915,7 @@ window.onload = function() {
             el.addEventListener('touchmove', triggerSlidePrevEnable, false);
         })
         .on('exit', el => {
-            alreadyEnterOnce = true;
+            alreadyEnteredOnce = true;
             document.removeEventListener('wheel', controlScene);
             if (swiperCube.activeIndex == 0) {
                 var currentVideo = swiper3prod0.slides[swiper3prod0.activeIndex].children[0];
